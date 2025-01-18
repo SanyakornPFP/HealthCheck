@@ -1,0 +1,301 @@
+﻿@{
+    ViewData["Controller"] = "DefualtConfig";
+    ViewData["Action"] = "Alnation";
+    ViewData["Icon"] = "flag";
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row" style="display: none" id="showInsert">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-light" id="createOff" href="#" style="float:right">ยกเลิก</a>
+                        <h4 id="createHeader"><i class="fa fa-plus"></i> เพิ่ม</h4>
+                        <h4 id="updateHeader" style="display:none"><i class="fa fa-edit"></i> แก้ไข</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <h6 class="sub-title" id="createHeader"><i class="icofont icofont-plus"></i> เพิ่มใหม่</h6>
+                                    <h6 class="sub-title" id="updateHeader" style="display: none"><i class="icofont icofont-edit"></i> แก้ไข</h6>
+                                    <form id="myForm" method="post" class="row g-3" action="">
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <input name="AlnationID" id="txtAlnationID" type="hidden" style="display:none">
+                                            <label class="col-form-label" for="txtAlnationName">ชื่อสัญชาติ</label>
+                                            <input class="form-control" name="AlnationName" id="txtAlnationName" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="createBtn" type="submit" title="btn btn-pill btn-primary active">บันทึก</button>
+                                            <button class="btn btn-pill btn-primary active" id="updateBtn" type="submit" title="btn btn-pill btn-info active" style="display: none;">อัพเดท</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4><i class="fa fa-flag"></i> สัญชาติ</h4>
+                                <a class="btn btn-primary mt-2" id="creteOn" href="#"><i class="fa fa-plus"></i> เพิ่ม</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex" asp-action="Alnation" asp-controller="DefualtConfig" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control m-2" name="searchString" placeholder="กรอกชื่อสัญชาติ">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary m-2" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อสัญชาติ</th>
+                                        <th>ดำเนินการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in (List<HealthCheck.Models.Alnation>)ViewBag.Alnation)
+                                    {
+                                        <tr>
+                                            <td>@item.AlnationName</td>
+                                            <td>
+                                                <ul class="action">
+                                                    <li class="edit"><a href="#" class="editBtn" data-AlnationID="@item.AlnationID"><i class="icon-pencil-alt"></i></a></li>
+                                                    <li class="delete"><a href="#" class="deleteBtn" data-AlnationID="@item.AlnationID"><i class="icon-trash"></i></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var showInsert = document.getElementById('showInsert');
+            var createOn = document.getElementById('creteOn');
+            var createOff = document.getElementById('createOff');
+
+            createOn.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'block';
+            });
+
+            createOff.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'none';
+                $('#myForm')[0].reset();
+                $('#txtAlnationID').hide();
+                $('#updateBtn').hide();
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+                $('#cancelBtn').hide();
+            });
+        });
+
+        $(document).ready(function () {
+            var editingAlnationData = null;
+
+            function loadAlnationData(alnation) {
+                $('#txtAlnationID').val(alnation.alnationID);
+                $('#txtAlnationName').val(alnation.alnationName);
+                editingAlnationData = alnation;
+            }
+
+            document.querySelectorAll('.editBtn').forEach(function (button) {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var alnationID = this.getAttribute('data-AlnationID');
+                    $.ajax({
+                        url: '@Url.Action("ModelAlnation", "DefualtConfig")',
+                        type: 'GET',
+                        data: { AlnationID: alnationID },
+                        success: function (response) {
+                            if (response) {
+                                $('#showInsert').show();
+                                loadAlnationData(response);
+                                $('#createHeader').hide();
+                                $('#updateHeader').show();
+                                $('#createBtn').hide();
+                                $('#updateBtn').show();
+                                $('#cancelBtn').show();
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                });
+            });
+
+            $('#cancelBtn').click(function (e) {
+                e.preventDefault();
+                $('#myForm')[0].reset();
+                $('#updateBtn').hide();
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+                $('#cancelBtn').hide();
+                editingAlnationData = null;
+            });
+        });
+
+        $('#createBtn').click(function (e) {
+            e.preventDefault();
+            var alnationData = {
+                AlnationName: $('#txtAlnationName').val(),
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d3d3d3',
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("CreateAlnation", "DefualtConfig")',
+                        type: 'POST',
+                        data: alnationData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#updateBtn').click(function (e) {
+            e.preventDefault();
+            var alnationData = {
+                AlnationID: $('#txtAlnationID').val(),
+                AlnationName: $('#txtAlnationName').val(),
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d3d3d3',
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("UpdateAlnation", "DefualtConfig")',
+                        type: 'POST',
+                        data: alnationData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.deleteBtn').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                var alnationID = this.getAttribute('data-AlnationID');
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณจะไม่สามารถย้อนกลับได้!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#d3d3d3',
+                    confirmButtonText: 'ใช่, ลบ!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteAlnation", "DefualtConfig")',
+                            type: 'POST',
+                            data: { AlnationID: alnationID },
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'ลบแล้ว!',
+                                        response.message,
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (xhr) {
+                                handleAjaxError(xhr);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+}

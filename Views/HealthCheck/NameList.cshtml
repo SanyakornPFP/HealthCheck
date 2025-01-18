@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Controller"] = "DataPerson";
+    ViewData["Action"] = "NameList";
+    ViewData["Icon"] = "address-card-o";
+    string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+	int countRow = 0;
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models;
+
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4>
+                                    <i class="fa fa-address-card-o"></i> ข้อมูลแรงงาน
+                                    <a asp-controller="HealthCheck" asp-action="EmpList" class="btn btn-light btm-sm">ย้อนกลับ</a>
+                                </h4>
+                                <p class="mt-2">ชื่อนายจ้าง/สถานประกอบการ : @ViewBag.EmpName</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>เลขประจำตัว</th>
+                                        <th>คำนำหน้า</th>
+                                        <th>ชื่อ</th>
+                                        <th>นามสกุล</th>
+                                        <th>วันที่เกิด</th>
+                                        <th>เพศ</th>
+                                        <th>สัญชาติ</th>
+                                        <th>ประเภทอาชีพ</th>
+                                        <th>ประเภทคนต่างด้าว</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.NameListData)
+                                    {
+                                        countRow++;
+                                        <tr>
+                                            <td>@countRow</td>
+                                            <td>@item.Alcode</td>
+                                            <td>@item.AlprefixName</td>
+                                            <td>@item.Alnameen</td>
+                                            <td>@(item.Alsnameen == "" || item.Alsnameen == null ? "-" : item.Alsnameen)</td>
+                                            <td>@item.Albdate</td>
+                                            <td>@item.AlgenderName</td>
+                                            <td>@item.AlnationName</td>
+                                            <td>@item.AlposName</td>
+                                            <td>@item.AltypeName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

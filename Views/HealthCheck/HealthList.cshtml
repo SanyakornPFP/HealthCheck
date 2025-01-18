@@ -1,0 +1,139 @@
+﻿@{
+	ViewData["Controller"] = "DataPerson";
+	ViewData["Action"] = "HealthData";
+	ViewData["Icon"] = "thermometer-half";
+	string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+	int countRow = 0;
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models;
+
+<div class="page-body">
+	<!-- Container-fluid starts-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header pb-0 card-no-border">
+						<div class="d-flex justify-content-between align-items-center mb-3">
+							<div>
+								<h4>
+									<i class="fa fa-thermometer-half" aria-hidden="true"></i> ข้อมูลผลตรวจสุขภาพ
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive theme-scrollbar">
+							<form class="d-flex" asp-action="HealthList" asp-controller="HealthCheck" method="get">
+								<div class="input-group">
+									<input type="text" class="form-control m-2" name="searchString" placeholder="กรอกเลขประจำตัว">
+									<div class="input-group-append">
+										<button class="btn btn-outline-secondary m-2" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+							<div class="table-responsive theme-scrollbar">
+								<table class="display" id="data-source-1" style="width:100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>เลขประจำตัว</th>
+											<th>นำหน้า</th>
+											<th>ชื่อ</th>
+											<th>นามสกุล</th>
+											<th>สัญชาติ</th>
+											<th>วันที่ดึงข้อมูล</th>
+											<th class="text-center">ข้อมูลเพิ่มเติม</th>
+											<th class="text-center">เลือก</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in ViewBag.NameListData)
+										{
+											countRow++;
+											<tr>
+												<td>@countRow</td>
+												<td>@item.Alcode</td>
+												<td>@item.AlprefixName</td>
+												<td>@item.Alnameen</td>
+												<td>@(item.Alsnameen == "" || item.Alsnameen == null ? "-" : item.Alsnameen)</td>
+												<td>@item.AlnationName</td>
+												<td>@item.CreatedAt</td>
+												<td class="text-center">
+													<a href="#" data-toggle="modal" data-target="#detailModal" data-alcode="@item.Alcode">
+														<i class="icofont icofont-list"></i>
+													</a>
+												</td>
+												<td class="text-center">
+													<a class="editBtn " asp-controller="HealthCheck" asp-action="PersonnalHealth" asp-route-Alcode="@item.Alcode"><i class="icon-pencil-alt"></i></a>
+												</td>
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="detailModalHealthLabel"><i class="icofont icofont-list"></i> ข้อมูลเพิ่มเติม</h5>
+			</div>
+			<div class="modal-body">
+				<p id="EmpName"></p>
+				<p id="Alcode"></p>
+				<p id="Albdate"></p>
+				<p id="AlposName"></p>
+				<p id="AltypeName"></p>
+				<!-- Add other fields as necessary -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">ปิด</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+@section Scripts {
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#detailModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget); // ปุ่มที่ถูกคลิก
+				var alcode = button.data('alcode'); // ดึงค่า userID จาก data attribute
+				// ส่ง AJAX request เพื่อดึงรายละเอียดโดยใช้ CesID
+				$.ajax({
+					url: '@Url.Action("ModelAlcode", "HealthCheck")', // เปลี่ยนเป็น URL ของ Controller และ Action
+					type: 'GET',
+					data: { Alcode: alcode }, // ส่งค่า CesID
+					success: function (response) { // เมื่อ AJAX สำเร็จ
+						console.log(response);
+						// อัปเดตเนื้อหาใน Modal
+						$('#EmpName').text("นายจ้าง/สถานประกอบ :  " + response.empName);
+						$('#Alcode').text("เลขประจำตัว :  " + response.alcode);
+						$('#Albdate').text("วันเกิด : " + response.albdate);
+						$('#AlposName').text("ประเภทอาชีพ : " + response.alposName);
+						$('#AltypeName').text("ประเภทคนต่างด้าว : " + response.altypeName);
+					},
+					error: function (xhr, status, error) { // เมื่อ AJAX ล้มเหลว
+						console.error("Error:", error); // จัดการข้อผิดพลาด
+					}
+				});
+			});
+		});
+	</script>
+}

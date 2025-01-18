@@ -1,0 +1,418 @@
+﻿@using ContainerEvaluationSystem.Helpers
+@* @using ContainerEvaluationSystem.Helpers *@
+@{
+	string SureActive = ViewContext.HttpContext.Request.Path;
+	string baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Mofi admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+	<meta name="keywords" content="admin template, Mofi admin template, dashboard template, flat admin template, responsive admin template, web app">
+	<meta name="author" content="pixelstrap">
+	<link rel="icon" href="~/assets/images/logo/Logo.jpg" type="image/x-icon">
+	<link rel="shortcut icon" href="~/assets/images/logo/Logo.jpg" type="image/x-icon">
+	<title>HealthCheck</title>
+	<!-- Google font-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.css">
+	<!-- ico-font-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/icofont.css">
+	<!-- Themify icon-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/themify.css">
+	<!-- Flag icon-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/flag-icon.css">
+	<!-- Feather icon-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/feather-icon.css">
+	<!-- Plugins css start-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick.css">
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/animate.css">
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/datatables.css">
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/date-range-picker/flatpickr.min.css">
+	<!-- Plugins css Ends-->
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+	<!-- Bootstrap css-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.css">
+	<!-- App css-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+	<link id="color" rel="stylesheet" href="~/assets/css/color-1.css" media="screen">
+	<!-- Responsive css-->
+	<link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+	@* Sweetalert2 *@
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- Select Option Search -->
+	<link href="https://fastly.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	@RenderSection("Styles", required: false)
+	<style>
+		.select2-selection--single {
+			border: 1px solid #d2d6da !important;
+			height: 3px !important;
+			padding: 1px !important;
+			font-weight: 400 !important;
+			line-height: 0.5 !important;
+			color: var(--bs-body-color) !important;
+			background-color: var(--bs-body-bg) !important;
+			background-clip: padding-box !important;
+			border: var(--bs-border-width) solid var(--bs-border-color) !important;
+			border-radius: var(--bs-border-radius) !important;
+			transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+		}
+
+		.select2-container--default {
+			height: 38px !important;
+		}
+
+		.select2-container .select2-selection--single {
+			border-radius: 0.25rem !important;
+			height: 38px !important;
+		}
+
+		.select2-container--below {
+			height: 38px !important;
+		}
+
+		.select2-selection__arrow {
+			height: 38px !important;
+		}
+
+		.select2-selection__rendered {
+			line-height: 38px !important;
+			font-size: 14px;
+		}
+
+		.filter-section {
+			display: flex;
+			flex-wrap: wrap; /* ให้ข้อความแต่ละบรรทัดสามารถไปต่อแถวใหม่ได้หากพื้นที่ไม่พอ */
+			gap: 15px; /* เพิ่มช่องว่างระหว่างช่องกรอง */
+		}
+
+			.filter-section label {
+				margin-right: 5px; /* เพิ่มช่องว่างระหว่าง label กับ input */
+			}
+
+			.filter-section select,
+			.filter-section input {
+				width: 200px; /* กำหนดความกว้างให้กับ select และ input */
+			}
+
+	</style>
+</head>
+<body>
+	<style>
+		.btn.dropdown-toggle {
+			width: 100%;
+			background-color: white; /* กำหนดพื้นหลังเป็นสีขาว */
+			color: black; /* กำหนดสีตัวอักษรเป็นสีดำ */
+		}
+	</style>
+	<div class="loader-wrapper">
+		<div class="loader loader-1">
+			<div class="loader-outter"></div>
+			<div class="loader-inner"></div>
+			<div class="loader-inner-1"></div>
+		</div>
+	</div>
+	<!-- loader ends-->
+	<!-- tap on top starts-->
+	<div class="tap-top"><i data-feather="chevrons-up"></i></div>
+	<!-- tap on tap ends-->
+	<!-- page-wrapper Start-->
+	<div class="page-wrapper compact-wrapper" id="pageWrapper">
+		<div class="page-header row">
+			<div class="header-logo-wrapper col-auto">
+				<div class="logo-wrapper"><a asp-controller="Home" asp-action="Index"><img class="img-fluid for-light" src="~/assets/images/logo/Logo.jpg" alt="" /><img class="img-fluid for-dark" src="~/assets/images/logo/icon.png" alt="" /></a></div>
+			</div>
+			<div class="col-4 col-xl-4 page-title">
+				<h4 class="f-w-700">HealthCheck <i class="fa fa-heartbeat" aria-hidden="true"></i></h4>
+				<nav>
+					<ol class="breadcrumb justify-content-sm-start align-items-center mb-0">
+						<li class="breadcrumb-item"><a href="#"> <i class="fa fa-@ViewData["Icon"]"> </i></a></li>
+						<li class="breadcrumb-item f-w-400">@ViewData["Controller"]</li>
+						<li class="breadcrumb-item f-w-400 active">@ViewData["Action"]</li>
+					</ol>
+				</nav>
+			</div>
+			<!-- Page Header Start-->
+			<div class="header-wrapper col m-0">
+				<div class="row">
+					<div class="header-logo-wrapper col-auto p-0">
+						<div class="logo-wrapper"><a href="#"><img class="img-fluid" src="../assets/images/logo/Logo.jpg" alt=""></a></div>
+						<div class="toggle-sidebar">
+							<svg class="stroke-icon sidebar-toggle status_toggle middle">
+								<use href="../assets/svg/icon-sprite.svg#toggle-icon"></use>
+							</svg>
+						</div>
+					</div>
+					<div class="nav-right col-xxl-8 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
+						<ul class="nav-menus">
+							<li>
+								<div class="mode">
+									<svg>
+										<use href="../assets/svg/icon-sprite.svg#moon"></use>
+									</svg>
+								</div>
+							</li>
+							<li class="profile-nav onhover-dropdown px-0 py-0">
+								<div class="d-flex profile-media align-items-center">
+									@if (User.GetLoggedInImgProfile() == "")
+									{
+										<img class="img-50 rounded-circle" src="~/profile/defaultUser.png" alt="">
+									}
+									else
+									{
+										<img class="img-50 rounded-circle" src="~/profile/@User.GetLoggedInImgProfile()" alt="">
+									}
+									<div class="flex-grow-1">
+										<span>@User.GetLoggedInName()</span>
+										<p class="mb-0 font-outfit">@User.GetLoggedInPosition()<i class="fa fa-angle-down"></i></p>
+									</div>
+								</div>
+								<ul class="profile-dropdown onhover-show-div">
+									<li><a asp-controller="User" asp-action="ProfileInfo"><i class="fa fa-user"></i><span style="padding-left:5px"> โปรไฟล์ส่วนตัว</span></a></li>
+									<li><a asp-controller="Authenication" asp-action="Logout"><i class="fa fa-sign-out"></i><span style="padding-left:5px"> ออกจากระบบ</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<script class="result-template" type="text/x-handlebars-template">
+						<div class="ProfileCard u-cf">
+						<div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
+						<div class="ProfileCard-details">
+						<div class="ProfileCard-realName">{{name}}</div>
+						</div>
+						</div>
+					</script>
+					<script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
+				</div>
+			</div>
+			<!-- Page Header Ends  -->
+		</div>
+		<!-- Page Body Start-->
+		<div class="page-body-wrapper">
+			<!-- Page Sidebar Start-->
+			<div class="sidebar-wrapper" data-layout="stroke-svg">
+				<div>
+					<div class="logo-wrapper">
+						<a href="#"><img src="~/assets/images/logo/logo.png" width="60%" alt=""></a>
+						<div class="back-btn"><i class="fa fa-angle-left"></i></div>
+						<div class="toggle-sidebar">
+							<svg class="stroke-icon sidebar-toggle status_toggle middle">
+								<use href="../assets/svg/icon-sprite.svg#toggle-icon"></use>
+							</svg>
+							<svg class="fill-icon sidebar-toggle status_toggle middle">
+								<use href="../assets/svg/icon-sprite.svg#fill-toggle-icon"></use>
+							</svg>
+						</div>
+					</div>
+					<div class="logo-icon-wrapper"></div>
+					<nav class="sidebar-main">
+						<div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+						<div id="sidebar-menu">
+							<ul class="sidebar-links" id="simple-bar">
+								<li class="back-btn">
+									<a class="p-4"><img class="img-fluid" src="~/assets/images/logo/icon.png" alt=""></a>
+									<div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+								</li>
+								<li class="sidebar-list">
+									<a class="sidebar-link sidebar-title link-nav  @(SureActive.StartsWith("/Dashboard") ? "active bg-primary text-white custom-rounded" : "")" asp-controller="Home" asp-action="Dashboard">
+										<i style="padding-left: 4px" class="stroke-icon fa fa-bar-chart-o text-white"></i>
+										<i style="padding-left: 4px" class="fill-icon fa fa-bar-chart-o text-white"></i>
+										<span style="padding-left: 10px">DashBoard</span>
+									</a>
+								</li>
+								@if (User.GetLoggedPermissionViewAlienlist() == "True")
+								{
+									<li class="sidebar-list">
+										<a class="sidebar-link sidebar-title link-nav  @(SureActive.StartsWith("/HealthCheck/EmpList") || SureActive.StartsWith("/HealthCheck/NameList") ? "active bg-primary text-white custom-rounded" : "")" asp-controller="HealthCheck" asp-action="EmpList">
+											<i style="padding-left: 4px" class="stroke-icon fa fa-user text-white"></i>
+											<i style="padding-left: 4px" class="fill-icon fa fa-user text-white"></i>
+											<span style="padding-left: 10px">NameList</span>
+										</a>
+									</li>
+								}
+								@if (User.GetLoggedPermissionViewHealthCheck() == "True")
+								{
+									<li class="sidebar-list">
+										<a class="sidebar-link sidebar-title link-nav  @(SureActive.StartsWith("/HealthCheck/HealthList") || SureActive.StartsWith("/HealthCheck/PersonnalHealth") ? "active bg-primary text-white custom-rounded" : "")" asp-controller="HealthCheck" asp-action="HealthList">
+											<i style="padding-left: 3px" class="stroke-icon fa fa-heartbeat text-white"></i>
+											<i style="padding-left: 3px" class="fill-icon fa fa-heartbeat text-white"></i>
+											<span style="padding-left: 10px">HealthCheck</span>
+										</a>
+									</li>
+								}
+								@if (User.GetLoggedPermissionViewAdmin() == "True")
+								{
+									<li class="sidebar-list">
+										<a class="sidebar-link sidebar-title  @(SureActive.StartsWith("/Admin") ? "active bg-primary text-white custom-rounded" : "")">
+											<i class="stroke-icon text-white fa fa-user-secret"></i>
+											<i class="fill-icon text-white fa fa-user-secret"></i>
+											<span style="padding-left: 10px">
+												Admin
+											</span>
+										</a>
+										<ul class="sidebar-submenu">
+											<li><a asp-controller="Admin" asp-action="Users">ผู้ใช้งาน</a></li>
+											<li><a asp-controller="Admin" asp-action="Permissions">กำหนดสิทธิ์เข้าใช้งาน</a></li>
+										</ul>
+									</li>
+								}
+								@if (User.GetLoggedPermissionViewDefualtConfig() == "True")
+								{
+									<li class="sidebar-list">
+										<a class="sidebar-link sidebar-title @(SureActive.StartsWith("/DefaultConfig") ? "active bg-primary text-white custom-rounded" : "")">
+											<i class="stroke-icon text-white fa fa-gear"></i>
+											<i class="fill-icon text-white fa fa-gear"></i>
+											<span style="padding-left: 10px">
+												DefaultConfige
+											</span>
+										</a>
+										<ul class="sidebar-submenu">
+											<li><a asp-controller="DefualtConfig" asp-action="Doctor">ข้อมูลแพทย์</a></li>
+											<li><a asp-controller="DefualtConfig" asp-action="Hospital">ข้อมูลโรงพยาบาล</a></li>
+											<li><a asp-controller="DefualtConfig" asp-action="Alchkstatu">ข้อมูลผลตรวจสุขภาพ</a></li>
+											<li><a asp-controller="DefualtConfig" asp-action="Alnation">ข้อมูลสัญชาติ</a></li>
+											<li><a asp-controller="DefualtConfig" asp-action="Alprefix">ข้อมูลคำนำหน้า</a></li>
+											<li><a asp-controller="DefualtConfig" asp-action="Alpos">ข้อมูลประเภทอาชีพ</a></li>
+											<li><a asp-controller="DefualtConfig" asp-action="Altype">ข้อมูลประเภทคนต่างด้าว</a></li>
+										</ul>
+									</li>
+								}
+								@if (User.GetLoggedPermissionViewLogSystem() == "True")
+								{
+									<li class="sidebar-list">
+										<a class="sidebar-link sidebar-title link-nav @(SureActive.StartsWith("/LogSystem") ? "active bg-primary text-white custom-rounded" : "")" asp-controller="LogSystem" asp-action="Logs">
+											<!-- Change to a log-related icon -->
+											<i class="stroke-icon text-white fa fa-info"></i>
+											<i class="fill-icon text-white fa fa-info"></i>
+											<span style="padding-left:10px"> LogSystem</span>
+										</a>
+									</li>
+								}
+								<li class="sidebar-list">
+									<a class="sidebar-link sidebar-title link-nav  @(SureActive.StartsWith("/HistoryHealth") ? "active bg-primary text-white custom-rounded" : "")" asp-controller="HistoryHealth" asp-action="HistoryHealthPage">
+										<i class="stroke-icon fa fa-undo text-white"></i>
+										<i class="fill-icon fa fa-undo text-white"></i>
+										<span style="padding-left: 10px">HistoryUpload</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
+					</nav>
+				</div>
+			</div>
+			@RenderBody()
+			<!-- footer start-->
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12 footer-copyright d-flex flex-wrap align-items-center justify-content-between">
+							<p class="mb-0 f-w-600">Copyright © MA 2024-2025 Processing Co., Ltd. All rights reserved.</p>
+							<p class="mb-0 f-w-600">
+								MA. 2024 - 2025
+								<svg class="footer-icon">
+									<use href="../assets/svg/icon-sprite.svg#footer-heart"> </use>
+								</svg>
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	@await RenderSectionAsync("Scripts", required: false)
+	<script src="~/assets/js/jquery.min.js"></script>
+	<!-- Bootstrap js-->
+	<script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+	<!-- feather icon js-->
+	<script src="~/assets/js/icons/feather-icon/feather.min.js"></script>
+	<script src="~/assets/js/icons/feather-icon/feather-icon.js"></script>
+	<!-- scrollbar js-->
+	<script src="~/assets/js/scrollbar/simplebar.js"></script>
+	<script src="~/assets/js/scrollbar/custom.js"></script>
+	<!-- Sidebar jquery-->
+	<script src="~/assets/js/config.js"></script>
+	<!-- Plugins JS start-->
+	<script src="~/assets/js/sidebar-menu.js"></script>
+	<script src="~/assets/js/sidebar-pin.js"></script>
+	<script src="~/assets/js/slick/slick.min.js"></script>
+	<script src="~/assets/js/slick/slick.js"></script>
+	<script src="~/assets/js/header-slick.js"></script>
+	<script src="~/assets/js/chart/apex-chart/moment.min.js"></script>
+	<script src="~/assets/js/notify/bootstrap-notify.min.js"></script>
+	<!-- calendar js-->
+	<script src="~/assets/js/dashboard/default.js"></script>
+	<script src="~/assets/js/notify/index.js"></script>
+	<script src="~/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+	<script src="~/assets/js/datatable/datatables/datatable.custom.js"></script>
+	<script src="~/assets/js/datatable/datatables/datatable.custom1.js"></script>
+	<script src="~/assets/js/datepicker/date-range-picker/moment.min.js"></script>
+	<script src="~/assets/js/datepicker/date-range-picker/datepicker-range-custom.js"></script>
+	<script src="~/assets/js/typeahead/handlebars.js"></script>
+	<script src="~/assets/js/typeahead/typeahead.bundle.js"></script>
+	<script src="~/assets/js/typeahead/typeahead.custom.js"></script>
+	<script src="~/assets/js/typeahead-search/handlebars.js"></script>
+	<script src="~/assets/js/typeahead-search/typeahead-custom.js"></script>
+	<script src="~/assets/js/animation/wow/wow.min.js"></script>
+	<!-- Plugins JS Ends-->
+	<!-- Theme js-->
+	<script src="~/assets/js/script.js"></script>
+	<script src="~/js/site.js"></script>
+	<!-- Plugin used-->
+	<!-- JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+	<script src="https://fastly.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<!-- JavaScript ที่ใช้ jQuery -->
+	<script>
+		$(document).ready(function () {
+			// เรียกใช้ Select2 หลังจากที่ปลั๊กอินถูกโหลด
+			$('.select2-In').select2();
+		});
+
+		function handleAjaxError(xhr) {
+			console.log('Error:', xhr.status, xhr.statusText);
+
+			switch (xhr.status) {
+				case 400:
+					window.open('@Url.Action("Error400", "Error")', '_blank');
+					break;
+				case 401:
+					window.open('@Url.Action("Error401", "Error")', '_blank');
+					break;
+				case 403:
+					window.open('@Url.Action("Error403", "Error")', '_blank');
+					break;
+				case 404:
+					window.open('@Url.Action("Error404", "Error")', '_blank');
+					break;
+				case 500:
+					window.open('@Url.Action("Error500", "Error")', '_blank');
+					break;
+				case 503:
+					window.open('@Url.Action("Error503", "Error")', '_blank');
+					break;
+				default:
+					console.log('An unexpected error occurred: ', xhr.status);
+			}
+		}
+
+		// Function to format the date to yyyy-MM-dd
+		function formatDate(dateString) {
+			var date = new Date(dateString);
+			var year = date.getFullYear();
+			var month = ("0" + (date.getMonth() + 1)).slice(-2);
+			var day = ("0" + date.getDate()).slice(-2);
+			return year + "-" + month + "-" + day;
+		}
+	</script>
+</body>
+</html>

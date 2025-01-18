@@ -1,0 +1,319 @@
+﻿@{
+    ViewData["Controller"] = "DefualtConfig";
+    ViewData["Action"] = "Doctor";
+    ViewData["Icon"] = "user-md";
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row" style="display: none" id="showInsert">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-light" id="createOff" href="#" style="float:right">ยกเลิก</a>
+                        <h4 id="createHeader"><i class="fa fa-plus"></i> เพิ่ม</h4>
+                        <h4 id="updateHeader" style="display:none"><i class="fa fa-edit"></i> แก้ไข</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <h6 class="sub-title" id="createHeader"><i class="icofont icofont-plus"></i> เพิ่มใหม่</h6>
+                                    <h6 class="sub-title" id="updateHeader" style="display: none"><i class="icofont icofont-edit"></i> แก้ไข</h6>
+                                    <form id="myForm" method="post" class="row g-3" action="">
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <input name="DoctorID" id="txtDoctorID" type="hidden" style="display:none">
+                                            <label class="col-form-label" for="txtDoctorName">ชื่อแพทย์</label>
+                                            <input class="form-control" name="DoctorName" id="txtDoctorName" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtPosition">ตำแหน่ง</label>
+                                            <input class="form-control" name="Position" id="txtPosition" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <label class="col-form-label" for="txtLicenseno">หมายเลขใบอนุญาต</label>
+                                            <input class="form-control" name="Licenseno" id="txtLicenseno" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="createBtn" type="submit" title="btn btn-pill btn-primary active">บันทึก</button>
+                                            <button class="btn btn-pill btn-primary active" id="updateBtn" type="submit" title="btn btn-pill btn-info active" style="display: none;">อัพเดท</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4><i class="fa fa-user-md"></i> Doctors - แพทย์</h4>
+                                <a class="btn btn-primary mt-2" id="creteOn" href="#"><i class="fa fa-plus"></i> เพิ่ม</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex" asp-action="Doctor" asp-controller="DefualtConfig" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control m-2" name="searchString" placeholder="กรอกชื่อแพทย์">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary m-2" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อแพทย์</th>
+                                        <th>ตำแหน่ง</th>
+                                        <th>เลขใบประกอบวิชาชีพ</th>
+                                        <th>ดำเนินการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in (List<HealthCheck.Models.Doctor>)ViewBag.Doctor)
+                                    {
+                                        <tr>
+                                            <td>@item.DoctorName</td>
+                                            <td>@item.Position</td>
+                                            <td>@item.Licenseno</td>
+                                            <td>
+                                                <ul class="action">
+                                                    <li class="edit"><a href="#" class="editBtn" data-DoctorID="@item.DoctorID"><i class="icon-pencil-alt"></i></a></li>
+                                                    <li class="delete"><a href="#" class="deleteBtn" data-DoctorID="@item.DoctorID"><i class="icon-trash"></i></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var showInsert = document.getElementById('showInsert');
+            var createOn = document.getElementById('creteOn');
+            var createOff = document.getElementById('createOff');
+
+            createOn.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'block';
+            });
+
+            createOff.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'none';
+                $('#myForm')[0].reset();
+                $('#txtDoctorID').hide();
+                $('#updateBtn').hide();
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+                $('#cancelBtn').hide();
+            });
+        });
+
+        $(document).ready(function () {
+            var editingDoctorData = null;
+
+            function loadDoctorData(doctor) {
+                $('#txtDoctorID').val(doctor.doctorID);
+                $('#txtDoctorName').val(doctor.doctorName);
+                $('#txtPosition').val(doctor.position);
+                $('#txtLicenseno').val(doctor.licenseno);
+                editingDoctorData = doctor;
+            }
+
+            document.querySelectorAll('.editBtn').forEach(function (button) {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var doctorID = this.getAttribute('data-DoctorID');
+                    $.ajax({
+                        url: '@Url.Action("ModelDoctor", "DefualtConfig")',
+                        type: 'GET',
+                        data: { DoctorID: doctorID },
+                        success: function (response) {
+                            if (response) {
+                                $('#showInsert').show();
+                                loadDoctorData(response);
+                                $('#createHeader').hide();
+                                $('#updateHeader').show();
+                                $('#createBtn').hide();
+                                $('#updateBtn').show();
+                                $('#cancelBtn').show();
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                });
+            });
+
+            $('#cancelBtn').click(function (e) {
+                e.preventDefault();
+                $('#myForm')[0].reset();
+                $('#updateBtn').hide();
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+                $('#cancelBtn').hide();
+                editingDoctorData = null;
+            });
+        });
+
+        $('#createBtn').click(function (e) {
+            e.preventDefault();
+            var doctorData = {
+                DoctorName: $('#txtDoctorName').val(),
+                Position: $('#txtPosition').val(),
+                Licenseno: $('#txtLicenseno').val()
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d3d3d3',
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("CreateDoctor", "DefualtConfig")',
+                        type: 'POST',
+                        data: doctorData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#updateBtn').click(function (e) {
+            e.preventDefault();
+            var doctorData = {
+                DoctorID: $('#txtDoctorID').val(),
+                DoctorName: $('#txtDoctorName').val(),
+                Position: $('#txtPosition').val(),
+                Licenseno: $('#txtLicenseno').val()
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d3d3d3',
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("UpdateDoctor", "DefualtConfig")',
+                        type: 'POST',
+                        data: doctorData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.deleteBtn').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                var doctorID = this.getAttribute('data-DoctorID');
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณจะไม่สามารถย้อนกลับได้!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#d3d3d3',
+                    confirmButtonText: 'ใช่, ลบ!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteDoctor", "DefualtConfig")',
+                            type: 'POST',
+                            data: { DoctorID: doctorID },
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'ลบแล้ว!',
+                                        response.message,
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (xhr) {
+                                handleAjaxError(xhr);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+}

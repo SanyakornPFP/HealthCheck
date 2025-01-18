@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Controller"] = "DefualtConfig";
+    ViewData["Action"] = "LogSystem";
+    ViewData["Icon"] = "info";
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4><i class="fa fa-info"></i> Logs</h4>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex" asp-action="Logs" asp-controller="LogSystem" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control m-2" name="searchString" placeholder="กรอกคำค้นหา">
+                                        <input type="date" class="form-control m-2" name="startDate" placeholder="วันที่เริ่มต้น">
+                                        <input type="date" class="form-control m-2" name="endDate" placeholder="วันที่สิ้นสุด">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary m-2" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Action Title</th>
+                                        <th>User Name</th>
+                                        <th>Table Name</th>
+                                        <th>Record ID</th>
+                                        <th>Time Stamp</th>
+                                        <th>Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.LogSystem)
+                                    {
+                                        <tr>
+                                            <td>@item.ActionTitle</td>
+                                            <td>@item.UserName</td>
+                                            <td>@item.TableName</td>
+                                            <td>@item.RecordID</td>
+                                            <td>@item.TimeStamp</td>
+                                            <td>@item.Detail</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

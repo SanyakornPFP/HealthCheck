@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<efcore context-namespace="HealthCheck.Data" namespace="HealthCheck.Models" p1:name="db_HealthCheckModel" p1:Guid="b8104d6a-c710-46aa-9d04-bf38085ba500" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0">
+  <class name="Alchkstatu" entity-set="Alchkstatus" table="Alchkstatus" schema="dbo" p1:Guid="490b8989-25d5-40ad-855f-28ed81519f54">
+    <id name="AlchkstatusID" type="String" p1:ValidateMaxLength="10" p1:ValidateRequired="true" p1:Guid="f1a10b7f-c7d3-487f-93ca-0485618e21a3">
+      <column name="AlchkstatusID" not-null="True" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="AlchkstatusName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="19885d05-d844-43fd-bb44-cf369e331914">
+      <column name="AlchkstatusName" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ee50837d-287c-41ac-8320-68f8ccc56862">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9ec372a3-4cf9-4180-beb7-3adeea2f54e2">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="8d505cb8-bf1f-4c63-80c7-bbfe7baeafae">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Algender" entity-set="Algenders" table="Algender" schema="dbo" p1:Guid="d8cd5974-d3be-4b52-8b57-fa2da3eded5c">
+    <id name="AlgenderID" type="String" p1:ValidateMaxLength="1" p1:ValidateRequired="true" p1:Guid="0c70d88a-4870-4338-ba37-dc9d8d431cc2">
+      <column name="AlgenderID" not-null="True" length="1" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="AlgenderName" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="21ac7462-fd44-461b-8c72-e58dea4a9af9">
+      <column name="AlgenderName" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ee081964-e1d2-49a0-912a-18ca3c688e39">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="393d465c-b1c7-4966-97ea-e6d8195db362">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="8ac0e968-4d37-4f81-9e95-f3df5386b50f">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Alienlist" entity-set="Alienlists" table="Alienlist" schema="dbo" p1:Guid="3410c348-240f-417e-9c82-37434c371e9f">
+    <id name="Alcode" type="String" p1:ValidateMaxLength="13" p1:ValidateRequired="true" p1:Guid="ab644b51-2fa7-455c-9aef-32e88a35b07a">
+      <column name="Alcode" not-null="True" length="13" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="EmpID" type="Int32" p1:ValidateRequired="true" p1:Guid="2f527715-b6c3-422c-93c3-8988e5bb7233">
+      <column name="EmpID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Reqcode" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="f88fd90b-c01b-44f1-88c7-fdc61a568601">
+      <column name="Reqcode" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="AltypeID" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="b092f37a-bfee-48ef-ba33-a1092949e9ad">
+      <column name="AltypeID" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="AlprefixID" type="String" p1:nullable="True" p1:ValidateMaxLength="1" p1:ValidateRequired="false" p1:Guid="90e224ac-ab1a-4a80-8e11-2142b06c5385">
+      <column name="AlprefixID" not-null="False" length="1" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alprefixen" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="5aeb51e7-103d-43a2-a60d-f01113ebcb7c">
+      <column name="Alprefixen" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alnameen" type="String" p1:nullable="True" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="e66d82ae-87b5-4934-a092-fdef286ff270">
+      <column name="Alnameen" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alsnameen" type="String" p1:nullable="True" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="f4ae45b1-5e8f-4bcc-aca8-241a2beddf71">
+      <column name="Alsnameen" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Albdate" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="e4d96d69-6006-45d4-9365-e99e079817ed">
+      <column name="Albdate" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="AlgenderID" type="String" p1:nullable="True" p1:ValidateMaxLength="1" p1:ValidateRequired="false" p1:Guid="fc8c249e-55b6-4396-a5d8-0d67ebb090bd">
+      <column name="AlgenderID" not-null="False" length="1" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="AlnationID" type="String" p1:nullable="True" p1:ValidateMaxLength="1" p1:ValidateRequired="false" p1:Guid="88dca326-748e-4b73-8c83-b07a5846f231">
+      <column name="AlnationID" not-null="False" length="1" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="AlposID" type="String" p1:nullable="True" p1:ValidateMaxLength="2" p1:ValidateRequired="false" p1:Guid="4cd41381-6e5e-4e16-aebf-0d71913cb394">
+      <column name="AlposID" not-null="False" length="2" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="dc379327-64ef-4650-9b26-287406b01b04">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c4a52176-a698-49a9-9660-56bab34fcf0a">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="ab250f95-0649-4f79-8696-a024cf7baa7d">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Alnation" entity-set="Alnations" table="Alnation" schema="dbo" p1:Guid="d7f47db6-684b-4f13-8c34-55518c0aca81">
+    <id name="AlnationID" type="String" p1:ValidateMaxLength="1" p1:ValidateRequired="true" p1:Guid="0cc2c87f-2dd0-430c-a938-44fa3919cf54">
+      <column name="AlnationID" not-null="True" length="1" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="AlnationName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="aed8b534-4524-4d45-8b8d-520ab3ad94e0">
+      <column name="AlnationName" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0fd49357-03d8-49f4-86a4-245e6a1ff507">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="d7e8787f-d1ed-4289-bd78-9b63f4094a20">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="bd9a26fc-6ca0-47b6-89bb-618afc50c18f">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Alpo" entity-set="Alpos" table="Alpos" schema="dbo" p1:Guid="4b6c11ab-b3d6-42c9-965c-295c6d1e5d3f">
+    <id name="AlposID" type="String" p1:ValidateMaxLength="2" p1:ValidateRequired="true" p1:Guid="e1e641ce-3d50-4867-bb5d-a1a8c3537dd4">
+      <column name="AlposID" not-null="True" length="2" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="AlposName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="47df9b66-6080-45c4-a2ee-bf5cfb9f0c0c">
+      <column name="AlposName" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="1b9bc251-6901-478b-beea-f9c6fe3c3cdd">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="5debbfca-3111-4829-bb02-406b658ff125">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="d05c1786-da20-4093-9310-dfde8a0124be">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Alprefix" entity-set="Alprefixes" table="Alprefix" schema="dbo" p1:Guid="3cc19de8-e8d2-4538-a7d0-111389981c83">
+    <id name="AlprefixID" type="String" p1:ValidateMaxLength="1" p1:ValidateRequired="true" p1:Guid="6a5fed53-f1cf-4971-909e-38d3e5499b00">
+      <column name="AlprefixID" not-null="True" length="1" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="AlprefixName" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="dc0b65d9-43fd-48b2-8a95-c0a8a72b8ae3">
+      <column name="AlprefixName" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e5d70dc4-36f1-4748-ac6a-fbf7f87e365f">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="dc077b45-0e83-402d-be6f-bcb855eab25b">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="05d79152-dd04-4a89-b85d-72e43a9bb9d2">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Altype" entity-set="Altypes" table="Altype" schema="dbo" p1:Guid="f6c829e8-30d8-43d7-8bc2-0a4ef7806a82">
+    <id name="AltypeID" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="true" p1:Guid="5651b735-7128-407d-82e9-8a623d56ad8e">
+      <column name="AltypeID" not-null="True" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="AltypeName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="b4f1c7bb-3522-46a6-822d-d2de104fdf05">
+      <column name="AltypeName" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="ca4b5fa8-bd64-4a3c-93c0-3640788edf9a">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a011470f-d298-4b6e-aaf6-47d99d2eac90">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e28fc5fd-6fd6-49e8-b67b-55852ae19bfc">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Employee" entity-set="Employees" table="Employee" schema="dbo" p1:Guid="09ada5c9-02b3-48f5-aad0-3bf4cce39daf">
+    <id name="EmpID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="f26d1f4e-3035-4daf-8eae-b09ca2627be0">
+      <column name="EmpID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="EmpName" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="17116402-52e4-4a36-ac4b-7e13ba294f57">
+      <column name="EmpName" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="Wkaddress" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9ad8bb2b-b71b-4e8b-a272-26227a043131">
+      <column name="Wkaddress" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="Btname" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="1701dcb2-d126-48a4-b810-fe9081206f70">
+      <column name="Btname" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="67ecaca6-f516-4bdb-b58e-e913d3318ba4">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c0340e9a-d5c5-4f22-b383-d540a09ef1d5">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="3c5275fe-3239-4ea1-b49b-6d1c8b4ce88b">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Position" entity-set="Positions" table="Position" schema="dbo" p1:Guid="db7e6240-0419-411d-bddf-990c7e6318ad">
+    <id name="PositionID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="1658e463-8da4-420e-917b-7abf710649b4">
+      <column name="PositionID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="PositionName" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="9274ca73-6605-4675-acf9-78c612d89444">
+      <column name="PositionName" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a0243c18-4266-42c2-a3d5-8297472bc75d">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="252598c1-9a61-4596-bac2-1b93e692a0fd">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="d18753e4-4305-4f71-96ab-c735aae84859">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Province" entity-set="Provinces" table="Province" schema="dbo" p1:Guid="6b693e85-c2e7-46fa-aec3-9507befd23d4">
+    <id name="ProvinceID" type="String" p1:ValidateMaxLength="2" p1:ValidateRequired="true" p1:Guid="70a95962-048f-4975-a6cd-c4d00a8a8526">
+      <column name="ProvinceID" not-null="True" length="2" sql-type="nvarchar" p1:unicode="True" />
+    </id>
+    <property name="ProvinceName" type="String" p1:ValidateMaxLength="100" p1:ValidateRequired="true" p1:Guid="cdf3d3ea-fd80-4c1e-8223-a24ac2e34a88">
+      <column name="ProvinceName" not-null="True" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a3212117-1795-42d9-b4d4-f74981df0a70">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8e1f957f-1423-46a5-9b0e-09af8e14df5f">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="53e9dc2f-290f-4951-8f10-a71155b37b55">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Token" entity-set="Tokens" table="Token" schema="dbo" p1:Guid="fa0ee617-bede-40b9-8279-4d6ad67c8b34">
+    <id name="TokenID" type="Int32" p1:ValidateRequired="true" p1:Guid="dc99b013-6e57-43fa-9040-7258f07dfaef">
+      <column name="TokenID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="TokenCode" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9ee9f2d1-c4e0-4bb8-8dbf-f30690640edd">
+      <column name="TokenCode" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="Description" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="aae933cc-7da5-46f5-a3c7-e4efabbe6298">
+      <column name="Description" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="54870225-169a-409d-ba39-e0ba406304c7">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="aea5e8ad-121e-4317-985a-e50fb3f6d5be">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="c0053dee-5b30-42fa-ae88-589d855c3389">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="User" entity-set="Users" table="Users" schema="dbo" p1:Guid="b2c84fd3-8432-4848-9249-d312414b1e0f">
+    <id name="UserID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="bd231e70-fe95-435c-bb6a-501484c9688c">
+      <column name="UserID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="CardID" type="String" p1:nullable="True" p1:ValidateMaxLength="13" p1:ValidateRequired="false" p1:Guid="29cfad5c-6ccc-49df-b631-93d48c1d3404">
+      <column name="CardID" not-null="False" length="13" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Username" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="true" p1:Guid="2690a3b5-db7f-49cf-9021-2cdab1c87879">
+      <column name="Username" not-null="True" length="50" sql-type="nvarchar" unique="True" p1:unicode="True" />
+    </property>
+    <property name="PasswordHash" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="b6147e44-a237-4e1e-830b-b8a497949a9a">
+      <column name="PasswordHash" not-null="True" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="PositionID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c2d16dd1-22e6-452b-b0a4-4f729fed02b4">
+      <column name="PositionID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Email" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="4f682cf8-9e3a-4fe7-808e-fc31e0409bb9">
+      <column name="Email" not-null="False" length="255" sql-type="nvarchar" unique="True" p1:unicode="True" />
+    </property>
+    <property name="Phone" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="bbf33c47-558c-4e6f-b4ff-e0cb5259e592">
+      <column name="Phone" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="FirstName" type="String" p1:nullable="True" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="4a4f7a6b-4b55-4aff-aeb1-3645ce466185">
+      <column name="FirstName" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="LastName" type="String" p1:nullable="True" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="8992f9c4-227c-412d-a4a1-a2972e1c566a">
+      <column name="LastName" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="ImagesPath" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="509a0edf-a9ed-459d-9ca5-635e6297fd08">
+      <column name="ImagesPath" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3a183372-dae2-42dd-8720-de4bf689e7fb">
+      <column name="CreatedAt" default="getdate()" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="a675318b-76cf-4c23-a4ab-9c83c6ca7001">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="3a1ee8a4-656c-4ec9-a92f-432ffa6096f9">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Menu" entity-set="Menus" table="Menu" schema="dbo" p1:Guid="7b707301-98d8-46fe-88ee-843c9f260d4c">
+    <id name="MenuID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="1b393818-0afe-4152-b04b-fbc0dfdcd979">
+      <column name="MenuID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="MenuName" type="String" p1:ValidateRequired="true" p1:Guid="d5796710-5e76-41fb-922e-82f51f13a3f3">
+      <column name="MenuName" not-null="True" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9c1010c1-df22-47ea-925d-07f92e57b57d">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e8fba23c-6f47-4bc7-b7a6-08dc566da9a0">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e413768a-8904-4abc-86af-288b37699ece">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Permission" entity-set="Permissions" table="Permissions" schema="dbo" p1:Guid="15cb0e48-30eb-4706-814a-f0997fcfb11c">
+    <id name="PermissionsID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="0f92240a-bfce-411f-82b7-4c76c9a1d814">
+      <column name="PermissionsID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="UserID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c9cce9b5-08c5-40ce-9763-559965b11176">
+      <column name="UserID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="MenuID" type="Int32" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8eb7dd76-dbcb-44b7-8a96-68fc61146951">
+      <column name="MenuID" not-null="False" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CanView" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="bcf79e29-4b60-4041-a2d5-1e0322aeaf81">
+      <column name="CanView" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="CanCreate" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="0e1e62f1-dc92-4c1f-baa0-e5d5cfba934f">
+      <column name="CanCreate" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="CanUpdate" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="35cca97c-5fdf-455a-8e38-a78cf2b9eee7">
+      <column name="CanUpdate" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="CanDelete" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="70f36705-61fa-4110-82ae-be046abd7da2">
+      <column name="CanDelete" default="0" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="65a12697-c697-447e-bc54-3911f5ac9287">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Healthcheck" entity-set="Healthchecks" table="Healthcheck" schema="dbo" p1:Guid="0794c4e2-8162-4a85-b69d-0c1a71d91cbe">
+    <id name="HealthID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="fee95b18-6a1c-4e32-803d-863e11efafd0">
+      <column name="HealthID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Alcode" type="String" p1:nullable="True" p1:ValidateMaxLength="13" p1:ValidateRequired="false" p1:Guid="a6453bc4-571e-47a1-a63f-02ee793c2c93">
+      <column name="Alcode" not-null="False" length="13" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alchkhos" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="c9058cd7-25cb-4990-bcb1-9a706e79b079">
+      <column name="Alchkhos" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="AlchkstatusID" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="51cbf1f1-06f9-4d27-b3c3-3a3f57a4560c">
+      <column name="AlchkstatusID" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alchkdate" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="5cf7ddbf-8e8a-4de9-8a25-5df383940c3c">
+      <column name="Alchkdate" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alchkprovid" type="String" p1:nullable="True" p1:ValidateMaxLength="2" p1:ValidateRequired="false" p1:Guid="c1272d2d-5d02-4b0d-bb5d-074c47a8e53a">
+      <column name="Alchkprovid" not-null="False" length="2" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Licenseno" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="a572e893-836d-4d69-9897-aa8e628ce006">
+      <column name="Licenseno" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Chkname" type="String" p1:nullable="True" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="a29d7b02-b150-4c66-b390-8922f3aa4173">
+      <column name="Chkname" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Chkposition" type="String" p1:nullable="True" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="ebbe7fdb-5136-470f-aa8e-be30584054ac">
+      <column name="Chkposition" not-null="False" length="100" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alchkdesc" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="287571a6-3344-4803-90b2-060fe71612bd">
+      <column name="Alchkdesc" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alchkdoc" type="String" p1:nullable="True" p1:ValidateMaxLength="500" p1:ValidateRequired="false" p1:Guid="0773d09b-57fb-43ec-986b-a5e2f0386835">
+      <column name="Alchkdoc" not-null="False" length="500" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="4fd76d99-60ac-4003-bd33-174033b892f1">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e4ef9290-58bd-429a-b4e0-b06b9a391ea6">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="9fc6cd70-97f2-4c8c-b2c7-d09f60931aa7">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="UserIDManage" type="Int32" p1:ValidateRequired="true" p1:Guid="865208c0-c743-49b7-bfe0-75b21f2cef75">
+      <column name="UserIDManage" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Doctor" entity-set="Doctors" table="Doctors" schema="dbo" p1:Guid="ad562b21-233b-4b95-983f-bed9f17c2c18">
+    <id name="DoctorID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e38e95cc-d561-4cab-ba5b-377fee5a73ca">
+      <column name="DoctorID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="DoctorName" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="43187748-91f2-4a08-aab8-f334237c3dcf">
+      <column name="DoctorName" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Position" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="43fcdae4-59d1-4e7a-86c7-fc4a456e5bba">
+      <column name="Position" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Licenseno" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="bc312f26-e4c2-4dc5-a6f0-80afb54f1636">
+      <column name="Licenseno" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="77c217e2-5822-45d3-8e96-a166077ec87b">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="083ddb8f-8c92-44f9-8853-c68b44a1ae1e">
+      <column name="UpdatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="1416f879-ff28-4bb4-855b-72b571622d1a">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Hospital" entity-set="Hospitals" table="Hospitals" schema="dbo" p1:Guid="7951d9b7-3e09-454f-9440-e8ac8311589f">
+    <id name="HospitalID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="b03f1d31-e680-4131-a060-949fb39bfd8c">
+      <column name="HospitalID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="HospitalName" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="3f1bcc61-422a-4785-a5b2-6bb2256be190">
+      <column name="HospitalName" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="435becd8-e135-4887-81cd-8645767f3381">
+      <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdateAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="9163666f-3e64-488b-9c21-b986b5f6af79">
+      <column name="UpdateAt" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="IsActive" type="Boolean" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="b7ce1117-3d33-4103-ab00-ecca4265f9e7">
+      <column name="IsActive" default="1" not-null="True" sql-type="bit" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="LogSystem" entity-set="LogSystems" table="LogSystem" schema="dbo" p1:Guid="1dc2611a-1e58-429b-b43b-690c7abe5ea8">
+    <id name="LogID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="40040cb2-4c95-44f6-a9d3-780e40b5e3f2">
+      <column name="LogID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="UserID" type="Int32" p1:ValidateRequired="true" p1:Guid="abaa56ba-7137-4f5e-be70-e554789da0cd">
+      <column name="UserID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ActionTitle" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b5a6eaac-330a-4607-9763-ae235cc3cc4c">
+      <column name="ActionTitle" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="TableName" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="true" p1:Guid="5f991eb2-1561-4069-9549-7a3a807e1758">
+      <column name="TableName" not-null="True" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="RecordID" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="true" p1:Guid="2de841ba-6ec5-4252-a3eb-35e365e35772">
+      <column name="RecordID" not-null="True" length="50" precision="10" scale="0" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="TimeStamp" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ef7a074a-f4cb-4d3d-8371-6f32432a8406">
+      <column name="TimeStamp" default="getdate()" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="Detail" type="Clob" p1:nullable="True" p1:ValidateMaxLength="2147483647" p1:ValidateRequired="false" p1:Guid="6d423a21-88ff-4ad9-b79b-1ae00f422b64">
+      <column name="Detail" not-null="False" length="2147483647" sql-type="text" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="HistoryHealth" entity-set="HistoryHealths" table="HistoryHealth" schema="dbo" p1:Guid="25cc8a51-fbf6-4a69-98df-257dd9085b4c">
+    <id name="HistoryHealthID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="78d50176-1209-4170-a18e-c85d77fac843">
+      <column name="HistoryHealthID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Alcode" type="String" p1:ValidateMaxLength="13" p1:ValidateRequired="true" p1:Guid="123e8281-865c-4890-ba17-d009e9a46120">
+      <column name="Alcode" not-null="True" length="13" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alnameen" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="9ec0dd57-4b8b-480c-bed8-7e435e32ee79">
+      <column name="Alnameen" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alchkdate" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="55a571af-70b5-44cb-855a-afca248fd012">
+      <column name="Alchkdate" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="UploadDate" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="532302f8-b3bd-4f4a-aefb-6116a32649b5">
+      <column name="UploadDate" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UserIDManage" type="Int32" p1:ValidateRequired="true" p1:Guid="1e60a588-5c42-46c7-af3e-91a31e090699">
+      <column name="UserIDManage" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <associations>
+    <association name="Alpo_Alienlist" cardinality="OneToMany" p1:Guid="463aef7c-9147-4bc7-a9a8-ce9212a79993">
+      <end1 multiplicity="ZeroOrOne" name="Alpo" class="Alienlist" relation-class="Alpo" constrained="True" lazy="False" p1:Guid="f81cd384-da64-4110-a22a-041cb45859da">
+        <property name="AlposID" />
+      </end1>
+      <end2 multiplicity="Many" name="Alienlists" class="Alpo" relation-class="Alienlist" lazy="False" p1:Guid="5080d93b-7c04-4407-a317-18ffc9332be4">
+        <property name="AlposID" />
+      </end2>
+    </association>
+    <association name="Alprefix_Alienlist" cardinality="OneToMany" p1:Guid="6c3d7806-7e05-4d4b-aabe-460513b06424">
+      <end1 multiplicity="ZeroOrOne" name="Alprefix" class="Alienlist" relation-class="Alprefix" constrained="True" lazy="False" p1:Guid="7f2bedce-b529-4e3f-8cf0-a9feed6315b6">
+        <property name="AlprefixID" />
+      </end1>
+      <end2 multiplicity="Many" name="Alienlists" class="Alprefix" relation-class="Alienlist" lazy="False" p1:Guid="4dea07e4-45fc-423b-8c4a-0e6d4c813ee0">
+        <property name="AlprefixID" />
+      </end2>
+    </association>
+    <association name="Alnation_Alienlist" cardinality="OneToMany" p1:Guid="0a253c0e-3dae-47ec-b99f-8a530cf26e50">
+      <end1 multiplicity="ZeroOrOne" name="Alnation" class="Alienlist" relation-class="Alnation" constrained="True" lazy="False" p1:Guid="893f9d46-a917-4176-b880-7d4fb80553c9">
+        <property name="AlnationID" />
+      </end1>
+      <end2 multiplicity="Many" name="Alienlists" class="Alnation" relation-class="Alienlist" lazy="False" p1:Guid="06d58354-dc2f-45c1-bedd-e10fb5497eac">
+        <property name="AlnationID" />
+      </end2>
+    </association>
+    <association name="Algender_Alienlist" cardinality="OneToMany" p1:Guid="5adc5c73-8555-4c4a-a3fb-d448cc84c24b">
+      <end1 multiplicity="ZeroOrOne" name="Algender" class="Alienlist" relation-class="Algender" constrained="True" lazy="False" p1:Guid="3d9b3157-cfe8-49bc-817f-03c72e4c4f73">
+        <property name="AlgenderID" />
+      </end1>
+      <end2 multiplicity="Many" name="Alienlists" class="Algender" relation-class="Alienlist" lazy="False" p1:Guid="ac912943-f075-4a1d-ac9f-7afb90d823e8">
+        <property name="AlgenderID" />
+      </end2>
+    </association>
+    <association name="Employee_Alienlist" cardinality="OneToMany" p1:Guid="b4cde1a9-84f1-4702-915c-0f3f536b0efc">
+      <end1 multiplicity="One" name="Employee" class="Alienlist" relation-class="Employee" constrained="True" lazy="False" p1:Guid="527d0fe8-876f-4dab-911d-29e1fe373606">
+        <property name="EmpID" />
+      </end1>
+      <end2 multiplicity="Many" name="Alienlists" class="Employee" relation-class="Alienlist" lazy="False" p1:Guid="2c1f5e13-f599-4120-a693-9165716661d8">
+        <property name="EmpID" />
+      </end2>
+    </association>
+    <association name="Position_User" cardinality="OneToMany" p1:Guid="9ec53cbf-1daa-4ebb-aec9-a41e8abdf7fd">
+      <end1 multiplicity="ZeroOrOne" name="Position" class="User" relation-class="Position" constrained="True" lazy="False" p1:Guid="802e2589-9c8b-4441-9aff-5457b4a905d4">
+        <property name="PositionID" />
+      </end1>
+      <end2 multiplicity="Many" name="Users" class="Position" relation-class="User" lazy="False" p1:Guid="93a3cf0b-c47a-47d5-bbac-7cc475fbe94e">
+        <property name="PositionID" />
+      </end2>
+    </association>
+    <association name="Menu_Permission" cardinality="OneToMany" p1:Guid="75c306ca-66cf-42e5-91fa-0025601b10ae">
+      <end1 multiplicity="ZeroOrOne" name="Menu" class="Permission" relation-class="Menu" constrained="True" lazy="False" p1:Guid="ff2343fe-5764-4924-9950-4df1174f79ba">
+        <property name="MenuID" />
+      </end1>
+      <end2 multiplicity="Many" name="Permissions" class="Menu" relation-class="Permission" lazy="False" p1:Guid="653e13ac-a759-4c52-8a25-8574464fa4b8">
+        <property name="MenuID" />
+      </end2>
+    </association>
+    <association name="User_Permission" cardinality="OneToMany" p1:Guid="3492ffe8-16f9-425b-a213-75acfa86e52f">
+      <end1 multiplicity="ZeroOrOne" name="User" class="Permission" relation-class="User" constrained="True" lazy="False" p1:Guid="c1adb68b-42c3-4f3e-8785-72060f9b3a5b">
+        <property name="UserID" />
+      </end1>
+      <end2 multiplicity="Many" name="Permissions" class="User" relation-class="Permission" lazy="False" p1:Guid="1eced580-c193-4e0b-998d-4cd71e117fbb">
+        <property name="UserID" />
+      </end2>
+    </association>
+    <association name="Alienlist_Healthcheck" cardinality="OneToMany" p1:Guid="b20eab20-b196-4618-966f-3f1fa849db76">
+      <end1 multiplicity="ZeroOrOne" name="Alienlist" class="Healthcheck" relation-class="Alienlist" constrained="True" lazy="False" p1:Guid="101a3df2-f778-4bae-9980-534334f9dd09">
+        <property name="Alcode" />
+      </end1>
+      <end2 multiplicity="Many" name="Healthchecks" class="Alienlist" relation-class="Healthcheck" lazy="False" p1:Guid="80bb42fe-745b-4c57-8f1e-68288698be33">
+        <property name="Alcode" />
+      </end2>
+    </association>
+    <association name="Province_Healthcheck" cardinality="OneToMany" p1:Guid="6b4ee513-bd85-4792-91e8-6056324b3187">
+      <end1 multiplicity="ZeroOrOne" name="Province" class="Healthcheck" relation-class="Province" constrained="True" lazy="False" p1:Guid="eb364f4a-e83a-4d02-9f84-12ba7aa6cdb1">
+        <property name="ProvinceID" />
+      </end1>
+      <end2 multiplicity="Many" name="Healthchecks" class="Province" relation-class="Healthcheck" lazy="False" p1:Guid="c1369fd4-a10a-40ad-806a-5c71160e50db">
+        <property name="Alchkprovid" />
+      </end2>
+    </association>
+    <association name="User_Healthcheck" cardinality="OneToMany" p1:Guid="40eeceff-dc8d-48b8-8641-dbc8e7e2fbdd">
+      <end1 multiplicity="One" name="User" class="Healthcheck" relation-class="User" constrained="True" lazy="False" p1:Guid="6b1e4c0c-3529-436d-982e-587baa3c12e6">
+        <property name="UserID" />
+      </end1>
+      <end2 multiplicity="Many" name="Healthchecks" class="User" relation-class="Healthcheck" lazy="False" p1:Guid="55362ae8-38df-4f18-ab25-d956ed1e15ff">
+        <property name="UserIDManage" />
+      </end2>
+    </association>
+    <association name="User_LogSystem" cardinality="OneToMany" p1:Guid="8735d57a-8b75-423b-8954-8031d1bc2a9a">
+      <end1 multiplicity="One" name="User" class="LogSystem" relation-class="User" constrained="True" lazy="False" p1:Guid="4b41af36-fca5-4cd4-bec7-18a016fde8e1">
+        <property name="UserID" />
+      </end1>
+      <end2 multiplicity="Many" name="LogSystems" class="User" relation-class="LogSystem" lazy="False" p1:Guid="abf4e662-0137-478b-a969-312eefe79bef">
+        <property name="UserID" />
+      </end2>
+    </association>
+    <association name="Alchkstatu_Healthcheck" cardinality="OneToMany" p1:Guid="82d21e47-e3af-4905-b444-4d3d161c07a6">
+      <end1 multiplicity="ZeroOrOne" name="Alchkstatu" class="Healthcheck" relation-class="Alchkstatu" constrained="True" lazy="False" p1:Guid="60794801-35b4-4ac5-b485-750a932507c2">
+        <property name="AlchkstatusID" />
+      </end1>
+      <end2 multiplicity="Many" name="Healthchecks" class="Alchkstatu" relation-class="Healthcheck" lazy="False" p1:Guid="08e340d2-bfa6-4301-a486-4104d7628e1e">
+        <property name="AlchkstatusID" />
+      </end2>
+    </association>
+    <association name="Altype_Alienlist" cardinality="OneToMany" p1:Guid="dc84f58c-565e-41c5-8bd3-db61f94ddb71">
+      <end1 multiplicity="ZeroOrOne" name="Altype" class="Alienlist" relation-class="Altype" constrained="True" lazy="False" p1:Guid="00fb2cae-940d-41be-ab25-54d11dfb0028">
+        <property name="AltypeID" />
+      </end1>
+      <end2 multiplicity="Many" name="Alienlists" class="Altype" relation-class="Alienlist" lazy="False" p1:Guid="66ea46a2-2046-4d77-b91b-03d047f4978f">
+        <property name="AltypeID" />
+      </end2>
+    </association>
+  </associations>
+</efcore>

@@ -1,0 +1,301 @@
+﻿@{
+    ViewData["Controller"] = "DefualtConfig";
+    ViewData["Action"] = "Altype";
+    ViewData["Icon"] = "globe";
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row" style="display: none" id="showInsert">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-light" id="createOff" href="#" style="float:right">ยกเลิก</a>
+                        <h4 id="createHeader"><i class="fa fa-plus"></i> เพิ่ม</h4>
+                        <h4 id="updateHeader" style="display:none"><i class="fa fa-edit"></i> แก้ไข</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <h6 class="sub-title" id="createHeader"><i class="icofont icofont-plus"></i> เพิ่มใหม่</h6>
+                                    <h6 class="sub-title" id="updateHeader" style="display: none"><i class="icofont icofont-edit"></i> แก้ไข</h6>
+                                    <form id="myForm" method="post" class="row g-3" action="">
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <input name="AltypeID" id="txtAltypeID" type="hidden" style="display:none">
+                                            <label class="col-form-label" for="txtAltypeName">ชื่อประเภทคนต่างด้าว</label>
+                                            <input class="form-control" name="AltypeName" id="txtAltypeName" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="createBtn" type="submit" title="btn btn-pill btn-primary active">บันทึก</button>
+                                            <button class="btn btn-pill btn-primary active" id="updateBtn" type="submit" title="btn btn-pill btn-info active" style="display: none;">อัพเดท</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4><i class="fa fa-globe"></i> ประเภทคนต่างด้าว</h4>
+                                <a class="btn btn-primary mt-2" id="creteOn" href="#"><i class="fa fa-plus"></i> เพิ่ม</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex" asp-action="Altype" asp-controller="DefualtConfig" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control m-2" name="searchString" placeholder="กรอกชื่อประเภทคนต่างด้าว">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary m-2" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อประเภทคนต่างด้าว</th>
+                                        <th>ดำเนินการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in (List<HealthCheck.Models.Altype>)ViewBag.Altype)
+                                    {
+                                        <tr>
+                                            <td>@item.AltypeName</td>
+                                            <td>
+                                                <ul class="action">
+                                                    <li class="edit"><a href="#" class="editBtn" data-AltypeID="@item.AltypeID"><i class="icon-pencil-alt"></i></a></li>
+                                                    <li class="delete"><a href="#" class="deleteBtn" data-AltypeID="@item.AltypeID"><i class="icon-trash"></i></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var showInsert = document.getElementById('showInsert');
+            var createOn = document.getElementById('creteOn');
+            var createOff = document.getElementById('createOff');
+
+            createOn.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'block';
+            });
+
+            createOff.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'none';
+                $('#myForm')[0].reset();
+                $('#txtAltypeID').hide();
+                $('#updateBtn').hide();
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+                $('#cancelBtn').hide();
+            });
+        });
+
+        $(document).ready(function () {
+            var editingAltypeData = null;
+
+            function loadAltypeData(altype) {
+                $('#txtAltypeID').val(altype.altypeID);
+                $('#txtAltypeName').val(altype.altypeName);
+                editingAltypeData = altype;
+            }
+
+            document.querySelectorAll('.editBtn').forEach(function (button) {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var altypeID = this.getAttribute('data-AltypeID');
+                    $.ajax({
+                        url: '@Url.Action("ModelAltype", "DefualtConfig")',
+                        type: 'GET',
+                        data: { AltypeID: altypeID },
+                        success: function (response) {
+                            if (response) {
+                                $('#showInsert').show();
+                                loadAltypeData(response);
+                                $('#createHeader').hide();
+                                $('#updateHeader').show();
+                                $('#createBtn').hide();
+                                $('#updateBtn').show();
+                                $('#cancelBtn').show();
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                });
+            });
+
+            $('#cancelBtn').click(function (e) {
+                e.preventDefault();
+                $('#myForm')[0].reset();
+                $('#updateBtn').hide();
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+                $('#cancelBtn').hide();
+                editingAltypeData = null;
+            });
+        });
+
+        $('#createBtn').click(function (e) {
+            e.preventDefault();
+            var altypeData = {
+                AltypeName: $('#txtAltypeName').val(),
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d3d3d3',
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("CreateAltype", "DefualtConfig")',
+                        type: 'POST',
+                        data: altypeData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#updateBtn').click(function (e) {
+            e.preventDefault();
+            var altypeData = {
+                AltypeID: $('#txtAltypeID').val(),
+                AltypeName: $('#txtAltypeName').val(),
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d3d3d3',
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("UpdateAltype", "DefualtConfig")',
+                        type: 'POST',
+                        data: altypeData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.deleteBtn').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                var altypeID = this.getAttribute('data-AltypeID');
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณจะไม่สามารถย้อนกลับได้!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#d3d3d3',
+                    confirmButtonText: 'ใช่, ลบ!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteAltype", "DefualtConfig")',
+                            type: 'POST',
+                            data: { AltypeID: altypeID },
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'ลบแล้ว!',
+                                        response.message,
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (xhr) {
+                                handleAjaxError(xhr);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+}

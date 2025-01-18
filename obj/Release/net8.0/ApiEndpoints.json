@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "HealthChecks.Controllers.HealthCheckResultDailyController",
+    "Method": "GetResultDaily",
+    "RelativePath": "api/HealthCheckResultDaily/GetResultDaily",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HealthChecks.Models.RequestHealthDaily",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

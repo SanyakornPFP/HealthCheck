@@ -1,0 +1,219 @@
+﻿@{
+    Layout = null;
+    string UrlLink = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mofi admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Mofi admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="~/assets/images/logo/Logo.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="~/assets/images/logo/Logo.jpg" type="image/x-icon">
+    <title>HealthCheck</title>
+    <!-- Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.css">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/icofont.css">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/themify.css">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/flag-icon.css">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/feather-icon.css">
+    <!-- Plugins css start-->
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/vendors/bootstrap.css">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+    <link id="color" rel="stylesheet" href="~/assets/css/color-1.css" media="screen">
+    <!-- Responsive css-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    @* Sweetalert2 *@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .bg-ocean {
+            background-color: #3b8fd1; /* สีน้ำเงินอมฟ้า */
+        }
+    </style>
+</head>
+<body>
+    <!-- login page start-->
+    <div class="container-fluid p-0">
+        <div class="row m-0">
+            <div class="col-12 p-0">
+                <div class="login-card login-dark">
+                    <div>
+                        <div class="login-main">
+                            <form id="myForm" class="theme-form">
+                                <h4 class="mb-4">
+                                    <img src="~/assets/images/logo/Logo.jpg" style="width:100%">
+                                </h4>
+                                <hr />
+                                <div class="form-group">
+                                    <label class="col-form-label">เลขบัตรประจำตัว 13 หลัก</label>
+                                    <input id="idNumber" name="Card" class="form-control" type="text" maxlength="13" placeholder="กรุณากรอกข้อมูล">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">รหัสผ่าน</label>
+                                    <div class="form-input position-relative">
+                                        <input id="newPassword" name="login[password]" class="form-control" type="password" placeholder="กรุณากรอกรหัสผ่านใหม่">
+                                        <div class="show-hide"><span class="show">                         </span></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">ยืนยันรหัสผ่าน</label>
+                                    <div class="form-input position-relative">
+                                        <input id="confirmPassword" name="login[password]" class="form-control" type="password" placeholder="กรุณากรอกรหัสผ่านใหม่อีกครั้ง">
+                                        <div class="show-hide"><span class="show">                         </span></div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <a asp-controller="Authenication" asp-action="Login">คุณต้องการเข้าสู่ระบบ ?</a>
+                                    <div class="text-end mt-3">
+                                        <button class="createBtn btn btn-primary btn-block w-100" type="submit">บันทึก</button>
+                                    </div>
+                                </div>
+                                <p class="mt-4 mb-0 text-center">
+                                    ไม่มีผู้ใช้งานภายในระบบ ? โปรดติดต่อผู้ดูแลระบบ
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- latest jquery-->
+        <script src="~/assets/js/jquery.min.js"></script>
+        <!-- Bootstrap js-->
+        <script src="~/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- feather icon js-->
+        <script src="~/assets/js/icons/feather-icon/feather.min.js"></script>
+        <script src="~/assets/js/icons/feather-icon/feather-icon.js"></script>
+        <!-- scrollbar js-->
+        <!-- Sidebar jquery-->
+        <script src="~/assets/js/config.js"></script>
+        <!-- Plugins JS start-->
+        <!-- calendar js-->
+        <!-- Plugins JS Ends-->
+        <!-- Theme js-->
+        <script src="~/assets/js/script.js"></script>
+        <!-- Plugin used-->
+        <script>
+            $(document).ready(function () {
+                $('#myForm').on('submit', function (e) {
+                    e.preventDefault(); // ป้องกันการส่งฟอร์มตามปกติ
+
+                    var idNumber = $('#idNumber').val(); // ค่าเลขบัตรประจำตัว
+                    var newPassword = $('#newPassword').val(); // รหัสผ่านใหม่
+                    var confirmPassword = $('#confirmPassword').val(); // ยืนยันรหัสผ่านใหม่
+
+                    // ตรวจสอบว่ารหัสผ่านไม่น้อยกว่า 6 ตัวอักษร
+                    if (newPassword.length < 6 || confirmPassword.length < 6) {
+                        Swal.fire('ผิดพลาด', 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร', 'error');
+                        return;
+                    }
+
+                    if (!idNumber || !newPassword || !confirmPassword) {
+                        Swal.fire('ผิดพลาด', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        Swal.fire('ผิดพลาด', 'รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน', 'error');
+                        return;
+                    }
+
+                    // ตรวจสอบค่าซ้ำก่อนบันทึก
+                    $.ajax({
+                        url: '@Url.Action("CheckCardID", "Authenication")', // ตรวจสอบว่าผู้ใช้มีอยู่
+                        type: 'GET',
+                        data: { CardID: idNumber },
+                        success: function (response) {
+                            if (!response) {
+                                Swal.fire('ผิดพลาด', 'เลขบัตรประจำของผู้ใช้งานไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง', 'error');
+                                return;
+                            }
+                            // Popup ยืนยันก่อนเปลี่ยนรหัสผ่าน
+                            Swal.fire({
+                                title: 'ยืนยันการเปลี่ยนรหัสผ่าน',
+                                text: 'คุณต้องการเปลี่ยนรหัสผ่านหรือไม่?',
+                                icon: 'warning',
+                                showCancelButton: true, // แสดงปุ่มยกเลิก
+                                confirmButtonText: 'ใช่', // ปุ่มยืนยัน
+                                cancelButtonText: 'ไม่' // ปุ่มยกเลิก
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // หากผู้ใช้ยืนยัน, ส่ง AJAX เพื่อเปลี่ยนรหัสผ่าน
+                                    $.ajax({
+                                        url: '@Url.Action("UpdateModelPassword", "Authenication")', // ปรับ URL ของ Controller
+                                        type: 'POST',
+                                        data: {
+                                            CardID: idNumber,
+                                            NewPassword: newPassword,
+                                        },
+                                        success: function (response) {
+                                            Swal.fire(
+                                                'สำเร็จ',
+                                                'การเปลี่ยนรหัสผ่านสำเร็จ',
+                                                'success'
+                                            ).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    window.location.href = '@Url.Action("Login", "Authenication")'; // เปลี่ยนเส้นทางไปยังหน้าอื่น
+                                                }
+                                            });
+                                        },
+                                        error: function (xhr, textStatus, errorThrown) {
+                                            console.error("Error:", textStatus, errorThrown);
+                                            handleHttpErrors(xhr.status); // จัดการข้อผิดพลาด
+                                        }
+                                    });
+                                }
+                            });
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.error("Error:", textStatus, errorThrown);
+                            handleHttpErrors(xhr.status); // จัดการข้อผิดพลาด
+                        }
+                    });
+                });
+            });
+
+            // ฟังก์ชันจัดการข้อผิดพลาด HTTP
+            function handleHttpErrors(status) {
+                switch (status) {
+                    case 400:
+                        window.open('@(UrlLink)/Error/Error400', '_blank');
+                        break;
+                    case 401:
+                        window.open('@(UrlLink)/Error/Error401', '_blank');
+                        break;
+                    case 403:
+                        window.open('@(UrlLink)/Error/Error403', '_blank');
+                        break;
+                    case 404:
+                        window.open('@(UrlLink)/Error/Error404', '_blank');
+                        break;
+                    case 500:
+                        window.open('@(UrlLink)/Error/Error500', '_blank');
+                        break;
+                    case 503:
+                        window.open('@(UrlLink)/Error/Error503', '_blank');
+                        break;
+                    default:
+                        console.log('Unexpected error occurred: ', status);
+                }
+            }
+
+        </script>
+    </div>
+</body>
+</html>

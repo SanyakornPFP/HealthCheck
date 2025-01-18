@@ -1,0 +1,450 @@
+﻿@{
+    ViewData["Controller"] = "AdministratorManagement";
+    ViewData["Action"] = "Users";
+    ViewData["Icon"] = "user";
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row" style="display: none" id="showInsert">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-light" id="createOff" href="#" style="float:right">ยกเลิก</a>
+                        <h4 id="createHeader"><i class="fa fa-plus"></i> เพิ่ม</h4>
+                        <h4 id="updateHeader" style="display:none"><i class="fa fa-edit"></i> แก้ไข</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">                                                                   
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <h6 class="sub-title" id="createHeader"><i class="icofont icofont-plus"></i> เพิ่มใหม่</h6>
+                                    <h6 class="sub-title" id="updateHeader" style="display: none"><i class="icofont icofont-edit"></i> แก้ไข</h6>
+                                    <form id="myForm" method="post" class="row g-3" action="">
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtUsername">ชื่อผู้ใช้</label>
+                                            <input class="form-control" name="Username" id="txtUsername" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <input name="UserID" id="txtUserID" type="hidden" style="display:none">
+                                            <label class="col-form-label" for="txtFirstName">ชื่อ </label>
+                                            <input class="form-control" name="FirstName" id="txtFirstName" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtLastName">นามสกุล</label>
+                                            <input class="form-control" name="LastName" id="txtLastName" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtEmail">อีเมล</label>
+                                            <input class="form-control" name="Email" id="txtEmail" type="email" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtPhoneNumber">เบอร์โทรศัพท์</label>
+                                            <input class="form-control" name="PhoneNumber" id="txtPhoneNumber" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtCardID">หมายเลขบัตร</label>
+                                            <input class="form-control" name="CardID" id="txtCardID" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddlPosition">ตำแหน่ง</label>
+                                            <select class="form-control select2-In" name="ddlPosition" id="ddlPosition">
+                                                <option value="">เลือกตำแหน่ง</option>
+                                                @foreach (var item in (List<Position>)ViewBag.Position)
+                                                {
+                                                    <option value="@item.PositionID">@item.PositionName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="createBtn" type="submit" title="btn btn-pill btn-primary active">บันทึก</button>
+                                            <button class="btn btn-pill btn-primary active" id="updateBtn" type="submit" title="btn btn-pill btn-info active" style="display: none;">อัพเดท</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4><i class="fa fa-user"></i> Users - ผู้ใช้งาน</h4>
+                                <a class="btn btn-primary mt-2" id="creteOn" href="#"><i class="fa fa-plus"></i> เพิ่ม</a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex" asp-action="Users" asp-controller="Administrator" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control m-2" name="searchString" placeholder="กรอกชื่อผู้ใช้งานหรือชื่อ-นามสกุล">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary m-2" type="submit">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <table class="display" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>ชื่อผู้ใช้</th>
+                                        <th>ชื่อ</th>
+                                        <th>นามสกุล</th>
+                                        <th>ตำแหน่ง</th>
+                                        <th class="text-center">เพิ่มเติม</th>
+                                        <th>ดำเนินการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in (List<HealthCheck.Models.User>)ViewBag.UserList)
+                                    {
+                                        <tr>
+                                            <td>@item.Username</td>
+                                            <td>@item.FirstName</td>
+                                            <td>@item.LastName</td>
+                                            <td>@item.Position.PositionName</td>
+                                            <td class="text-center">
+                                                <!-- ปุ่มที่เปิด Modal -->
+                                                <a href="#" data-toggle="modal" data-target="#detailModal" data-userID="@item.UserID">
+                                                    <i class="icofont icofont-list"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <ul class="action">
+                                                    <li class="edit"><a href="#" class="editBtn" data-UserID="@item.UserID"><i class="icon-pencil-alt"></i></a></li>
+                                                    <li class="delete"><a href="#" class="deleteBtn" data-UserID="@item.UserID"><i class="icon-trash"></i></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h6 class="modal-title">
+                        <i class="icofont icofont-list"></i> รายละเอียดเพิ่มเติม
+                    </h6>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0"><i class="svg-modal" data-feather="arrow-right-circle"></i></div>
+                        <div class="flex-grow-1 ms-2">
+                            <p id="FullName"></p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="flex-shrink-0"><i class="svg-modal" data-feather="arrow-right-circle"></i></div>
+                        <div class="flex-grow-1 ms-2">
+                            <p id="Email"></p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="flex-shrink-0"><i class="svg-modal" data-feather="arrow-right-circle"></i></div>
+                        <div class="flex-grow-1 ms-2">
+                            <p id="NumberPhone"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // ดักจับเหตุการณ์เมื่อ Modal ถูกเปิด
+            $('#detailModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // ปุ่มที่ถูกคลิก
+                var userId = button.data('userid'); // ดึงค่า userID จาก data attribute
+                console.log(userId);
+                // ส่ง AJAX request เพื่อดึงรายละเอียดโดยใช้ CesID
+                $.ajax({
+                    url: '@Url.Action("ModelUser", "Admin")', // เปลี่ยนเป็น URL ของ Controller และ Action
+                    type: 'GET',
+                    data: { userID: userId }, // ส่งค่า CesID
+                    success: function (response) { // เมื่อ AJAX สำเร็จ
+                        console.log(response);
+                        // อัปเดตเนื้อหาใน Modal
+                        $('#FullName').text("ชื่อ-นามสกุล:  " + response.firstName + "  " + response.lastName);
+                        $('#Email').text("อีเมลล์ : " + response.email);
+                        $('#NumberPhone').text("เบอร์โทรศัพท์ : " + response.phone);
+                    },
+                    error: function (xhr, status, error) { // เมื่อ AJAX ล้มเหลว
+                        console.error("Error:", error); // จัดการข้อผิดพลาด
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var showInsert = document.getElementById('showInsert');
+            var createOn = document.getElementById('creteOn');
+            var createOff = document.getElementById('createOff');
+
+            // Event listener for "เพิ่ม" button
+            createOn.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'block';  // Show the form
+            });
+
+            // Event listener for "ยกเลิกเพิ่ม" button
+            createOff.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'none';  // Hide the form
+                // Reset the form fields
+                $('#myForm')[0].reset();
+                // Hide the DepartmentID field and update button
+                $('#txtUserID').hide();
+                $('#updateBtn').hide();
+                // Show the create button and header
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+                // Hide the cancel button
+                $('#cancelBtn').hide();
+            });
+        });
+
+        $(document).ready(function () {
+            var editingUserData = null;
+
+            // Function to load user data into the form
+            function loadUserData(user) {
+                $('#txtUserID').val(user.userID);
+                $('#ddlDepartment').val(user.departmentID).trigger('change');
+                $('#ddlPoition').val(user.postionID).trigger('change');
+                editingUserData = user; // Store the user data globally
+
+                // Set other fields as needed
+                $('#txtUsername').val(user.username).show();
+                $('#txtFirstName').val(user.firstName);
+                $('#txtLastName').val(user.lastName);
+                $('#txtEmail').val(user.email);
+                $('#txtPhoneNumber').val(user.phone);
+                $('#txtCardID').val(user.cardID);
+            }
+
+            // Edit button click event
+            document.querySelectorAll('.editBtn').forEach(function (button) {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var userID = this.getAttribute('data-UserID');
+                    $.ajax({
+                        url: '@Url.Action("ModelUser", "Admin")',
+                        type: 'GET',
+                        data: { userID: userID },
+                        success: function (response) {
+                            if (response) {
+                                // Populate the form with the retrieved data
+                                $('#showInsert').show();
+
+                                loadUserData(response);
+
+                                // Show the update button and header
+                                $('#createHeader').hide();
+                                $('#updateHeader').show();
+                                $('#createBtn').hide();
+                                $('#updateBtn').show();
+
+                                // Show the cancel button
+                                $('#cancelBtn').show();
+
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                });
+            });
+
+            // Cancel button click event
+            $('#cancelBtn').click(function (e) {
+                e.preventDefault();
+
+                // Reset the form
+                $('#userForm')[0].reset();
+
+                // Hide the update button and header
+                $('#updateBtn').hide();
+                $('#createHeader').show();
+                $('#updateHeader').hide();
+                $('#createBtn').show();
+
+                // Hide the cancel button
+                $('#cancelBtn').hide();
+
+                // Clear global user data
+                editingUserData = null;
+            });
+        });
+
+        $('#createBtn').click(function (e) {
+            e.preventDefault();
+            var userData = {
+                Username: $('#txtUsername').val(),
+                FirstName: $('#txtFirstName').val(),
+                LastName: $('#txtLastName').val(),
+                Email: $('#txtEmail').val(),
+                PhoneNumber: $('#txtPhoneNumber').val(),
+                PositionID: $('#ddlPosition').val(),
+                CardID: $('#txtCardID').val(),
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745', // Light green
+                cancelButtonColor: '#d3d3d3', // Light gray
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("CreateUser", "Admin")',
+                        type: 'POST',
+                        data: userData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#updateBtn').click(function (e) {
+            e.preventDefault();
+            var userData = {
+                UserID: $('#txtUserID').val(),
+                Username: $('#txtUsername').val(),
+                FirstName: $('#txtFirstName').val(),
+                LastName: $('#txtLastName').val(),
+                Email: $('#txtEmail').val(),
+                PhoneNumber: $('#txtPhoneNumber').val(),
+                PositionID: $('#ddlPosition').val(),
+                CardID: $('#txtCardID').val(),
+            };
+
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณจะไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff', // Light blue
+                cancelButtonColor: '#d3d3d3', // Light gray
+                confirmButtonText: 'ใช่, บันทึก!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '@Url.Action("UpdateUser", "Admin")',
+                        type: 'POST',
+                        data: userData,
+                        success: function (response) {
+                            if (response.success) {
+                                Swal.fire(
+                                    'บันทึกแล้ว!',
+                                    'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire('ผิดพลาด', response.message, 'error');
+                            }
+                        },
+                        error: function (xhr) {
+                            handleAjaxError(xhr);
+                        }
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.deleteBtn').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                var userID = this.getAttribute('data-UserID');
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณจะไม่สามารถย้อนกลับได้!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#d3d3d3',
+                    confirmButtonText: 'ใช่, ลบ!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteUser", "Admin")',
+                            type: 'POST',
+                            data: { UserID: userID },
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'ลบแล้ว!',
+                                        response.message,
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (xhr) {
+                                handleAjaxError(xhr);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+}

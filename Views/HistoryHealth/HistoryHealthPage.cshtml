@@ -1,0 +1,62 @@
+﻿@{
+	ViewData["Controller"] = "History";
+	ViewData["Action"] = "HealthCheck";
+	ViewData["Icon"] = "file-text";
+	string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+	int countRow = 0;
+}
+@using ContainerEvaluationSystem.Helpers;
+@using HealthCheck.Models;
+
+<div class="page-body">
+	<!-- Container-fluid starts-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header pb-0 card-no-border">
+						<div class="d-flex justify-content-between align-items-center mb-3">
+							<div>
+								<h4>
+									<i class="fa fa-file-text"></i> ข้อมูลประวัติการส่งข้อมูลผลตรวจสุขภาพ
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive theme-scrollbar">
+							<table class="display" id="data-source-1" style="width:100%">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>วันที่ตรวจสุขภาพ</th>
+										<th>จำนวนการอัปโหลดข้อมูล</th>
+										<th>รายละเอียด</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var item in ViewBag.HistoryHealthCheck)
+									{
+										countRow++;
+										<tr>
+											<td>@countRow</td>
+											<td>@item.Alchkdate</td>
+											<td>@item.TotalCount</td>
+											<td class="text-center">
+												<!-- ปุ่มที่เปิด Modal -->
+												<a asp-controller="HistoryHealth" asp-action="HistoryDetail" asp-route-Alchkdate="@item.Alchkdate">
+													<i class="icofont icofont-list"></i>
+												</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,271 @@
+﻿@{
+    ViewData["Controller"] = "Profile";
+    ViewData["Action"] = "Info";
+    ViewData["Icon"] = "user";
+}
+    @using ContainerEvaluationSystem.Helpers;
+<!-- Page Sidebar Ends-->
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="edit-profile">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">My Profile</h4>
+                            <p>โปรไฟล์ส่วนตัว</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="profile-title">
+                                    <div class="d-flex">
+                                        @if (User.GetLoggedInImgProfile() == "")
+                                        {
+                                            <img class="img-100 rounded-circle" alt="" src="~/profile/defaultUser.png">
+                                        }
+                                        else
+                                        {
+                                            <img class="img-100 rounded-circle" src="~/profile/@User.GetLoggedInImgProfile()" alt="">
+                                        }
+                                        <div class="flex-grow-1">
+                                            <h4 class="mb-1">@User.GetLoggedInName()</h4>
+                                            <p>@User.GetLoggedInPosition()</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="table-responsive theme-scrollbar">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: bold"><i class="icofont icofont-id-card" style="padding-right:10px"></i>  ชื่อผู้ใช้งาน/รหัสพนักงาน</td>
+                                                <td>
+                                                    @User.GetLoggedInUsername()
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight: bold"><i class="icofont icofont-email" style="padding-right:10px"></i>  อีเมลล์</td>
+                                                <td>
+                                                    @(User.GetLoggedInEmail() == "" ? "ไม่พบข้อมูล" : User.GetLoggedInEmail())
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight: bold"><i class="icofont icofont-briefcase-alt-1" style="padding-right:10px"></i> เบอร์โทรศัพท์</td>
+                                                <td>
+                                                    @User.GetLoggedInPhone()
+                                                </td>
+                                            </tr>
+
+                                            <tr class="text-center">
+                                                <td></td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-7">
+                    <form id="updateInfo" class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">UpdateProfile</h4>
+                            <p>อัพเดทโปรไฟล์ส่วนตัว</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">เบอร์โทรศัพท์</label>
+                                        <input class="form-control" name="Phone" type="text" placeholder="ตัวอย่าง :'0611111111'" value="@(User.GetLoggedInPhone() == "NULL" ? "" : User.GetLoggedInPhone())">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">อีเมลล์</label>
+                                        <input class="form-control" name="Email" type="email" placeholder="ตัวอย่าง :'xxxxxxx@pfp-pacific.com'" value="@(User.GetLoggedInEmail() == "NULL" ? "" : User.GetLoggedInEmail())">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">รูปโปรไฟล์</label>
+                                        <div class="input-group">
+                                            <button class="btn btn-info" id="inputGroupFileAddon03" type="button"><i class="icon-image"></i></button>
+                                            <input class="form-control" id="inputGroupFile03" name="ProfileImage" type="file" aria-describedby="inputGroupFileAddon03" aria-label="Upload" accept="image/jpeg, image/png, image/jpg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <button class="btn btn-success" type="submit">บันทึก</button>
+                        </div>
+                    </form>
+
+                   @*  <form id="changePaswords" class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">ChangePassword</h4>
+                            <p>เปลี่ยนรหัสผ่านใหม่</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="mปb-3">
+                                <label class="form-label">เลขบัตรประจำตัว</label>
+                                <input type="hidden" value="@User.GetLoggedInUserID()" id="txtEmpID" />
+                                <input class="form-control" id="idNumber" type="text" maxlength="13" placeholder="กรุณากรอกเลขประจำตัว 13 หลัก" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input class="form-control" id="newPassword" type="password" placeholder="กรุณากรอกรหัสผ่านใหม่" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input class="form-control" id="confirmPassword" type="password" placeholder="กรุณากรอกรหัสผ่านใหม่อีกครั้ง" />
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <button type="button" class="btn btn-success" id="submitChangePassword">บันทึก</button>
+                        </div>
+                    </form> *@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submitChangePassword').on('click', function () {
+                var idNumber = $('#idNumber').val(); // ค่าเลขบัตรประจำตัว
+                var newPassword = $('#newPassword').val(); // รหัสผ่านใหม่
+                var confirmPassword = $('#confirmPassword').val(); // ยืนยันรหัสผ่านใหม่
+                var empID = $('#txtEmpID').val(); // รหัสพนักงาน
+
+                // ตรวจสอบว่ารหัสผ่านไม่น้อยกว่า 6 ตัวอักษร
+                if (newPassword.length < 6 || confirmPassword.length < 6) {
+                    Swal.fire('ผิดพลาด', 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร', 'error');
+                    return;
+                }
+
+                if (!idNumber || !newPassword || !confirmPassword) {
+                    Swal.fire('ผิดพลาด', 'กรุณากรอกข้อมูลให้ครบถ้วน', 'error');
+                    return;
+                }
+
+                if (newPassword !== confirmPassword) {
+                    Swal.fire('ผิดพลาด', 'รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน', 'error');
+                    return;
+                }
+
+                // ตรวจสอบค่าซ้ำก่อนบันทึก
+                $.ajax({
+                    url: '@Url.Action("CheckCardID", "User")', // ตรวจสอบว่าผู้ใช้มีอยู่
+                    type: 'GET',
+                    data: { EmpID: empID, CardID: idNumber },
+                    success: function (response) {
+                        if (!response) {
+                            Swal.fire('ผิดพลาด', 'เลขบัตรประจำของผู้ใช้งานไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง', 'error');
+                            return;
+                        }
+                        // Popup ยืนยันก่อนเปลี่ยนรหัสผ่าน
+                        Swal.fire({
+                            title: 'ยืนยันการเปลี่ยนรหัสผ่าน',
+                            text: 'คุณต้องการเปลี่ยนรหัสผ่านหรือไม่?',
+                            icon: 'warning',
+                            showCancelButton: true, // แสดงปุ่มยกเลิก
+                            confirmButtonText: 'ใช่', // ปุ่มยืนยัน
+                            cancelButtonText: 'ไม่' // ปุ่มยกเลิก
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // หากผู้ใช้ยืนยัน, ส่ง AJAX เพื่อเปลี่ยนรหัสผ่าน
+                                $.ajax({
+                                    url: '@Url.Action("ChangePassword", "User")', // ปรับ URL ของ Controller
+                                    type: 'POST',
+                                    data: {
+                                        IdNumber: idNumber,
+                                        NewPassword: newPassword,
+                                        EmpID: empID
+                                    },
+                                    success: function (response) {
+                                        Swal.fire(
+                                            'สำเร็จ',
+                                            'การเปลี่ยนรหัสผ่านสำเร็จ',
+                                            'success'
+                                        ).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.reload(); // รีโหลดหน้า
+                                            }
+                                        });
+                                    },
+                                    error: function (xhr, textStatus, errorThrown) {
+                                        // Log the error to the console with more details
+                                        console.log('Error:', xhr.status, textStatus, errorThrown);
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        // Log the error to the console with more details
+                        console.log('Error:', xhr.status, textStatus, errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#updateInfo').on('submit', function (e) {
+
+                e.preventDefault(); // ป้องกันการส่งฟอร์มแบบดั้งเดิม
+                var formData = new FormData(this); // สร้าง FormData จากฟอร์ม
+
+                if (!formData.has('Email')) {
+                    Swal.fire('ผิดพลาด', 'กรุณากรอกอีเมลล์', 'error');
+                    return;
+                }
+
+                // แสดง SweetAlert2 เพื่อยืนยันการดำเนินการ
+                Swal.fire({
+                    title: 'ยืนยันการอัพเดทโปรไฟล์',
+                    text: 'คุณต้องการอัพเดทโปรไฟล์ส่วนตัวใช่หรือไม่?',
+                    icon: 'warning', // แสดงเป็นไอคอนเตือน
+                    showCancelButton: true, // แสดงปุ่มยกเลิก
+                    confirmButtonText: 'ใช่, ฉันต้องการอัพเดท', // ข้อความปุ่มยืนยัน
+                    cancelButtonText: 'ไม่, ยกเลิก' // ข้อความปุ่มยกเลิก
+                }).then((result) => {
+                    if (result.isConfirmed) { // ถ้าผู้ใช้ยืนยัน
+
+                        // ส่งข้อมูล AJAX เพื่ออัพเดทโปรไฟล์
+                        $.ajax({
+                            url: '@Url.Action("UpdateProfile", "User")', // URL ของ Controller
+                            type: 'POST',
+                            data: formData, // ส่งข้อมูลในรูปแบบ FormData
+                            processData: false, // ไม่ต้องประมวลผลข้อมูล
+                            contentType: false, // ใช้เนื้อหาเริ่มต้นสำหรับ FormData
+                            success: function (response) {
+                                Swal.fire(
+                                    'สำเร็จ',
+                                    'การอัพเดทโปรไฟล์สำเร็จ',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload(); // รีโหลดหน้าเพื่อแสดงการเปลี่ยนแปลง
+                                });
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                // Log the error to the console with more details
+                                console.log('Error:', xhr.status, textStatus, errorThrown);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+}

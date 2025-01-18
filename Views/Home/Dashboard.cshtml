@@ -1,0 +1,338 @@
+﻿@{
+	ViewData["Controller"] = "HealthCheck";
+	ViewData["Action"] = "DashBoard";
+	ViewData["Icon"] = "area-chart";
+	string UrlContext = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+	int CountRow = 0;
+}
+<!-- Page Sidebar Ends-->
+<div class="page-body">
+	<!-- Container-fluid starts-->
+	<div class="container-fluid dashboard-2">
+		<div class="row">
+			<div class="col-xl-4 col-xl-4 col-md-12 col-12 proorder-md-1">
+				<div class="card">
+					<div class="card-header card-no-border pb-0">
+						<div class="header-top">
+							<h4><i class="fa fa-cog" aria-hidden="true"></i> ข้อมูลภาพรวม</h4>
+						</div>
+					</div>
+					<div class="card-body project-status-col">
+						<div class="row">
+							<div class="col-6">
+								<div class="btn-light1-success b-r-10">
+									<div class="upcoming-box">
+										<div class="upcoming-icon bg-success">
+											<i class="fa fa-building" aria-hidden="true" style="font-size: 2em; color: white;"></i>
+										</div>
+										<h6>สถานประกอบการ</h6>
+										<p>@ViewBag.EmployerTotal สถานที่</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="btn-light1-warning b-r-10">
+									<div class="upcoming-box mb-0">
+										<div class="upcoming-icon bg-warning">
+											<i class="fa fa-users" aria-hidden="true" style="font-size: 2em; color: white;"></i>
+										</div>
+										<h6>แรงงานต่างด้าว</h6>
+										<p>@ViewBag.HazardObjectTotal จำนวน</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<div class="btn-light1-info b-r-10">
+									<div class="upcoming-box">
+										<div class="upcoming-icon bg-info">
+											<i class="fa fa-heartbeat" aria-hidden="true" style="font-size: 2em; color: white;"></i>
+										</div>
+										<h6>ผลตรวจสุขภาพ</h6>
+										<p>@ViewBag.FormHazardTotal รายการ</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="btn-light1-secondary b-r-10">
+									<div class="upcoming-box">
+										<div class="upcoming-icon bg-secondary">
+											<i class="fa fa-user" aria-hidden="true" style="font-size: 2em; color: white;"></i>
+										</div>
+										<h6>ผู้ใช้งาน</h6>
+										<p>@ViewBag.UserTotal คน</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xxl-8 col-12 col-xl-12 box-col-12 proorder-xl-8 proorder-md-9">
+				<div class="card">
+					<div class="card-header card-no-border pb-0">
+						<div class="header-top">
+							<h4><i class="fa fa-file-text-o" aria-hidden="true"></i> จำนวนผลตรวจสุขภาพเพิ่มใหม่ในปี: @DateTime.Now.ToString("yyyy")  </h4>
+							<p></p>
+						</div>
+					</div>
+					<div class="card-body sale-statistic">
+						<div id="chartline"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xxl-12 col-xl-70 col-md-12">
+				<div class="card">
+					<div class="card-header card-no-border pb-0">
+						<div class="header-top">
+							<h4><i class="fa fa-info-circle" aria-hidden="true"></i>แสดงข้อมูลการอัปโหลดข้อมูลล่าสุด </h4>
+						</div>
+					</div>
+					<div class="card-body p-3 projects">
+						<div class="table-responsive theme-scrollbar m-3">
+							<table class="table overflow-hidden" style="width:100%">
+								<thead>
+									<tr>
+										<th>วันที่ตรวจสุขภาพ</th>
+										<th>เลขประจำตัว</th>
+										<th>ชื่อ</th>
+										<th>วันที่อัปโหลดข้อมูล</th>
+									</tr>
+								</thead>
+								<tbody>
+									@if (ViewBag.UpdateloadHistory != null && ViewBag.UpdateloadHistory.Count > 0)
+									{
+										foreach (var item in ViewBag.UpdateloadHistory)
+										{
+											CountRow++;
+											<tr>
+												<td>@CountRow</td>
+												<td>@item.Alcode</td>
+												<td>@item.Alnameen</td>
+												<td>@item.UploadDate</td>
+											</tr>
+										}
+									}
+									else
+									{
+										<tr>
+											<td colspan="2" class="text-center">ไม่พบข้อมูล</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			@* <div class="col-xxl-12 col-xl-70 col-md-12"> *@
+			@* 	<div class="card"> *@
+			@* 		<div class="card-header card-no-border pb-0"> *@
+			@* 			<div class="header-top"> *@
+			@* 				<h4><i class="fa fa-info-circle" aria-hidden="true"></i> LogSystem</h4> *@
+			@* 			</div> *@
+			@* 		</div> *@
+			@* 		<div class="card-body p-3 projects"> *@
+			@* 			<div class="table-responsive theme-scrollbar m-3"> *@
+			@* 				<table class="table overflow-hidden" style="width:100%"> *@
+			@* 					<thead> *@
+			@* 						<tr> *@
+			@* 							<th>Action</th> *@
+			@* 							<th>NewValue</th> *@
+			@* 							<th>OldValue</th> *@
+			@* 							<th class="text-center">ChangeDate</th> *@
+			@* 						</tr> *@
+			@* 					</thead> *@
+			@* 					<tbody> *@
+			@* 						@if (ViewBag.LogSystem != null && ViewBag.LogSystem.Count > 0) *@
+			@* 						{ *@
+			@* 							foreach (var item in ViewBag.LogSystem) *@
+			@* 							{ *@
+			@* 								<tr> *@
+			@* 									<td>@item.Action</td> *@
+			@* 									<td>@item.NewValue</td> *@
+			@* 									<td>@item.OldValue</td> *@
+			@* 									<td class="text-center">@item.ChangeDate</td> *@
+			@* 								</tr> *@
+			@* 							} *@
+			@* 						} *@
+			@* 						else *@
+			@* 						{ *@
+			@* 							<tr> *@
+			@* 								<td colspan="4" class="text-center">ไม่พบข้อมูล</td> *@
+			@* 							</tr> *@
+			@* 						} *@
+			@* 					</tbody> *@
+			@* 				</table> *@
+			@* 			</div> *@
+			@* 		</div> *@
+			@* 	</div> *@
+
+			@* </div> *@
+		</div>
+		<!-- Container-fluid Ends-->
+	</div>
+</div>
+@section Scripts {
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$.ajax({
+				url: '@Url.Action("GetChartData", "Home")', // URL ของ AJAX endpoint
+				type: 'GET', // ประเภทการร้องขอ
+				success: function (response) {
+					if (response.success) {
+						var data = response.data;
+									var options = {
+			series: [
+				{
+					name: 'จำนวนแบบฟอร์ม',
+					type: 'bar', // เปลี่ยนจาก 'area' เป็น 'bar'
+					data: data.counts
+				}
+			],
+			chart: {
+				height: 309,
+				type: 'bar',
+				toolbar: {
+					show: false,
+				},
+				dropShadow: {
+					enabled: true,
+					top: 4,
+					left: 1,
+					blur: 8,
+					color: ['#007bff', '#8D8D8D'],
+					opacity: 0.6
+				},
+			},
+			stroke: {
+				curve: 'smooth',
+				width: [3, 3],
+				dashArray: [0, 4]
+			},
+			grid: {
+				show: true,
+				borderColor: 'rgba(106, 113, 133, 0.30)',
+				strokeDashArray: 3,
+			},
+			fill: {
+				type: 'solid',
+				opacity: [1], // ปรับ opacity สำหรับ bar chart
+			},
+			labels: data.months,
+			markers: {
+				size: [3, 0],
+				colors: ['#3D434A'],
+				strokeWidth: [0, 0],
+			},
+			responsive: [
+				{
+					breakpoint: 991,
+					options: {
+						chart: {
+							height: 300
+						}
+					}
+				},
+				{
+					breakpoint: 1500,
+					options: {
+						chart: {
+							height: 325
+						}
+					}
+				}
+			],
+			tooltip: {
+				shared: true,
+				intersect: false,
+				y: {
+					formatter: function (y) {
+						if (typeof y !== "undefined") {
+							return y.toFixed(0) + " รายการ";
+						}
+						return y;
+					}
+				}
+			},
+			annotations: {
+				xaxis: [
+					{
+						x: 550,
+						strokeDashArray: 5,
+						borderWidth: 3,
+						borderColor: '#7a70ba69',
+					},
+				],
+				points: [
+					{
+						x: 550,
+						y: 330,
+						marker: {
+							size: 8,
+							fillColor: '#007bff',
+							strokeColor: "#ffffff",
+							strokeWidth: 4,
+							radius: 5,
+						},
+						label: {
+							borderWidth: 1,
+							offsetY: 0,
+							text: '32.10k',
+							style: {
+								fontSize: '14px',
+								fontWeight: '600',
+								fontFamily: 'Outfit, sans-serif',
+							}
+						}
+					}
+				],
+			},
+			legend: {
+				show: false,
+			},
+			colors: ['#007bff', '#8D8D8D'],
+			xaxis: {
+				labels: {
+					style: {
+						fontFamily: 'Outfit, sans-serif',
+						fontWeight: 500,
+						colors: '#8D8D8D',
+					},
+				},
+				axisBorder: {
+					show: false
+				},
+			},
+			yaxis: {
+				labels: {
+					formatter: function (value) {
+						return value + "";
+					},
+					style: {
+						fontFamily: 'Outfit, sans-serif',
+						fontWeight: 500,
+						colors: '#3D434A',
+					},
+				},
+			}
+		};
+
+		var chart = new ApexCharts(document.querySelector("#chartline"), options);
+		chart.render();
+
+
+					} else {
+						console.error('Failed to retrieve chart data');
+					}
+				},
+				error: function (xhr, textStatus, errorThrown) {
+					console.error('Error:', xhr.status, textStatus, errorThrown);
+				}
+			});
+		});
+	</script>
+}

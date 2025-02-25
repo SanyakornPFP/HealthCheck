@@ -502,20 +502,24 @@ namespace HealthCheks.Controllers
                 h => new
                 {
                     EmpName = h.Alienlist.Employee.EmpName,
+                    EmpAddress = h.Alienlist.Employee.Wkaddress,
+                    EmpBtname = h.Alienlist.Employee.Btname,
                     Alcode = h.Alcode,
                     Albdate = h.Alienlist.Albdate,
+                    Aldadress = h.Alienlist.Aladdress,
                     Algender = h.Alienlist.Algender.AlgenderName,
                     Alsname = h.Alienlist.Alnameen + " " + h.Alienlist.Alsnameen,
                     Alnation = h.Alienlist.Alnation.AlnationName,
                     Alpos = h.Alienlist.Alpo.AlposName,
-                    Alchkhos = h.Alchkhos,
+                    Hoppital = h.Alchkhos,
+                    HoppitalAddress = _db.Hospitals.Where(s => s.HospitalName == h.Alchkhos).Select(c => c.Address).FirstOrDefault(),
                     AlchkstatusID = h.AlchkstatusID,
                     AlchkstatusName = h.Alchkstatu.AlchkstatusName,
                     Alchkdate = h.Alchkdate,
                     Alchkprovid = h.Alchkprovid,
                     AlchkprovidName = h.Province.ProvinceName,
                     Licenseno = h.Licenseno,
-                    ChkName = h.Chkname,
+                    Chkname = h.Chkname,
                     Chkposition = h.Chkposition,
                     Alchkdesc = h.Alchkdesc,
                     Alchkdoc = h.Alchkdoc,
@@ -568,8 +572,16 @@ namespace HealthCheks.Controllers
                 new ReportParameter("Alcountry", "ประเทศ   "), ///รอข้อมูลจากฐานข้อมูล
                 new ReportParameter("Alnation", "สัญชาติ  " + model.Alnation),
                 new ReportParameter("Alpos", "อาชีพ  " + model.Alpos),
-                new ReportParameter("Aladdress", "-"),///รอข้อมูลจากฐานข้อมูล
+                new ReportParameter("Aladdress", model.Aldadress),///รอข้อมูลจากฐานข้อมูล
                 //// ส่วนที่ 2
+                new ReportParameter("Employee", model.EmpName),
+                new ReportParameter("EmpBtname", model.EmpBtname),
+                new ReportParameter("Empaddress", model.EmpAddress),
+                //// ส่วนที่ 3
+                new ReportParameter("Chkname", model.Chkname),
+                new ReportParameter("Licenseno", model.Licenseno),
+                new ReportParameter("Hoppital", model.Hoppital),
+                new ReportParameter("HoppitalAddress", model.HoppitalAddress)
             }.Concat(alcodeParameters).ToArray();
 
             report.SetParameters(parameters);

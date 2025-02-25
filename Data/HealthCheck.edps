@@ -1,30 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDeveloper Version="6.8.1019.0">
   <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="db_HealthCheckModelConnectionString" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="True" TargetFramework="NetCore30" DetectManyToManyAssociations="False" DetectTPTInheritance="False" EntityFrameworkCoreVersion="Version3" DetectFunctionBasedColumnDefault="True">
-    <Connection ConnectionString="Data Source=DESKTOP-30TC9IA\MSSQLSERVER2022;Initial Catalog=db_HealthChecks;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
+    <Connection ConnectionString="Data Source=DESKTOP-MB03GLQ;Initial Catalog=db_HealthChecks;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
     <Generation>
       <GeneratedFiles>
-        <File Name="db_HealthCheckModel.cs" DestinationFolder="D:\Project\HealthCheks\Data" />
-        <File Name="Alchkstatu.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Algender.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Alienlist.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Alnation.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Alpo.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Alprefix.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Altype.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Employee.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Position.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Province.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Token.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="User.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Menu.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Permission.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Healthcheck.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Doctor.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="Hospital.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="LogSystem.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="UpdateloadCount.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
-        <File Name="HistoryHealth.cs" DestinationFolder="D:\Project\HealthCheks\Models" />
+        <File Name="db_HealthCheckModel.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Data" />
+        <File Name="Alchkstatu.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Algender.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Alienlist.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Alnation.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Alpo.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Alprefix.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Altype.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Employee.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Position.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Province.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Token.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="User.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Menu.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Permission.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Healthcheck.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Doctor.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="Hospital.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="LogSystem.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
+        <File Name="HistoryHealth.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Models" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>
@@ -54,14 +53,14 @@
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />
-            <DestinationFolder>D:\Project\HealthCheks\Models</DestinationFolder>
+            <DestinationFolder>D:\Project\Project\2024\HealthCheck\Models</DestinationFolder>
           </OutputInfo>
         </ed:Property>
         <ed:Property Name="ContextOutput" Type="EntityDeveloper.TemplateEngine.OutputInfo, EntityDeveloper.Common, Version=6.8.1019.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
           <OutputInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <Project />
             <ProjectFolder />
-            <DestinationFolder>D:\Project\HealthCheks\Data</DestinationFolder>
+            <DestinationFolder>D:\Project\Project\2024\HealthCheck\Data</DestinationFolder>
           </OutputInfo>
         </ed:Property>
         <ed:Property Name="FilePerClass" Type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -132,29 +131,15 @@
     </Templates>
     <AttributeAssemblies />
     <UpdateFromDatabaseExcludes>
-      <Exclude Name="Alcode" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="EmpID" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="Reqcode" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="AltypeID" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="AlprefixID" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="Alprefixen" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="Alnameen" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="Alsnameen" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="Albdate" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="AlgenderID" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="AlnationID" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="AlposID" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="CreatedAt" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="UpdatedAt" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="IsActive" Table="dbo.Alienlist" Type="Column" />
-      <Exclude Name="PK_alienlist" Table="dbo.Alienlist" Type="Constraint" />
-      <Exclude Name="FK_alienlist_algender" Table="dbo.Alienlist" Type="Constraint" />
-      <Exclude Name="FK_alienlist_alnation" Table="dbo.Alienlist" Type="Constraint" />
-      <Exclude Name="FK_alienlist_alpos" Table="dbo.Alienlist" Type="Constraint" />
-      <Exclude Name="FK_alienlist_alprefix" Table="dbo.Alienlist" Type="Constraint" />
-      <Exclude Name="FK_alienlist_altype" Table="dbo.Alienlist" Type="Constraint" />
-      <Exclude Name="FK_alienlist_employeeid" Table="dbo.Alienlist" Type="Constraint" />
-      <Exclude Name="Reqcode" Table="dbo.Alienlist" Type="Column" />
+      <Exclude Name="HistoryHealthID" Table="dbo.HistoryHealth" Type="Column" />
+      <Exclude Name="Alcode" Table="dbo.HistoryHealth" Type="Column" />
+      <Exclude Name="Alnameen" Table="dbo.HistoryHealth" Type="Column" />
+      <Exclude Name="Alchkdate" Table="dbo.HistoryHealth" Type="Column" />
+      <Exclude Name="UploadDate" Table="dbo.HistoryHealth" Type="Column" />
+      <Exclude Name="UserIDManage" Table="dbo.HistoryHealth" Type="Column" />
+      <Exclude Name="PK_HistoryHealth" Table="dbo.HistoryHealth" Type="Constraint" />
+      <Exclude Name="Alcode" Table="dbo.HistoryHealth" Type="Column" />
+      <Exclude Name="Alchkdate" Table="dbo.HistoryHealth" Type="Column" />
     </UpdateFromDatabaseExcludes>
   </ModelSettings>
 </EntityDeveloper>

@@ -35,7 +35,15 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value> ส่วนสูง</Value>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!HealthInfo.Value</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -517,7 +525,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>23.13186cm</Top>
+            <Top>23.48476cm</Top>
             <Left>13.08478cm</Left>
             <Height>0.84621cm</Height>
             <Width>3.17573cm</Width>
@@ -548,15 +556,15 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>24.16405cm</Top>
+            <Top>24.51696cm</Top>
             <Left>11.1456cm</Left>
             <Height>0.84621cm</Height>
-            <Width>7.27931cm</Width>
+            <Width>7.18884cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -598,7 +606,31 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>ชื่อ-นามสกุล (นายจ้าง)                                                    สถานประกอบการ</Value>
+                    <Value>ชื่อ-นามสกุล (นายจ้าง)  </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Employee.Value</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>   สถานประกอบการ   </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!EmpBtname.Value</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -620,6 +652,14 @@
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!EmpAddress.Value</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
                 </TextRuns>
                 <Style>
                   <TextAlign>Left</TextAlign>
@@ -630,7 +670,7 @@
             <Top>6.36991cm</Top>
             <Left>0.27255cm</Left>
             <Height>2.0981cm</Height>
-            <Width>19.8627cm</Width>
+            <Width>19.85327cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -649,7 +689,15 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>3. ข้อมูลแพทย์ผู้ตรวจ</Value>
+                    <Value>3. ข้อมูลแพทย์ผู้ตรวจ   </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Chkname.Value</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -680,7 +728,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve">                            </Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -688,7 +736,39 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>   สถานพยาบาลชื่อ</Value>
+                    <Value>=Parameters!Licenseno.Value</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">      </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>สถานพยาบาลชื่อ   </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Hoppital.Value</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -703,7 +783,23 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>    ที่อยู่</Value>
+                    <Value>    ที่อยู่   </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!HoppitalAddress.Value</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -1676,8 +1772,60 @@
               <PaddingBottom>1pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox48">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>(</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Chkname.Value</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>)</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>25.36316cm</Top>
+            <Left>11.1456cm</Left>
+            <Height>0.84621cm</Height>
+            <Width>7.18884cm</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>25.47736cm</Height>
+        <Height>26.20938cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1986,11 +2134,59 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="Employee">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Empaddress">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="EmpBtname">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Licenseno">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Hoppital">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="HoppitalAddress">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Chkname">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="HealthInfo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>8</NumberOfRows>
+      <NumberOfRows>10</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
@@ -2111,6 +2307,46 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>7</RowIndex>
           <ParameterName>Alcode13</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>Employee</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>Empaddress</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>EmpBtname</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>Licenseno</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>Hoppital</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>HoppitalAddress</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>Chkname</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>HealthInfo</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

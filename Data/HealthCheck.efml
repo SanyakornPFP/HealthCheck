@@ -71,6 +71,9 @@
     <property name="AlposID" type="String" p1:nullable="True" p1:ValidateMaxLength="2" p1:ValidateRequired="false" p1:Guid="4cd41381-6e5e-4e16-aebf-0d71913cb394">
       <column name="AlposID" not-null="False" length="2" sql-type="nvarchar" p1:unicode="True" />
     </property>
+    <property name="Aladdress" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e5ef9213-1b87-4525-9ead-cd2ff56db2de">
+      <column name="Aladdress" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
     <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="dc379327-64ef-4650-9b26-287406b01b04">
       <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
     </property>
@@ -386,6 +389,9 @@
     </id>
     <property name="HospitalName" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="3f1bcc61-422a-4785-a5b2-6bb2256be190">
       <column name="HospitalName" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Address" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="757bbcce-7cd4-4dc4-9c8b-1e9b754270ea">
+      <column name="Address" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
     </property>
     <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="435becd8-e135-4887-81cd-8645767f3381">
       <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />

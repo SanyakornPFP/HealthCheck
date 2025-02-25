@@ -1,598 +1,604 @@
 ﻿@{
-	ViewData["Controller"] = "DataPerson";
-	ViewData["Action"] = "HealthData";
-	ViewData["Icon"] = "thermometer-half";
-	string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+    ViewData["Controller"] = "DataPerson";
+    ViewData["Action"] = "HealthData";
+    ViewData["Icon"] = "thermometer-half";
+    string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
 }
 
 @using ContainerEvaluationSystem.Helpers;                                                           โ
 @using HealthCheck.Models;
 <!-- Page Sidebar Ends-->
 <div class="page-body">
-	<!-- Container-fluid starts-->
-	<div class="container-fluid">
-		<div class="row" style="display: none" id="showInsert">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-header">
-						<h6 class="sub-title" id="createHeader"><i class="icofont icofont-plus"></i> เพิ่ม</h6>
-						<h6 class="sub-title" id="updateHeader" style="display:none"><i class="icofont icofont-edit"></i> แก้ไข</h6>
-					</div>
-					<div class="card-body">
-						<div class="row g-3">
-							<div class="col-12">
-								<div class="card-wrapper border rounded-3 light-card checkbox-checked">
-									<form id="myForm" method="post" class="row g-3" action="">
-										<div class="col-xxl-6 col-sm-6">
-											<input name="HealthID" id="txtHealthID" type="hidden">
-											<label class="col-form-label" for="txtAlcode">เลขประจำตัว</label>
-											<input class="form-control" name="Alcode" id="txtAlcode" type="text" placeholder="กรุณากรอกข้อมูล" value="@ViewBag.Alcode">
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="txtAlchkhos">ชื่อโรงพยาบาลที่ตรวจสุขภาพ</label>
-											<select class="form-control select2-In" name="ddlAlchkhos" id="ddlAlchkhos">
-												<option value="">เลือกโรงพยาบาล</option>
-												@foreach (var item in (List<Hospital>)ViewBag.Hospital)
-												{
-													if (item.HospitalID == 10)
-													{
-														<option value="@item.HospitalName" selected>@item.HospitalName</option>
-													}
-													else
-													{
-														<option value="@item.HospitalName">@item.HospitalName</option>
-													}
-												}
-											</select>
-										</div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row" style="display: none" id="showInsert">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="sub-title" id="createHeader"><i class="icofont icofont-plus"></i> เพิ่ม</h6>
+                        <h6 class="sub-title" id="updateHeader" style="display:none"><i class="icofont icofont-edit"></i> แก้ไข</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <form id="myForm" method="post" class="row g-3" action="">
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <input name="HealthID" id="txtHealthID" type="hidden">
+                                            <label class="col-form-label" for="txtAlcode">เลขประจำตัว</label>
+                                            <input class="form-control" name="Alcode" id="txtAlcode" type="text" placeholder="กรุณากรอกข้อมูล" value="@ViewBag.Alcode">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtAlchkhos">ชื่อโรงพยาบาลที่ตรวจสุขภาพ</label>
+                                            <select class="form-control select2-In" name="ddlAlchkhos" id="ddlAlchkhos">
+                                                <option value="">เลือกโรงพยาบาล</option>
+                                                @foreach (var item in (List<Hospital>)ViewBag.Hospital)
+                                                {
+                                                    if (item.HospitalID == 10)
+                                                    {
+                                                        <option value="@item.HospitalName" selected>@item.HospitalName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.HospitalName">@item.HospitalName</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
 
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="ddlAlchkstatusID">ผลตรวจสุขภาพ</label>
-											<select class="form-control select2-In" name="ddlAlchkstatusID" id="ddlAlchkstatusID">
-												<option value="">เลือกผลตรวจสุขภาพ</option>
-												@foreach (var item in (List<Alchkstatu>)ViewBag.Alchkstatus)
-												{
-													if (item.AlchkstatusID == "1")
-													{
-														<option value="@item.AlchkstatusID" selected>@item.AlchkstatusName</option>
-													}
-													else
-													{
-														<option value="@item.AlchkstatusID">@item.AlchkstatusName</option>
-													}
-												}
-											</select>
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="txtAlchkdate">วันที่ตรวจสุขภาพ </label>
-											<input class="form-control" name="Alchkdate" id="txtAlchkdate" type="date" placeholder="กรุณากรอกข้อมูล" onchange="checkHealthDate()">
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="ddlalchkprovid">จังหวัด</label>
-											<select class="form-control select2-In" name="ddlalchkprovid" id="ddlalchkprovid">
-												<option value="">เลือกจังหวัด</option>
-												@foreach (var item in (List<Province>)ViewBag.Province)
-												{
-													if (item.ProvinceID == "90")
-													{
-														<option value="@item.ProvinceID" selected>@item.ProvinceName</option>
-													}
-													else
-													{
-														<option value="@item.ProvinceID">@item.ProvinceName</option>
-													}
-												}
-											</select>
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="ddChkname">ชื่อ-นามสกุลแพทย์ <span class="text-red"></span></label>
-											<select class="form-control select2-In" name="ddChkname" id="ddChkname">
-												<option value="">เลือกแพทย์</option>
-												@foreach (var item in (List<Doctor>)ViewBag.Doctor)
-												{
-													<option value="@item.DoctorName" selected>@item.DoctorName</option>
-												}
-											</select>
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="Chkposition">ตำแหน่งแพทย์ </label>
-											<input class="form-control text-dark" name="Chkposition" id="txtChkposition" type="text" value="@ViewBag.Position">
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="txtLicenseno">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
-											<input class="form-control text-dark" name="Licenseno" id="txtLicenseno" type="text" value="@ViewBag.Licenseno">
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="txtAlchkdesc">รายละเอียดผลตรวจสุขภาพเพิ่มเติม *</label>
-											<textarea class="form-control" name="Alchkdesc" id="txtAlchkdesc" placeholder="กรุณากรอกข้อมูล" rows="1"></textarea>
-										</div>
-										<div class="col-xxl-6 col-sm-6">
-											<label class="col-form-label" for="Alchkdoc">เอกสารอ้างอิงผลการตรวจสุขภาพ</label>
-											<input class="form-control" name="Alchkdoc" id="fileAlchkdoc" type="file" placeholder="กรุณากรอกข้อมูล">
-										</div>
-										<div class="col-xxl-12 col-sm-12">
-											<button class="btn btn-pill btn-primary active" id="createBtn" type="submit" title="btn btn-pill btn-success active">บันทึก</button>
-											<a href="" class="btn btn-pill btn-light" id="cancelBtn" style="display: none;">ยกเลิก</a>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddlAlchkstatusID">ผลตรวจสุขภาพ</label>
+                                            <select class="form-control select2-In" name="ddlAlchkstatusID" id="ddlAlchkstatusID">
+                                                <option value="">เลือกผลตรวจสุขภาพ</option>
+                                                @foreach (var item in (List<Alchkstatu>)ViewBag.Alchkstatus)
+                                                {
+                                                    if (item.AlchkstatusID == "1")
+                                                    {
+                                                        <option value="@item.AlchkstatusID" selected>@item.AlchkstatusName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.AlchkstatusID">@item.AlchkstatusName</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtAlchkdate">วันที่ตรวจสุขภาพ </label>
+                                            <input class="form-control" name="Alchkdate" id="txtAlchkdate" type="date" placeholder="กรุณากรอกข้อมูล" onchange="checkHealthDate()">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddlalchkprovid">จังหวัด</label>
+                                            <select class="form-control select2-In" name="ddlalchkprovid" id="ddlalchkprovid">
+                                                <option value="">เลือกจังหวัด</option>
+                                                @foreach (var item in (List<Province>)ViewBag.Province)
+                                                {
+                                                    if (item.ProvinceID == "90")
+                                                    {
+                                                        <option value="@item.ProvinceID" selected>@item.ProvinceName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.ProvinceID">@item.ProvinceName</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddChkname">ชื่อ-นามสกุลแพทย์ <span class="text-red"></span></label>
+                                            <select class="form-control select2-In" name="ddChkname" id="ddChkname">
+                                                <option value="">เลือกแพทย์</option>
+                                                @foreach (var item in (List<Doctor>)ViewBag.Doctor)
+                                                {
+                                                    <option value="@item.DoctorName" selected>@item.DoctorName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="Chkposition">ตำแหน่งแพทย์ </label>
+                                            <input class="form-control text-dark" name="Chkposition" id="txtChkposition" type="text" value="@ViewBag.Position">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtLicenseno">เลขที่ใบอนุญาตประกอบวิชาชีพ</label>
+                                            <input class="form-control text-dark" name="Licenseno" id="txtLicenseno" type="text" value="@ViewBag.Licenseno">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtAlchkdesc">รายละเอียดผลตรวจสุขภาพเพิ่มเติม *</label>
+                                            <textarea class="form-control" name="Alchkdesc" id="txtAlchkdesc" placeholder="กรุณากรอกข้อมูล" rows="1"></textarea>
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="Alchkdoc">เอกสารอ้างอิงผลการตรวจสุขภาพ</label>
+                                            <input class="form-control" name="Alchkdoc" id="fileAlchkdoc" type="file" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="createBtn" type="submit" title="btn btn-pill btn-success active">บันทึก</button>
+                                            <a href="" class="btn btn-pill btn-light" id="cancelBtn" style="display: none;">ยกเลิก</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="card">
-					<div class="card-header border-3">
-						<button id="addNewResultBtn" class="btn btn-primary btn-sm" style="float:right"><i class="fa fa-plus"></i> เพิ่มผลตรวจใหม่</button>
-						<h4>
-							<i class="fa fa-list-alt" aria-hidden="true"></i> รายการตรวจสุขภาพ
-							<a asp-controller="HealthCheck" asp-action="HealthList" class="btn btn-light btn-sm"><i class="fa fa-undo" aria-hidden="true"></i> ย้อนกลับ</a>
-							<p class="mt-1 f-m-light">
-								[ชื่อ] : @ViewBag.AlName [เลขประจำตัว] : @ViewBag.Alcode
-								<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailModal" data-alcode="@ViewBag.Alcode">
-									<i class="icofont icofont-list"></i> รายละเอียดเพิ่มเติม
-								</button>
-							</p>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header border-3">
+                        <button id="addNewResultBtn" class="btn btn-primary btn-sm" style="float:right"><i class="fa fa-plus"></i> เพิ่มผลตรวจใหม่</button>
+                        <h4>
+                            <i class="fa fa-list-alt" aria-hidden="true"></i> รายการตรวจสุขภาพ
+                            <a asp-controller="HealthCheck" asp-action="HealthList" class="btn btn-light btn-sm"><i class="fa fa-caret-left"></i> ย้อนกลับ</a>
+                            <p class="mt-1 f-m-light">
+                                [ชื่อ] : @ViewBag.AlName [เลขประจำตัว] : @ViewBag.Alcode
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailModal" data-alcode="@ViewBag.Alcode">
+                                    <i class="icofont icofont-list"></i> รายละเอียดเพิ่มเติม
+                                </button>
+                            </p>
 
-						</h4>
-					</div>
-					<div class="card-body">
-						<div class="table-responsive theme-scrollbar">
-							<div class="table-responsive theme-scrollbar">
-								<table class="display" id="data-source-1" style="width:100%">
-									<thead>
-										<tr>
-											<th>วันที่ตรวจ</th>
-											<th>ผลตรวจ</th>
-											<th>โรงพยาบาล</th>
-											<th class="text-center">รายละเอียด</th>
-											<th class="text-center">แก้ไข</th>
-											<th class="text-center">ลบ</th>
-											<th class="text-center">อัปโหลดข้อมูล</th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach (var item in (List<Healthcheck>)ViewBag.HealthchecksPerson)
-										{
-											<tr>
-												<td>@item.Alchkdate</td>
-												<td>@item.Alchkstatu.AlchkstatusName</td>
-												<td>@item.Alchkhos</td>
-												<td class="text-center">
-													<a href="#" data-toggle="modal" data-target="#detailModalHealth" data-healthid="@item.HealthID">
-														<i class="icofont icofont-list"></i>
-													</a>
-												</td>
-												<td class="text-center">
-													<a href="#" class="editBtn" data-healthid="@item.HealthID"><i class="icon-pencil-alt"></i></a>
-												</td>
-												<td class="text-center">
-													<a href="#" class="deleteBtn" data-healthid="@item.HealthID"><i class="fa fa-trash"></i></a>
-												</td>
-												<td class="text-center">
-													<a href="#" class="uploadBtn" data-healthid="@item.HealthID"><i class="fa fa-upload" aria-hidden="true"></i></a>
-												</td>
-											</tr>
-										}
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <div class="table-responsive theme-scrollbar">
+                                <table class="display" id="data-source-1" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>วันที่ตรวจ</th>
+                                            <th>ผลตรวจ</th>
+                                            <th>โรงพยาบาล</th>
+                                            <th class="text-center">รายละเอียด</th>
+                                            <th class="text-center">แบบฟอร์ม</th>
+                                            <th class="text-center">แนบไฟล์ผลตรวจ</th>
+                                            <th class="text-center">อัปโหลดข้อมูล</th>
+                                            <th class="text-center">ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in (List<Healthcheck>)ViewBag.HealthchecksPerson)
+                                        {
+                                            <tr>
+                                                <td>@item.Alchkdate</td>
+                                                <td>@item.Alchkstatu.AlchkstatusName</td>
+                                                <td>@item.Alchkhos</td>
+                                                <td class="text-center">
+                                                    <a href="#" data-toggle="modal" data-target="#detailModalHealth" data-healthid="@item.HealthID">
+                                                        <i class="icofont icofont-list"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a target="_blank" asp-action="ExaminationForm" asp-controller="HealthCheck" asp-route-HealthID="@item.HealthID">
+                                                        <i class="fa fa-file-pdf-o text-danger"></i>
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="#" class="editBtn" data-healthid="@item.HealthID"><i class="icon-pencil-alt"></i></a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="#" class="uploadBtn" data-healthid="@item.HealthID"><i class="fa fa-upload" aria-hidden="true"></i></a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="#" class="deleteBtn" data-healthid="@item.HealthID"><i class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Structure -->
 <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="detailModalHealthLabel"><i class="icofont icofont-list"></i> ข้อมูลเพิ่มเติม</h5>
-			</div>
-			<div class="modal-body">
-				<p id="EmpName"></p>
-				<p id="Alcode"></p>
-				<p id="Albdate"></p>
-				<p id="AlposName"></p>
-				<p id="AltypeName"></p>
-				<!-- Add other fields as necessary -->
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">ปิด</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalHealthLabel"><i class="icofont icofont-list"></i> ข้อมูลเพิ่มเติม</h5>
+            </div>
+            <div class="modal-body">
+                <p id="EmpName"></p>
+                <p id="Alcode"></p>
+                <p id="Albdate"></p>
+                <p id="AlposName"></p>
+                <p id="AltypeName"></p>
+                <!-- Add other fields as necessary -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal Structure -->
 <div class="modal fade" id="detailModalHealth" tabindex="-1" role="dialog" aria-labelledby="detailModalHealthLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="detailModalHealthLabel"><i class="fa fa-clipboard" aria-hidden="true"></i> ผลตรวจสุขภาพ</h5>
-			</div>
-			<div class="modal-body">
-				<p id="EmpName"></p>
-				<p id="Alcode"></p>
-				<p id="Alchkhos"></p>
-				<p id="AlchkstatusID"></p>
-				<p id="Alchkdate"></p>
-				<p id="AlchkprovidName"></p>
-				<p id="Licenseno"></p>
-				<p id="ChkName"></p>
-				<p id="Chkposition"></p>
-				<p id="Alchkdesc"></p>
-				<p id="Alchkdoc"></p>
-				<p id="UserName"></p>
-				<!-- Add other fields as necessary -->
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">ปิด</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalHealthLabel"><i class="fa fa-clipboard" aria-hidden="true"></i> ผลตรวจสุขภาพ</h5>
+            </div>
+            <div class="modal-body">
+                <p id="EmpName"></p>
+                <p id="Alcode"></p>
+                <p id="Alchkhos"></p>
+                <p id="AlchkstatusID"></p>
+                <p id="Alchkdate"></p>
+                <p id="AlchkprovidName"></p>
+                <p id="Licenseno"></p>
+                <p id="ChkName"></p>
+                <p id="Chkposition"></p>
+                <p id="Alchkdesc"></p>
+                <p id="Alchkdoc"></p>
+                <p id="UserName"></p>
+                <!-- Add other fields as necessary -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		document.querySelectorAll('.deleteBtn').forEach(function (button) {
-			button.addEventListener('click', function (e) {
-				e.preventDefault();
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.querySelectorAll('.deleteBtn').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
 
-				var healthID = this.getAttribute('data-healthid');
+                var healthID = this.getAttribute('data-healthid');
 
-				Swal.fire({
-					title: 'คุณแน่ใจหรือไม่?',
-					text: "คุณต้องการลบข้อมูลนี้หรือไม่?",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					confirmButtonText: 'ใช่, ลบเลย!',
-					cancelButtonText: 'ยกเลิก'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						$.ajax({
-					url: '@Url.Action("DeleteHealthData", "HealthCheck")',
-					type: 'POST',
-					data: { HealthID: healthID },
-					success: function (response) {
-						if (response.success) {
-									Swal.fire(
-										'ลบข้อมูลแล้ว!',
-										'ข้อมูลของคุณถูกบันทึกแล้ว.',
-										'success'
-									).then(() => {
-										window.location.reload();
-									});
-								} else {
-									Swal.fire('ผิดพลาด', response.message, 'error');
-								}
-					},
-					error: function (error) {
-						console.error('Error fetching form data:', error);
-					}
-				});
-					}
-				});
-
-
-			});
-		});
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการลบข้อมูลนี้หรือไม่?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ใช่, ลบเลย!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                    url: '@Url.Action("DeleteHealthData", "HealthCheck")',
+                    type: 'POST',
+                    data: { HealthID: healthID },
+                    success: function (response) {
+                        if (response.success) {
+                                    Swal.fire(
+                                        'ลบข้อมูลแล้ว!',
+                                        'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                    },
+                    error: function (error) {
+                        console.error('Error fetching form data:', error);
+                    }
+                });
+                    }
+                });
 
 
-		document.querySelectorAll('.editBtn').forEach(function (button) {
-			button.addEventListener('click', function (e) {
-				e.preventDefault();
-
-				var healthID = this.getAttribute('data-healthid');
-				$.ajax({
-					url: '@Url.Action("ModelHealthDetail", "HealthCheck")',
-					type: 'GET',
-					data: { HealthID: healthID },
-					success: function (response) {
-
-						if (response) {
-							// แยกวันที่ออกมาจาก response
-							var dateOnly = response.alchkdate;
-
-							// แปลงรูปแบบวันที่จาก "dd-MM-yyyy" เป็น "yyyy-MM-dd"
-							var parts = dateOnly.split("-");
-							var formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
-
-							// Populate form fields with data
-							$('#txtHealthID').val(healthID);
-							$('#txtAlcode').val(response.alcode);
-							$('#ddlAlchkhos').val(response.alchkhos).trigger('change');
-							$('#ddlAlchkstatusID').val(response.alchkstatusID).trigger('change');
-							$('#txtAlchkdate').val(formattedDate);
-							$('#ddlalchkprovid').val(response.alchkprovid).trigger('change');
-							$('#ddChkname').val(response.chkName).trigger('change');
-							$('#txtLicenseno').val(response.licenseno);
-							$('#txtChkposition').val(response.chkposition);
-							$('#txtAlchkdesc').val(response.alchkdesc);
-
-							// Show the form
-							$('#showInsert').show();
-						} else {
-							console.error('Error: No data found');
-						}
-					},
-					error: function (error) {
-						console.error('Error fetching form data:', error);
-					}
-				});
-			});
-		});
-
-		$(document).ready(function () {
-
-			$('#addNewResultBtn').on('click', function (e) {
-				e.preventDefault();
-				$('#showInsert').show(); // แสดง div ที่มี id="showInsert"
-				$('#myForm')[0].reset(); // รีเซ็ตฟอร์มให้เป็นค่าว่าง
-				$('#createHeader').show(); // แสดงหัวข้อ "เพิ่ม"
-				$('#updateHeader').hide(); // ซ่อนหัวข้อ "แก้ไข"
-				$('#createBtn').show(); // แสดงปุ่ม "บันทึก"
-				$('#cancelBtn').show(); // แสดงปุ่ม "ยกเลิก"
-			});
-
-			$('#detailModal').on('show.bs.modal', function (event) {
-				var button = $(event.relatedTarget); // ปุ่มที่ถูกคลิก
-				var alcode = button.data('alcode'); // ดึงค่า userID จาก data attribute
-
-				$.ajax({
-					url: '@Url.Action("ModelAlcode", "HealthCheck")', // เปลี่ยนเป็น URL ของ Controller และ Action
-					type: 'GET',
-					data: { Alcode: alcode }, // ส่งค่า CesID
-					success: function (response) { // เมื่อ AJAX สำเร็จ
-						console.log(response);
-						// อัปเดตเนื้อหาใน Modal
-						$('#EmpName').text("นายจ้าง/สถานประกอบ :  " + response.empName);
-						$('#Alcode').text("เลขประจำตัว :  " + response.alcode);
-						$('#Albdate').text("วันเกิด : " + response.albdate);
-						$('#AlposName').text("ประเภทอาชีพ : " + response.alposName);
-						$('#AltypeName').text("ประเภทคนต่างด้าว : " + response.altypeName);
-					},
-					error: function (xhr, status, error) { // เมื่อ AJAX ล้มเหลว
-						console.error("Error:", error); // จัดการข้อผิดพลาด
-					}
-				});
-			});
+            });
+        });
 
 
-			$('#detailModalHealth').on('show.bs.modal', function (event) {
-				var button = $(event.relatedTarget); // Button that triggered the modal
-				var healthID = button.data('healthid');// Extract info from data-* attributes
+        document.querySelectorAll('.editBtn').forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
 
-				// Send AJAX request to fetch details using Alcode
-				$.ajax({
-					url: '@Url.Action("ModelHealthDetail", "HealthCheck")', // Update with your controller's name
-					type: 'GET',
-					data: { HealthID: healthID }, // Send Alcode
-					success: function (response) { // When AJAX succeeds
-						if (response) {
-							// Update modal content
-							$('#EmpName').text("นายจ้าง/สถานประกอบ :  " + response.empName);
-							$('#Alcode').text("เลขประจำตัว :  " + response.alcode);
-							$('#Alchkhos').text("ชื่อโรงพยาบาลที่ตรวจสุขภาพ : " + response.alchkhos);
-							$('#AlchkstatusID').text("ผลตรวจสุขภาพ : " + response.alchkstatusName);
-							$('#Alchkdate').text("วันที่ตรวจสุขภาพ : " + response.alchkdate);
-							$('#AlchkprovidName').text("จังหวัด : " + response.alchkprovidName);
-							$('#Licenseno').text("เลขที่ใบอนุญาตประกอบวิชาชีพ : " + response.licenseno);
-							$('#ChkName').text("ชื่อ-นามสกุลแพทย์ : " + response.chkName);
-							$('#Chkposition').text("ตำแหน่งแพทย์ : " + response.chkposition);
-							$('#Alchkdesc').text("รายละเอียดผลตรวจสุขภาพเพิ่มเติม : " + response.alchkdesc);
+                var healthID = this.getAttribute('data-healthid');
+                $.ajax({
+                    url: '@Url.Action("ModelHealthDetail", "HealthCheck")',
+                    type: 'GET',
+                    data: { HealthID: healthID },
+                    success: function (response) {
 
-							// Create a link for the document
-							if (response.alchkdoc) {
-								var docLink = 'เอกสารอ้างอิงผลการตรวจสุขภาพ : <a class="btn btn-primary" href="' + response.alchkdoc + '" target="_blank"><i class="fa fa-file-text" aria-hidden="true"></i> เปิดดูเอกสาร</a>';
-								$('#Alchkdoc').html(docLink);
-							} else {
-								$('#Alchkdoc').text("เอกสารอ้างอิงผลการตรวจสุขภาพ : ไม่มีเอกสาร");
-							}
+                        if (response) {
+                            // แยกวันที่ออกมาจาก response
+                            var dateOnly = response.alchkdate;
 
-							$('#UserName').text(" ผู้บันทึกข้อมูล : " + response.userName);
-						} else {
-							console.error("Error: No data found");
-						}
-					},
-					error: function (xhr, status, error) { // When AJAX fails
-						console.error("Error:", error); // Handle error
-					}
-				});
-			});
+                            // แปลงรูปแบบวันที่จาก "dd-MM-yyyy" เป็น "yyyy-MM-dd"
+                            var parts = dateOnly.split("-");
+                            var formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
 
-			$('#createBtn').click(function (e) {
-				e.preventDefault();
+                            // Populate form fields with data
+                            $('#txtHealthID').val(healthID);
+                            $('#txtAlcode').val(response.alcode);
+                            $('#ddlAlchkhos').val(response.alchkhos).trigger('change');
+                            $('#ddlAlchkstatusID').val(response.alchkstatusID).trigger('change');
+                            $('#txtAlchkdate').val(formattedDate);
+                            $('#ddlalchkprovid').val(response.alchkprovid).trigger('change');
+                            $('#ddChkname').val(response.chkName).trigger('change');
+                            $('#txtLicenseno').val(response.licenseno);
+                            $('#txtChkposition').val(response.chkposition);
+                            $('#txtAlchkdesc').val(response.alchkdesc);
 
-				Swal.fire({
-					title: 'คุณแน่ใจหรือไม่?',
-					text: "คุณต้องการบันทึกข้อมูลนี้หรือไม่?",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					confirmButtonText: 'ใช่, บันทึกเลย!',
-					cancelButtonText: 'ยกเลิก'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						var formData = new FormData();
-						formData.append('HealthID', $('#txtHealthID').val());
-						formData.append('Alcode', $('#txtAlcode').val());
-						formData.append('Alchkhos', $('#ddlAlchkhos').val());
-						formData.append('AlchkstatusID', $('#ddlAlchkstatusID').val());
-						// Get the date value and format it to DD-MM-YYYY
-						var alchkdate = $('#txtAlchkdate').val();
-						if (alchkdate) {
-							var dateParts = alchkdate.split('-');
-							var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-							formData.append('Alchkdate', formattedDate);
-						}
-						formData.append('Alchkprovid', $('#ddlalchkprovid').val());
-						formData.append('Licenseno', $('#txtLicenseno').val());
-						formData.append('Chkname', $('#ddChkname').val());
-						formData.append('Chkposition', $('#txtChkposition').val());
-						formData.append('Alchkdesc', $('#txtAlchkdesc').val());
-						formData.append('Alchkdoc', $('#fileAlchkdoc')[0].files[0]);
+                            // Show the form
+                            $('#showInsert').show();
+                        } else {
+                            console.error('Error: No data found');
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Error fetching form data:', error);
+                    }
+                });
+            });
+        });
 
-						$.ajax({
-							url: '@Url.Action("SaveHealthData", "HealthCheck")',
-							type: 'POST',
-							data: formData,
-							contentType: false,
-							processData: false,
-							success: function (response) {
-								if (response.success) {
-									Swal.fire(
-										'บันทึกแล้ว!',
-										'ข้อมูลของคุณถูกบันทึกแล้ว.',
-										'success'
-									).then(() => {
-										window.location.reload();
-									});
-								} else {
-									Swal.fire('ผิดพลาด', response.message, 'error');
-								}
-							},
-							error: function (xhr) {
-								handleAjaxError(xhr);
-							}
-						});
-					}
-				});
-			});
+        $(document).ready(function () {
 
-			$('.uploadBtn').on('click', function (e) {
-				e.preventDefault();
-				var healthID = $(this).data('healthid');
-				var requestData = { HealthID: healthID };
+            $('#addNewResultBtn').on('click', function (e) {
+                e.preventDefault();
+                $('#showInsert').show(); // แสดง div ที่มี id="showInsert"
+                $('#myForm')[0].reset(); // รีเซ็ตฟอร์มให้เป็นค่าว่าง
+                $('#createHeader').show(); // แสดงหัวข้อ "เพิ่ม"
+                $('#updateHeader').hide(); // ซ่อนหัวข้อ "แก้ไข"
+                $('#createBtn').show(); // แสดงปุ่ม "บันทึก"
+                $('#cancelBtn').show(); // แสดงปุ่ม "ยกเลิก"
+            });
 
-				$.ajax({
-					url: '@Url.Action("UploadData", "HealthCheck")',
-					type: 'POST',
-					data: requestData,
-					success: function (response) {
-						// console.log(response.healthrequest);
-						// console.log(response);
-						if (response.success) {
-							Swal.fire({
-								title: 'สำเร็จ!',
-								text: 'อัปโหลดข้อมูลเรียบร้อยแล้ว.',
-								icon: 'success',
-								confirmButtonText: 'ตกลง'
-							});
-						} else {
-							Swal.fire({
-								title: 'ผิดพลาด!',
-								text: 'ไม่สามารถอัปโหลดข้อมูลได้: ' + response.message,
-								icon: 'error',
-								confirmButtonText: 'ตกลง'
-							});
-						}
-					},
-					error: function (xhr, status, error) {
-						console.log('Error:', xhr, status, error);
-						Swal.fire({
-							title: 'ผิดพลาด!',
-							text: 'เกิดข้อผิดพลาด: ' + error,
-							icon: 'error',
-							confirmButtonText: 'ตกลง'
-						});
-					}
-				});
-			});
+            $('#detailModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // ปุ่มที่ถูกคลิก
+                var alcode = button.data('alcode'); // ดึงค่า userID จาก data attribute
 
-			// Cancel button click event
-			$('#cancelBtn').click(function (e) {
-				e.preventDefault();
+                $.ajax({
+                    url: '@Url.Action("ModelAlcode", "HealthCheck")', // เปลี่ยนเป็น URL ของ Controller และ Action
+                    type: 'GET',
+                    data: { Alcode: alcode }, // ส่งค่า CesID
+                    success: function (response) { // เมื่อ AJAX สำเร็จ
+                        console.log(response);
+                        // อัปเดตเนื้อหาใน Modal
+                        $('#EmpName').text("นายจ้าง/สถานประกอบ :  " + response.empName);
+                        $('#Alcode').text("เลขประจำตัว :  " + response.alcode);
+                        $('#Albdate').text("วันเกิด : " + response.albdate);
+                        $('#AlposName').text("ประเภทอาชีพ : " + response.alposName);
+                        $('#AltypeName').text("ประเภทคนต่างด้าว : " + response.altypeName);
+                    },
+                    error: function (xhr, status, error) { // เมื่อ AJAX ล้มเหลว
+                        console.error("Error:", error); // จัดการข้อผิดพลาด
+                    }
+                });
+            });
 
-				// Reset the form
-				$('#showInsert').hide();
 
-				$('#userForm')[0].reset();
+            $('#detailModalHealth').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var healthID = button.data('healthid');// Extract info from data-* attributes
 
-				// Hide the update button and header
-				$('#updateBtn').hide();
-				$('#updateHeader').hide();
+                // Send AJAX request to fetch details using Alcode
+                $.ajax({
+                    url: '@Url.Action("ModelHealthDetail", "HealthCheck")', // Update with your controller's name
+                    type: 'GET',
+                    data: { HealthID: healthID }, // Send Alcode
+                    success: function (response) { // When AJAX succeeds
+                        if (response) {
+                            // Update modal content
+                            $('#EmpName').text("นายจ้าง/สถานประกอบ :  " + response.empName);
+                            $('#Alcode').text("เลขประจำตัว :  " + response.alcode);
+                            $('#Alchkhos').text("ชื่อโรงพยาบาลที่ตรวจสุขภาพ : " + response.alchkhos);
+                            $('#AlchkstatusID').text("ผลตรวจสุขภาพ : " + response.alchkstatusName);
+                            $('#Alchkdate').text("วันที่ตรวจสุขภาพ : " + response.alchkdate);
+                            $('#AlchkprovidName').text("จังหวัด : " + response.alchkprovidName);
+                            $('#Licenseno').text("เลขที่ใบอนุญาตประกอบวิชาชีพ : " + response.licenseno);
+                            $('#ChkName').text("ชื่อ-นามสกุลแพทย์ : " + response.chkName);
+                            $('#Chkposition').text("ตำแหน่งแพทย์ : " + response.chkposition);
+                            $('#Alchkdesc').text("รายละเอียดผลตรวจสุขภาพเพิ่มเติม : " + response.alchkdesc);
 
-				// Hide the cancel button
-				$('#cancelBtn').hide();
+                            // Create a link for the document
+                            if (response.alchkdoc) {
+                                var docLink = 'เอกสารอ้างอิงผลการตรวจสุขภาพ : <a class="btn btn-primary" href="' + response.alchkdoc + '" target="_blank"><i class="fa fa-file-text" aria-hidden="true"></i> เปิดดูเอกสาร</a>';
+                                $('#Alchkdoc').html(docLink);
+                            } else {
+                                $('#Alchkdoc').text("เอกสารอ้างอิงผลการตรวจสุขภาพ : ไม่มีเอกสาร");
+                            }
 
-				// Clear global user data
-				editingUserData = null;
-			});
+                            $('#UserName').text(" ผู้บันทึกข้อมูล : " + response.userName);
+                        } else {
+                            console.error("Error: No data found");
+                        }
+                    },
+                    error: function (xhr, status, error) { // When AJAX fails
+                        console.error("Error:", error); // Handle error
+                    }
+                });
+            });
 
-					 // Onchange event for doctor select
-			$('#ddChkname').on('change', function () {
-				var selectedDoctor = $(this).val();
-				console.log("Selected Doctor: " + selectedDoctor);
-				fetchDoctorDetails(selectedDoctor); // Call function to handle the selected value
-			});
+            $('#createBtn').click(function (e) {
+                e.preventDefault();
 
-			// Trigger onchange for the default selected value
-			$('#ddChkname').trigger('change');
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการบันทึกข้อมูลนี้หรือไม่?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ใช่, บันทึกเลย!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData();
+                        formData.append('HealthID', $('#txtHealthID').val());
+                        formData.append('Alcode', $('#txtAlcode').val());
+                        formData.append('Alchkhos', $('#ddlAlchkhos').val());
+                        formData.append('AlchkstatusID', $('#ddlAlchkstatusID').val());
+                        // Get the date value and format it to DD-MM-YYYY
+                        var alchkdate = $('#txtAlchkdate').val();
+                        if (alchkdate) {
+                            var dateParts = alchkdate.split('-');
+                            var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+                            formData.append('Alchkdate', formattedDate);
+                        }
+                        formData.append('Alchkprovid', $('#ddlalchkprovid').val());
+                        formData.append('Licenseno', $('#txtLicenseno').val());
+                        formData.append('Chkname', $('#ddChkname').val());
+                        formData.append('Chkposition', $('#txtChkposition').val());
+                        formData.append('Alchkdesc', $('#txtAlchkdesc').val());
+                        formData.append('Alchkdoc', $('#fileAlchkdoc')[0].files[0]);
 
-		});
+                        $.ajax({
+                            url: '@Url.Action("SaveHealthData", "HealthCheck")',
+                            type: 'POST',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'บันทึกแล้ว!',
+                                        'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (xhr) {
+                                handleAjaxError(xhr);
+                            }
+                        });
+                    }
+                });
+            });
 
-				// Function to fetch doctor details
-		function fetchDoctorDetails(doctorName) {
-			if (!doctorName) return; // Return if no doctor selected
-			$.ajax({
-				url: '@Url.Action("ModelDoctor", "HealthCheck")',
-				type: 'GET',
-				data: { DoctorName: doctorName },
-				success: function (response) {
-					if (response) {
-						response
-						$('#txtChkposition').val(response.position);
-						$('#txtLicenseno').val(response.licenseno);
-					} else {
-						console.error("No data found for the selected doctor");
-					}
-				},
-				error: function (xhr, status, error) {
-					console.error("Error fetching doctor details:", error);
-				}
-			});
-		}
+            $('.uploadBtn').on('click', function (e) {
+                e.preventDefault();
+                var healthID = $(this).data('healthid');
+                var requestData = { HealthID: healthID };
 
-		function checkHealthDate() {
-			// Get the selected health date
-			var alchkdate = $('#txtAlchkdate').val();
-			var alcode = '@ViewBag.Alcode'; // Ensure this is a valid value
+                $.ajax({
+                    url: '@Url.Action("UploadData", "HealthCheck")',
+                    type: 'POST',
+                    data: requestData,
+                    success: function (response) {
+                        // console.log(response.healthrequest);
+                        // console.log(response);
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'สำเร็จ!',
+                                text: 'อัปโหลดข้อมูลเรียบร้อยแล้ว.',
+                                icon: 'success',
+                                confirmButtonText: 'ตกลง'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'ผิดพลาด!',
+                                text: 'ไม่สามารถอัปโหลดข้อมูลได้: ' + response.message,
+                                icon: 'error',
+                                confirmButtonText: 'ตกลง'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', xhr, status, error);
+                        Swal.fire({
+                            title: 'ผิดพลาด!',
+                            text: 'เกิดข้อผิดพลาด: ' + error,
+                            icon: 'error',
+                            confirmButtonText: 'ตกลง'
+                        });
+                    }
+                });
+            });
 
-			// Call the server-side method using AJAX
-			$.ajax({
-				url: '@Url.Action("CheckHealthDate", "HealthCheck")', // Update with your controller's name
-				data: { Alcode: alcode, Alchkdate: alchkdate },
-				type: 'GET',
-				success: function (data) {
-					if (data.success) {
-						Swal.fire({
-							title: 'ข้อมูลซ้ำ!',
-							text: 'มีข้อมูลซ้ำในระบบ.',
-							icon: 'warning',
-							confirmButtonText: 'OK'
-						});
-					}
-				},
-				error: function (xhr, status, error) {
-					console.log("Error: " + error);
-					Swal.fire({
-						title: 'Error!',
-						text: 'There was an error retrieving health check details.',
-						icon: 'error',
-						confirmButtonText: 'OK'
-					});
-				}
-			});
-		}
-	</script>
+            // Cancel button click event
+            $('#cancelBtn').click(function (e) {
+                e.preventDefault();
+
+                // Reset the form
+                $('#showInsert').hide();
+
+                $('#userForm')[0].reset();
+
+                // Hide the update button and header
+                $('#updateBtn').hide();
+                $('#updateHeader').hide();
+
+                // Hide the cancel button
+                $('#cancelBtn').hide();
+
+                // Clear global user data
+                editingUserData = null;
+            });
+
+                     // Onchange event for doctor select
+            $('#ddChkname').on('change', function () {
+                var selectedDoctor = $(this).val();
+                console.log("Selected Doctor: " + selectedDoctor);
+                fetchDoctorDetails(selectedDoctor); // Call function to handle the selected value
+            });
+
+            // Trigger onchange for the default selected value
+            $('#ddChkname').trigger('change');
+
+        });
+
+                // Function to fetch doctor details
+        function fetchDoctorDetails(doctorName) {
+            if (!doctorName) return; // Return if no doctor selected
+            $.ajax({
+                url: '@Url.Action("ModelDoctor", "HealthCheck")',
+                type: 'GET',
+                data: { DoctorName: doctorName },
+                success: function (response) {
+                    if (response) {
+                        response
+                        $('#txtChkposition').val(response.position);
+                        $('#txtLicenseno').val(response.licenseno);
+                    } else {
+                        console.error("No data found for the selected doctor");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching doctor details:", error);
+                }
+            });
+        }
+
+        function checkHealthDate() {
+            // Get the selected health date
+            var alchkdate = $('#txtAlchkdate').val();
+            var alcode = '@ViewBag.Alcode'; // Ensure this is a valid value
+
+            // Call the server-side method using AJAX
+            $.ajax({
+                url: '@Url.Action("CheckHealthDate", "HealthCheck")', // Update with your controller's name
+                data: { Alcode: alcode, Alchkdate: alchkdate },
+                type: 'GET',
+                success: function (data) {
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'ข้อมูลซ้ำ!',
+                            text: 'มีข้อมูลซ้ำในระบบ.',
+                            icon: 'warning',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error: " + error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'There was an error retrieving health check details.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        }
+    </script>
 }

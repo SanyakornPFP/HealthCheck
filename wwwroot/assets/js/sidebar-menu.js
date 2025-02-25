@@ -443,7 +443,7 @@
       {
         scrollTop:
           $(".simplebar-wrapper .simplebar-content-wrapper a.active").offset()
-            .top - 400,
+            //.top - 400,
       },
       1000
     );

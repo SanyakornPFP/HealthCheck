@@ -17,137 +17,137 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HealthChecks
 build_property.RootNamespace = HealthChecks
-build_property.ProjectDir = D:\Project\HealthCheks\
+build_property.ProjectDir = D:\Project\Project\2024\HealthCheck\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Project\HealthCheks
+build_property.MSBuildProjectDirectory = D:\Project\Project\2024\HealthCheck
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/Project/HealthCheks/Views/Admin/Permissions.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Admin/Permissions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGVybWlzc2lvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Admin/Users.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Admin/Users.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Authenication/ChangePass.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Authenication/ChangePass.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVuaWNhdGlvblxDaGFuZ2VQYXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Authenication/Login.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Authenication/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aGVuaWNhdGlvblxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/DefualtConfig/Alchkstatu.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/DefualtConfig/Alchkstatu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVmdWFsdENvbmZpZ1xBbGNoa3N0YXR1LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/DefualtConfig/Alnation.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/DefualtConfig/Alnation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVmdWFsdENvbmZpZ1xBbG5hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/DefualtConfig/Alpos.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/DefualtConfig/Alpos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVmdWFsdENvbmZpZ1xBbHBvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/DefualtConfig/Alprefix.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/DefualtConfig/Alprefix.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVmdWFsdENvbmZpZ1xBbHByZWZpeC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/DefualtConfig/Altype.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/DefualtConfig/Altype.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVmdWFsdENvbmZpZ1xBbHR5cGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/DefualtConfig/Doctor.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/DefualtConfig/Doctor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVmdWFsdENvbmZpZ1xEb2N0b3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/DefualtConfig/Hospital.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/DefualtConfig/Hospital.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVmdWFsdENvbmZpZ1xIb3NwaXRhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Error/Error400.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Error/Error400.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Error/Error401.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Error/Error401.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Error/Error403.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Error/Error403.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Error/Error404.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Error/Error404.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Error/Error500.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Error/Error500.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I1MDAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Error/Error503.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Error/Error503.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I1MDMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/HealthCheck/EmpList.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/HealthCheck/EmpList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2hlY2tcRW1wTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/HealthCheck/HealthList.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/HealthCheck/HealthList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2hlY2tcSGVhbHRoTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/HealthCheck/NameList.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/HealthCheck/NameList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2hlY2tcTmFtZUxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/HealthCheck/PersonnalHealth.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/HealthCheck/PersonnalHealth.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQ2hlY2tcUGVyc29ubmFsSGVhbHRoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/HistoryHealth/HistoryDetail.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/HistoryHealth/HistoryDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yeUhlYWx0aFxIaXN0b3J5RGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/HistoryHealth/HistoryHealthPage.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/HistoryHealth/HistoryHealthPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGlzdG9yeUhlYWx0aFxIaXN0b3J5SGVhbHRoUGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Home/Dashboard.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Home/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/LogSystem/Logs.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/LogSystem/Logs.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9nU3lzdGVtXExvZ3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Shared/Error.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/User/ProfileInfo.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/User/ProfileInfo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQcm9maWxlSW5mby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/_ViewImports.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/_ViewStart.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Project/HealthCheks/Views/Shared/_Layout.cshtml]
+[D:/Project/Project/2024/HealthCheck/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-rlw4ttexsu

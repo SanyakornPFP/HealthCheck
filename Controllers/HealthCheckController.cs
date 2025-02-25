@@ -4,17 +4,11 @@ using HealthCheck.Models;
 using HealthChecks.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Design.Internal;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Reflection.Emit;
-using System.Xml.Linq;
-using System.Net.Http.Json;
-using System.ComponentModel;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Reporting.NETCore;
+using Newtonsoft.Json;
+using QRCoder;
+using System.Text;
 
 namespace HealthCheks.Controllers
 {
@@ -22,10 +16,10 @@ namespace HealthCheks.Controllers
     public class HealthCheckController : Controller
     {
         private readonly db_HealthCheckModel _db;
-        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         public HealthCheckController(IWebHostEnvironment hostingEnvironment, db_HealthCheckModel db)
         {
-            _hostingEnvironment = hostingEnvironment;
+            _webHostEnvironment = hostingEnvironment;
             _db = db;
         }
 
@@ -276,7 +270,7 @@ namespace HealthCheks.Controllers
                 if (model.Alchkdoc != null && model.Alchkdoc.Length > 0)
                 {
                     var fileName = "HC" + DateTime.ParseExact(model.Alchkdate, "dd-MM-yyyy", null).ToString("yyyyMMdd") + model.Alcode + Path.GetExtension(model.Alchkdoc.FileName);
-                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads", "healthDoc");
+                    var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "healthDoc");
                     filePath = Path.Combine(uploads, fileName);
                     relativeFilePath = Path.Combine("uploads", "healthDoc", fileName);
 
@@ -497,5 +491,115 @@ namespace HealthCheks.Controllers
                 return Json(new { success = false, message = $"An error occurred while deleting data: {ex.Message}" });
             }
         }
+
+
+        #region Report V.1
+        [HttpGet]
+        public IActionResult ExaminationForm(int HealthID)
+        {
+            var model = _db.Healthchecks
+              .Where(e => e.HealthID == HealthID).Select(
+                h => new
+                {
+                    EmpName = h.Alienlist.Employee.EmpName,
+                    Alcode = h.Alcode,
+                    Albdate = h.Alienlist.Albdate,
+                    Algender = h.Alienlist.Algender.AlgenderName,
+                    Alsname = h.Alienlist.Alnameen + " " + h.Alienlist.Alsnameen,
+                    Alnation = h.Alienlist.Alnation.AlnationName,
+                    Alpos = h.Alienlist.Alpo.AlposName,
+                    Alchkhos = h.Alchkhos,
+                    AlchkstatusID = h.AlchkstatusID,
+                    AlchkstatusName = h.Alchkstatu.AlchkstatusName,
+                    Alchkdate = h.Alchkdate,
+                    Alchkprovid = h.Alchkprovid,
+                    AlchkprovidName = h.Province.ProvinceName,
+                    Licenseno = h.Licenseno,
+                    ChkName = h.Chkname,
+                    Chkposition = h.Chkposition,
+                    Alchkdesc = h.Alchkdesc,
+                    Alchkdoc = h.Alchkdoc,
+                    UserName = h.User.FirstName + h.User.LastName
+                })
+            .FirstOrDefault();
+
+            // Generate QR Code
+            string hostname = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
+            string qrCodeUrl = $"{hostname}/{model.Alchkdoc}";
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrCodeUrl, QRCodeGenerator.ECCLevel.Q);
+
+            // ใช้ PngByteQRCode แทน QRCode
+            PngByteQRCode pngByteQRCode = new PngByteQRCode(qrCodeData);
+            byte[] qrCodeImage = pngByteQRCode.GetGraphic(20);
+
+            // แปลงเป็น Base64
+            string base64Image = Convert.ToBase64String(qrCodeImage);
+
+            string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "qr-code.png");
+            System.IO.File.WriteAllBytes(filePath, qrCodeImage);
+
+            string renderFormat = "PDF";
+            string mimetype = "application/pdf";
+            using var report = new LocalReport();
+            report.ReportPath = $"{this._webHostEnvironment.WebRootPath}\\Report\\MC-01.rdlc";
+            report.EnableExternalImages = true;
+
+            string formattedAlbdate = Convert.ToDateTime(model.Albdate).ToString("dd/MM/yyyy");
+            string formattedDate = ToThaiDate(Convert.ToDateTime(model.Alchkdate));
+
+            // Create individual parameters for each digit of Alcode
+            var alcodeParameters = new List<ReportParameter>();
+            for (int i = 0; i < model.Alcode.Length; i++)
+            {
+                alcodeParameters.Add(new ReportParameter($"Alcode{i + 1}", model.Alcode[i].ToString()));
+            }
+
+            ReportParameter[] parameters = new ReportParameter[]
+            {
+                new ReportParameter("QRCode", new Uri(filePath).AbsoluteUri),
+                new ReportParameter("Healthdate", formattedDate),
+                //// ส่วนที่ 1
+                new ReportParameter("Alsname", model.Alsname),
+                new ReportParameter("Algender", "เพศ  " + model.Algender),
+                new ReportParameter("Alpassport", "เลขที่ Passport  "), ///รอข้อมูลจากฐานข้อมูล
+                new ReportParameter("Albdate", "วัน/เดือน/ปี เกิด  " + formattedAlbdate),
+                new ReportParameter("Alcity", "เมือง   "),///รอข้อมูลจากฐานข้อมูล
+                new ReportParameter("Alcountry", "ประเทศ   "), ///รอข้อมูลจากฐานข้อมูล
+                new ReportParameter("Alnation", "สัญชาติ  " + model.Alnation),
+                new ReportParameter("Alpos", "อาชีพ  " + model.Alpos),
+                new ReportParameter("Aladdress", "-"),///รอข้อมูลจากฐานข้อมูล
+                //// ส่วนที่ 2
+            }.Concat(alcodeParameters).ToArray();
+
+            report.SetParameters(parameters);
+
+            string deviceInfo = @"<DeviceInfo>
+                            <OutputFormat>PDF</OutputFormat>
+                            <StartPage>1</StartPage>
+                            <EndPage>1</EndPage>
+                          </DeviceInfo>";
+
+            var pdf = report.Render(format: renderFormat, deviceInfo: deviceInfo);
+
+            var contentDisposition = new System.Net.Mime.ContentDisposition
+            {
+                FileName = model.Alcode + ".pdf",
+                Inline = true // false = prompt the user for downloading; true = browser to try to show the content inline
+            };
+
+            return new FileContentResult(pdf, mimetype);
+        }
+
+        public static string ToThaiDate(DateTime date)
+        {
+            var thaiCulture = new System.Globalization.CultureInfo("th-TH");
+            var thaiYear = date.Year + 543; // Convert to Buddhist calendar year
+            var thaiMonth = date.ToString("MMMM", thaiCulture); // Get month name in Thai
+            var thaiDay = date.Day;
+
+            return $"วันที่ {thaiDay} เดือน {thaiMonth} พ.ศ. {thaiYear}";
+        }
+        #endregion
     }
 }

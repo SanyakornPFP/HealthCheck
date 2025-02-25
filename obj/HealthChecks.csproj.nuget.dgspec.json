@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\HealthCheks\\HealthChecks.csproj": {}
+    "D:\\Project\\Project\\2024\\HealthCheck\\HealthChecks.csproj": {}
   },
   "projects": {
-    "D:\\Project\\HealthCheks\\HealthChecks.csproj": {
+    "D:\\Project\\Project\\2024\\HealthCheck\\HealthChecks.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\HealthCheks\\HealthChecks.csproj",
+        "projectUniqueName": "D:\\Project\\Project\\2024\\HealthCheck\\HealthChecks.csproj",
         "projectName": "HealthChecks",
-        "projectPath": "D:\\Project\\HealthCheks\\HealthChecks.csproj",
-        "packagesPath": "C:\\Users\\San\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\HealthCheks\\obj\\",
+        "projectPath": "D:\\Project\\Project\\2024\\HealthCheck\\HealthChecks.csproj",
+        "packagesPath": "C:\\Users\\sanyakorn.ch\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\Project\\2024\\HealthCheck\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\San\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sanyakorn.ch\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -86,6 +87,14 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "ReportViewerCore.NETCore": {
+              "target": "Package",
+              "version": "[15.1.26, )"
+            },
             "System.CodeDom": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -93,6 +102,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.9.0, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[9.0.2, )"
             }
           },
           "imports": [

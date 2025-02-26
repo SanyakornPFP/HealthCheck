@@ -40962,8 +40962,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>wt0j9gejtz</Fingerprint>
-      <Integrity>DOxmZbGJjlu3s0YJu9PWJxeEObp3oFk0a/EN/83WOls=</Integrity>
+      <Fingerprint>fy3nd9l01a</Fingerprint>
+      <Integrity>x7RS4Igq51Vv7Us5Qx8CbygzrwJvwDFyS+9al9vk+ag=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\qr-code.png'))</OriginalItemSpec>

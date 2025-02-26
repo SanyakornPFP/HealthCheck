@@ -4,10 +4,10 @@ using HealthCheck.Models;
 using HealthChecks.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Reporting.NETCore;
 using Newtonsoft.Json;
 using QRCoder;
+using System.Globalization;
 using System.Text;
 
 namespace HealthCheks.Controllers
@@ -590,44 +590,40 @@ namespace HealthCheks.Controllers
               .Where(e => e.HealthID == HealthID).Select(
                 h => new
                 {
-                    EmpName = h.Alienlist.Employee.EmpName,
-                    EmpAddress = h.Alienlist.Employee.Wkaddress,
-                    EmpBtname = h.Alienlist.Employee.Btname,
-                    Alcode = h.Alcode,
-                    Albdate = h.Alienlist.Albdate,
-                    Aladdress = h.Alienlist.Aladdress,
-                    Alpassport = h.Alienlist.Alpassport,
-                    Alcity = h.Alienlist.Alcity,
-                    Alcountry = h.Alienlist.Alcountry,
-                    Algender = h.Alienlist.Algender.AlgenderName,
+                    EmpName = h.Alienlist.Employee.EmpName ?? "-",
+                    EmpAddress = h.Alienlist.Employee.Wkaddress ?? "-",
+                    EmpBtname = h.Alienlist.Employee.Btname ?? "-",
+                    Alcode = h.Alcode ?? "-",
+                    Albdate = h.Alienlist.Albdate ?? "-",
+                    Aladdress = h.Alienlist.Aladdress ?? "-",
+                    Alpassport = h.Alienlist.Alpassport ?? "-",
+                    Alcity = h.Alienlist.Alcity ?? "-",
+                    Alcountry = h.Alienlist.Alcountry ?? "-",
+                    Algender = h.Alienlist.Algender.AlgenderName ?? "-",
                     Alsname = h.Alienlist.Alnameen + " " + h.Alienlist.Alsnameen,
-                    Alnation = h.Alienlist.Alnation.AlnationName,
-                    Alpos = h.Alienlist.Alpo.AlposName,
-                    Hospital = h.Alchkhos,
-                    HospitalAddress = _db.Hospitals
-                                    .Where(s => EF.Functions.Collate(s.HospitalName, "Thai_CI_AS") == h.Alchkhos)
-                                    .Select(c => c.HospitalAddress)
-                                    .FirstOrDefault(),
-                    AlchkstatusID = h.AlchkstatusID,
-                    AlchkstatusName = h.Alchkstatu.AlchkstatusName,
-                    Alchkdate = h.Alchkdate,
-                    Alchkprovid = h.Alchkprovid,
-                    AlchkprovidName = h.Province.ProvinceName,
-                    Licenseno = h.Licenseno,
-                    Chkname = h.Chkname,
-                    Chkposition = h.Chkposition,
-                    Alchkdesc = h.Alchkdesc,
-                    Alchkdoc = h.Alchkdoc,
-                    UserName = h.User.FirstName + h.User.LastName,
-                    Height = h.Height,
-                    Weight = h.Weight,
-                    SkinColor = h.SkinColor,
-                    Bloodpressure = h.Bloodpressure,
-                    Pulse = h.Pulse,
-                    GeneralHealth = h.GeneralHealth
+                    Alnation = h.Alienlist.Alnation.AlnationName ?? "-",
+                    Alpos = h.Alienlist.Alpo.AlposName ?? "-",
+                    Hospital = h.Alchkhos ?? "-",
+                    AlchkstatusID = h.AlchkstatusID ?? "-",
+                    AlchkstatusName = h.Alchkstatu.AlchkstatusName ?? "-",
+                    Alchkdate = h.Alchkdate ?? "-",
+                    Alchkprovid = h.Alchkprovid ?? "-",
+                    AlchkprovidName = h.Province.ProvinceName ?? "-",
+                    Licenseno = h.Licenseno ?? "-",
+                    Chkname = h.Chkname ?? "-",
+                    Chkposition = h.Chkposition ?? "-",
+                    Alchkdesc = h.Alchkdesc ?? "-",
+                    Alchkdoc = h.Alchkdoc ?? "-",
+                    Height = h.Height ?? "-",
+                    Weight = h.Weight ?? "-",
+                    SkinColor = h.SkinColor ?? "-",
+                    Bloodpressure = h.Bloodpressure ?? "-",
+                    Pulse = h.Pulse ?? "-",
+                    GeneralHealth = h.GeneralHealth ?? "-"
                 })
             .FirstOrDefault();
 
+            string HospitalAddress = _db.Hospitals.Where(h => h.HospitalName == model.Hospital).Select(h => h.HospitalAddress).FirstOrDefault();
             // Generate QR Code
             string hostname = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
             string qrCodeUrl = $"{hostname}/{model.Alchkdoc}";
@@ -650,8 +646,22 @@ namespace HealthCheks.Controllers
             report.ReportPath = $"{this._webHostEnvironment.WebRootPath}\\Report\\MC-01.rdlc";
             report.EnableExternalImages = true;
 
-            string formattedAlbdate = Convert.ToDateTime(model.Albdate).ToString("dd/MM/yyyy");
-            string formattedDate = ToThaiDate(Convert.ToDateTime(model.Alchkdate));
+            // แปลงวันที่จากสตริงเป็น DateTime
+            DateTime albdate;
+            DateTime alchkdate;
+            if (!DateTime.TryParseExact(model.Albdate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out albdate))
+            {
+                // จัดการข้อผิดพลาดเมื่อแปลงวันที่ไม่สำเร็จ
+                throw new FormatException($"String '{model.Albdate}' was not recognized as a valid DateTime.");
+            }
+            if (!DateTime.TryParseExact(model.Alchkdate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out alchkdate))
+            {
+                // จัดการข้อผิดพลาดเมื่อแปลงวันที่ไม่สำเร็จ
+                throw new FormatException($"String '{model.Alchkdate}' was not recognized as a valid DateTime.");
+            }
+
+            string formattedAlbdate = albdate.ToString("dd/MM/yyyy");
+            string formattedDate = ToThaiDate(alchkdate);
 
             // Create individual parameters for each digit of Alcode
             var alcodeParameters = new List<ReportParameter>();
@@ -682,7 +692,7 @@ namespace HealthCheks.Controllers
                 new ReportParameter("Chkname", model.Chkname),
                 new ReportParameter("Licenseno", model.Licenseno),
                 new ReportParameter("Hospital", model.Hospital),
-                new ReportParameter("HospitalAddress", model.HospitalAddress),
+                new ReportParameter("HospitalAddress", HospitalAddress),
                 //// ผลตรวจสุขภาพ
                 new ReportParameter("HealthInfo", "ส่วนสูง " + model.Height + " ซม. "  + " น้ำหนัก " + model.Weight + " ก.ก " + " สีผิว " + model.SkinColor + " " + " ความดันโลหิต " + model.Bloodpressure + " มม.ปรอท " + " ชีพจร " + model.Pulse + " ครั้ง/นาที " ),
                 new ReportParameter("GeneralHealth", model.GeneralHealth),

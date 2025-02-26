@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDeveloper Version="6.8.1019.0">
   <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="db_HealthCheckModelConnectionString" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="True" TargetFramework="NetCore30" DetectManyToManyAssociations="False" DetectTPTInheritance="False" EntityFrameworkCoreVersion="Version3" DetectFunctionBasedColumnDefault="True">
-    <Connection ConnectionString="Data Source=DESKTOP-MB03GLQ;Initial Catalog=db_HealthChecks;Integrated Security=True;Persist Security Info=True" Provider="System.Data.SqlClient" />
+    <Connection ConnectionString="Data Source=10.0.66.77\MSSQL2019;Initial Catalog=db_HealthChecks;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=Systemadmin@!" Provider="System.Data.SqlClient" />
     <Generation>
       <GeneratedFiles>
         <File Name="db_HealthCheckModel.cs" DestinationFolder="D:\Project\Project\2024\HealthCheck\Data" />
@@ -130,16 +130,5 @@
       </Template>
     </Templates>
     <AttributeAssemblies />
-    <UpdateFromDatabaseExcludes>
-      <Exclude Name="HistoryHealthID" Table="dbo.HistoryHealth" Type="Column" />
-      <Exclude Name="Alcode" Table="dbo.HistoryHealth" Type="Column" />
-      <Exclude Name="Alnameen" Table="dbo.HistoryHealth" Type="Column" />
-      <Exclude Name="Alchkdate" Table="dbo.HistoryHealth" Type="Column" />
-      <Exclude Name="UploadDate" Table="dbo.HistoryHealth" Type="Column" />
-      <Exclude Name="UserIDManage" Table="dbo.HistoryHealth" Type="Column" />
-      <Exclude Name="PK_HistoryHealth" Table="dbo.HistoryHealth" Type="Constraint" />
-      <Exclude Name="Alcode" Table="dbo.HistoryHealth" Type="Column" />
-      <Exclude Name="Alchkdate" Table="dbo.HistoryHealth" Type="Column" />
-    </UpdateFromDatabaseExcludes>
   </ModelSettings>
 </EntityDeveloper>

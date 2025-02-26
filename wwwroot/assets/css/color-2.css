@@ -118,7 +118,7 @@
 
  */
 :root {
-    --theme-default: #88967e;
+    --theme-default: #3b8fd1;
     --theme-secondary: #29353a;
     --light-background: rgba(242, 243, 247, 0.7);
     --body-font-color: #2F2F3B;
@@ -39672,11 +39672,11 @@ ul.dot-group {
 }
 
     .show-hide span.show:before {
-        content: "show";
+        content: "แสดง";
     }
 
     .show-hide span:before {
-        content: "hide";
+        content: "ซ่อน";
     }
 
 .needs-validation .invalid-feedback {

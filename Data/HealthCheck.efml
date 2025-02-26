@@ -44,6 +44,9 @@
     <property name="Reqcode" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="f88fd90b-c01b-44f1-88c7-fdc61a568601">
       <column name="Reqcode" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
     </property>
+    <property name="Alpassport" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="c68a4c47-f766-429e-8c5b-4eb4bf6a87ee">
+      <column name="Alpassport" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
     <property name="AltypeID" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="b092f37a-bfee-48ef-ba33-a1092949e9ad">
       <column name="AltypeID" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
     </property>
@@ -70,6 +73,12 @@
     </property>
     <property name="AlposID" type="String" p1:nullable="True" p1:ValidateMaxLength="2" p1:ValidateRequired="false" p1:Guid="4cd41381-6e5e-4e16-aebf-0d71913cb394">
       <column name="AlposID" not-null="False" length="2" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Alcity" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e31465e6-0b44-42af-8a69-700c0630414d">
+      <column name="Alcity" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
+    <property name="Alcountry" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e09da276-1c93-451a-8c99-210eee718c78">
+      <column name="Alcountry" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
     </property>
     <property name="Aladdress" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="e5ef9213-1b87-4525-9ead-cd2ff56db2de">
       <column name="Aladdress" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
@@ -332,6 +341,24 @@
     <property name="Alchkprovid" type="String" p1:nullable="True" p1:ValidateMaxLength="2" p1:ValidateRequired="false" p1:Guid="c1272d2d-5d02-4b0d-bb5d-074c47a8e53a">
       <column name="Alchkprovid" not-null="False" length="2" sql-type="nvarchar" p1:unicode="True" />
     </property>
+    <property name="Height" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="6db254c1-ff4f-4ba1-b0f6-b19e7551443a">
+      <column name="Height" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Weight" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="372cd0fa-23ab-4dd6-9fa2-67f30ca81545">
+      <column name="Weight" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="SkinColor" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="929bcdee-bb9f-47ef-ad1d-f720e18a2bd3">
+      <column name="SkinColor" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Bloodpressure" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="f21e923c-260b-4bd0-b068-094795a00dfe">
+      <column name="Bloodpressure" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="Pulse" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="0e52f189-08a8-4f8d-bc68-3ae19b7ff7f9">
+      <column name="Pulse" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
+    </property>
+    <property name="GeneralHealth" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="aa012084-71a4-46e3-9ce0-5819138aed9f">
+      <column name="GeneralHealth" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    </property>
     <property name="Licenseno" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="a572e893-836d-4d69-9897-aa8e628ce006">
       <column name="Licenseno" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
     </property>
@@ -390,8 +417,8 @@
     <property name="HospitalName" type="String" p1:nullable="True" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="3f1bcc61-422a-4785-a5b2-6bb2256be190">
       <column name="HospitalName" not-null="False" length="255" sql-type="nvarchar" p1:unicode="True" />
     </property>
-    <property name="Address" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="757bbcce-7cd4-4dc4-9c8b-1e9b754270ea">
-      <column name="Address" not-null="False" sql-type="nvarchar(max)" p1:unicode="True" />
+    <property name="HospitalAddress" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="fa2f33cd-6197-46ed-a750-4268eeea5dda">
+      <column name="HospitalAddress" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
     </property>
     <property name="CreatedAt" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="435becd8-e135-4887-81cd-8645767f3381">
       <column name="CreatedAt" not-null="False" sql-type="datetime" p1:unicode="False" />
@@ -422,22 +449,22 @@
     <property name="TimeStamp" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ef7a074a-f4cb-4d3d-8371-6f32432a8406">
       <column name="TimeStamp" default="getdate()" not-null="False" sql-type="datetime" p1:unicode="False" />
     </property>
-    <property name="Detail" type="Clob" p1:nullable="True" p1:ValidateMaxLength="2147483647" p1:ValidateRequired="false" p1:Guid="6d423a21-88ff-4ad9-b79b-1ae00f422b64">
-      <column name="Detail" not-null="False" length="2147483647" sql-type="text" p1:unicode="False" />
+    <property name="Detail" type="String" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="6d423a21-88ff-4ad9-b79b-1ae00f422b64">
+      <column name="Detail" not-null="False" length="2147483647" sql-type="nvarchar" p1:unicode="True" />
     </property>
   </class>
   <class name="HistoryHealth" entity-set="HistoryHealths" table="HistoryHealth" schema="dbo" p1:Guid="25cc8a51-fbf6-4a69-98df-257dd9085b4c">
     <id name="HistoryHealthID" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="78d50176-1209-4170-a18e-c85d77fac843">
       <column name="HistoryHealthID" not-null="True" precision="10" scale="0" sql-type="int" p1:unicode="False" />
     </id>
-    <property name="Alcode" type="String" p1:ValidateMaxLength="13" p1:ValidateRequired="true" p1:Guid="123e8281-865c-4890-ba17-d009e9a46120">
-      <column name="Alcode" not-null="True" length="13" sql-type="nvarchar" p1:unicode="True" />
+    <property name="Alcode" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="123e8281-865c-4890-ba17-d009e9a46120">
+      <column name="Alcode" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
     </property>
     <property name="Alnameen" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="9ec0dd57-4b8b-480c-bed8-7e435e32ee79">
       <column name="Alnameen" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
     </property>
-    <property name="Alchkdate" type="String" p1:nullable="True" p1:ValidateMaxLength="10" p1:ValidateRequired="false" p1:Guid="55a571af-70b5-44cb-855a-afca248fd012">
-      <column name="Alchkdate" not-null="False" length="10" sql-type="nvarchar" p1:unicode="True" />
+    <property name="Alchkdate" type="String" p1:nullable="True" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="55a571af-70b5-44cb-855a-afca248fd012">
+      <column name="Alchkdate" not-null="False" length="50" sql-type="nvarchar" p1:unicode="True" />
     </property>
     <property name="UploadDate" type="DateTime" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="532302f8-b3bd-4f4a-aefb-6116a32649b5">
       <column name="UploadDate" not-null="False" sql-type="datetime" p1:unicode="False" />

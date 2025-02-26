@@ -129,10 +129,35 @@ namespace HealthCheks.Controllers
             ViewBag.Hospital = _db.Hospitals.Where(d => d.IsActive).ToList();
             ViewBag.Alchkstatus = _db.Alchkstatus.Where(d => d.IsActive).ToList();
             ViewBag.Province = _db.Provinces.Where(d => d.IsActive).ToList();
+
+            var modelAleint = _db.Alienlists.Where(e => e.Alcode == Alcode)
+                .Select(e => new
+                {
+                    Alnameen = e.Alnameen + " " + e.Alsnameen,
+                    e.Alpassport,
+                    e.Alcountry,
+                    e.Alcity,
+                    e.Aladdress,
+                    e.Alnation.AlnationName,
+
+                }).FirstOrDefault();
+
             ViewBag.Alcode = Alcode;
-            ViewBag.AlName = _db.Alienlists.Where(e => e.Alcode == Alcode).Select(e => e.Alnameen).FirstOrDefault();
+            ViewBag.Alnation = modelAleint.AlnationName;
+            ViewBag.AlName = modelAleint.Alnameen;
+            ViewBag.AlPassport = modelAleint.Alpassport;
+            ViewBag.AlCountry = modelAleint.Alcountry;
+            ViewBag.AlCity = modelAleint.Alcity;
+            ViewBag.AlAddress = modelAleint.Aladdress;
 
             ViewBag.HealthchecksPerson = _db.Healthchecks.Where(e => e.Alcode == Alcode && e.IsActive)
+                .Select(s => new
+                {
+                    s.HealthID,
+                    s.Alchkdate,
+                    AlchkstatusName = s.Alchkstatu.AlchkstatusName ?? "รอลงผลตรวจ",
+                    s.Alchkhos
+                })
                 .OrderByDescending(e => e.HealthID)
                 .ToList();
 
@@ -180,6 +205,10 @@ namespace HealthCheks.Controllers
                 {
                     EmpName = h.Alienlist.Employee.EmpName,
                     Alcode = h.Alcode,
+                    Alcountry = h.Alienlist.Alcountry,
+                    Aladdress = h.Alienlist.Aladdress,
+                    Alpassport = h.Alienlist.Alpassport,
+                    Alcity = h.Alienlist.Alcity,
                     Alchkhos = h.Alchkhos,
                     AlchkstatusID = h.AlchkstatusID,
                     AlchkstatusName = h.Alchkstatu.AlchkstatusName,
@@ -191,6 +220,12 @@ namespace HealthCheks.Controllers
                     Chkposition = h.Chkposition,
                     Alchkdesc = h.Alchkdesc,
                     Alchkdoc = h.Alchkdoc != null ? $"{baseUrl}/{h.Alchkdoc}" : null,
+                    h.Height,
+                    h.Weight,
+                    h.SkinColor,
+                    h.Bloodpressure,
+                    h.Pulse,
+                    h.GeneralHealth,
                     UserName = h.User.FirstName + h.User.LastName
                 })
             .FirstOrDefault();
@@ -259,17 +294,17 @@ namespace HealthCheks.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveHealthData(RequestHealthcheck model)
+        public async Task<IActionResult> SaveHealthData(RequestHealthcheckResult model)
         {
             try
             {
-                var existingHealth = _db.Healthchecks.Where(h => h.Alcode == model.Alcode && h.Alchkdate == model.Alchkdate && h.IsActive == true).FirstOrDefault();
+                var existingHealth = _db.Healthchecks.Where(h => h.HealthID == model.HealthID).FirstOrDefault();
 
                 string filePath = null;
                 string relativeFilePath = null;
                 if (model.Alchkdoc != null && model.Alchkdoc.Length > 0)
                 {
-                    var fileName = "HC" + DateTime.ParseExact(model.Alchkdate, "dd-MM-yyyy", null).ToString("yyyyMMdd") + model.Alcode + Path.GetExtension(model.Alchkdoc.FileName);
+                    var fileName = "HC" + DateTime.ParseExact(existingHealth.Alchkdate, "dd-MM-yyyy", null).ToString("yyyyMMdd") + existingHealth.Alcode + Path.GetExtension(model.Alchkdoc.FileName);
                     var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "healthDoc");
                     filePath = Path.Combine(uploads, fileName);
                     relativeFilePath = Path.Combine("uploads", "healthDoc", fileName);
@@ -286,6 +321,65 @@ namespace HealthCheks.Controllers
                     }
                 }
 
+                existingHealth.AlchkstatusID = model.AlchkstatusID;
+                existingHealth.Alchkdesc = model.Alchkdesc;
+                existingHealth.UserIDManage = int.Parse(User.GetLoggedInUserID());
+                if (relativeFilePath != null)
+                {
+                    existingHealth.Alchkdoc = relativeFilePath.Replace("\\", "/");
+                }
+                existingHealth.UpdatedAt = DateTime.Now;
+
+                _db.Healthchecks.Update(existingHealth);
+
+                // Log update action
+                _db.LogSystems.Add(new LogSystem
+                {
+                    UserID = int.Parse(User.GetLoggedInUserID()),
+                    ActionTitle = "Update Healthcheck",
+                    TableName = "Healthchecks",
+                    RecordID = existingHealth.Alcode,
+                    TimeStamp = DateTime.UtcNow,
+                    Detail = $"Updated healthcheck for Alcode {existingHealth.Alcode}"
+                });
+
+                await _db.SaveChangesAsync();
+
+                var requestUpload = new HealthCheckRequest
+                {
+                    HealthID = existingHealth.HealthID
+                };
+
+                await UploadData(requestUpload);
+
+                return Json(new { success = true, message = "Data saved successfully." });
+            }
+            catch (Exception ex)
+            {
+                // Return an error response with detailed message
+                return Json(new { success = false, message = $"An error occurred while saving data: {ex.Message}" });
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateFormHealthCheck(RequestHealthcheckForm model)
+        {
+            try
+            {
+                var existingHealth = _db.Healthchecks.Where(h => h.Alcode == model.Alcode && h.Alchkdate == model.Alchkdate && h.IsActive == true).FirstOrDefault();
+                var modelAleint = _db.Alienlists.Where(e => e.Alcode == model.Alcode).FirstOrDefault();
+
+                if (modelAleint.Alpassport != model.Alpassport || modelAleint.Alcity != model.Alcity || modelAleint.Alcountry != model.Alcountry || modelAleint.Aladdress != model.Aladdress)
+                {
+                    modelAleint.Alpassport = model.Alpassport;
+                    modelAleint.Alcity = model.Alcity;
+                    modelAleint.Alcountry = model.Alcountry;
+                    modelAleint.Aladdress = model.Aladdress;
+                    _db.Alienlists.Update(modelAleint);
+                    _db.SaveChanges();
+                }
+
                 var modeDoctor = _db.Doctors.FirstOrDefault(d => d.DoctorName.ToString() == model.Chkname);
                 if (modeDoctor == null)
                 {
@@ -296,18 +390,18 @@ namespace HealthCheks.Controllers
                 {
                     // Update existing record
                     existingHealth.Alchkhos = model.Alchkhos;
-                    existingHealth.AlchkstatusID = model.AlchkstatusID;
                     existingHealth.Alchkdate = model.Alchkdate;
                     existingHealth.Alchkprovid = model.Alchkprovid;
+                    existingHealth.Height = model.Height;
+                    existingHealth.Weight = model.Weight;
+                    existingHealth.SkinColor = model.SkinColor;
+                    existingHealth.Bloodpressure = model.Bloodpressure;
+                    existingHealth.Pulse = model.Pulse;
+                    existingHealth.GeneralHealth = model.GeneralHealth;
                     existingHealth.Licenseno = model.Licenseno;
                     existingHealth.Chkname = model.Chkname;
                     existingHealth.Chkposition = modeDoctor.Position;
-                    existingHealth.Alchkdesc = model.Alchkdesc;
                     existingHealth.UserIDManage = int.Parse(User.GetLoggedInUserID());
-                    if (relativeFilePath != null)
-                    {
-                        existingHealth.Alchkdoc = relativeFilePath.Replace("\\", "/");
-                    }
                     existingHealth.UpdatedAt = DateTime.Now;
 
                     _db.Healthchecks.Update(existingHealth);
@@ -329,14 +423,17 @@ namespace HealthCheks.Controllers
                     {
                         Alcode = model.Alcode,
                         Alchkhos = model.Alchkhos,
-                        AlchkstatusID = model.AlchkstatusID,
                         Alchkdate = model.Alchkdate,
                         Alchkprovid = model.Alchkprovid,
                         Licenseno = model.Licenseno,
                         Chkname = modeDoctor.DoctorName,
                         Chkposition = modeDoctor.Position,
-                        Alchkdesc = model.Alchkdesc,
-                        Alchkdoc = relativeFilePath?.Replace("\\", "/"),
+                        Height = model.Height,
+                        Weight = model.Weight,
+                        SkinColor = model.SkinColor,
+                        Bloodpressure = model.Bloodpressure,
+                        Pulse = model.Pulse,
+                        GeneralHealth = model.GeneralHealth,
                         CreatedAt = DateTime.Now,
                         UserIDManage = int.Parse(User.GetLoggedInUserID()),
                         IsActive = true
@@ -356,14 +453,6 @@ namespace HealthCheks.Controllers
                 }
 
                 await _db.SaveChangesAsync();
-
-                var requestUpload = new HealthCheckRequest
-                {
-                    HealthID = await _db.Healthchecks.Where(s => s.Alchkdate == model.Alchkdate && s.Alcode == model.Alcode).Select(s => s.HealthID).FirstOrDefaultAsync(),
-                };
-
-                await UploadData(requestUpload);
-
                 return Json(new { success = true, message = "Data saved successfully." });
             }
             catch (Exception ex)
@@ -506,13 +595,19 @@ namespace HealthCheks.Controllers
                     EmpBtname = h.Alienlist.Employee.Btname,
                     Alcode = h.Alcode,
                     Albdate = h.Alienlist.Albdate,
-                    Aldadress = h.Alienlist.Aladdress,
+                    Aladdress = h.Alienlist.Aladdress,
+                    Alpassport = h.Alienlist.Alpassport,
+                    Alcity = h.Alienlist.Alcity,
+                    Alcountry = h.Alienlist.Alcountry,
                     Algender = h.Alienlist.Algender.AlgenderName,
                     Alsname = h.Alienlist.Alnameen + " " + h.Alienlist.Alsnameen,
                     Alnation = h.Alienlist.Alnation.AlnationName,
                     Alpos = h.Alienlist.Alpo.AlposName,
-                    Hoppital = h.Alchkhos,
-                    HoppitalAddress = _db.Hospitals.Where(s => s.HospitalName == h.Alchkhos).Select(c => c.Address).FirstOrDefault(),
+                    Hospital = h.Alchkhos,
+                    HospitalAddress = _db.Hospitals
+                                    .Where(s => EF.Functions.Collate(s.HospitalName, "Thai_CI_AS") == h.Alchkhos)
+                                    .Select(c => c.HospitalAddress)
+                                    .FirstOrDefault(),
                     AlchkstatusID = h.AlchkstatusID,
                     AlchkstatusName = h.Alchkstatu.AlchkstatusName,
                     Alchkdate = h.Alchkdate,
@@ -523,7 +618,13 @@ namespace HealthCheks.Controllers
                     Chkposition = h.Chkposition,
                     Alchkdesc = h.Alchkdesc,
                     Alchkdoc = h.Alchkdoc,
-                    UserName = h.User.FirstName + h.User.LastName
+                    UserName = h.User.FirstName + h.User.LastName,
+                    Height = h.Height,
+                    Weight = h.Weight,
+                    SkinColor = h.SkinColor,
+                    Bloodpressure = h.Bloodpressure,
+                    Pulse = h.Pulse,
+                    GeneralHealth = h.GeneralHealth
                 })
             .FirstOrDefault();
 
@@ -566,13 +667,13 @@ namespace HealthCheks.Controllers
                 //// ส่วนที่ 1
                 new ReportParameter("Alsname", model.Alsname),
                 new ReportParameter("Algender", "เพศ  " + model.Algender),
-                new ReportParameter("Alpassport", "เลขที่ Passport  "), ///รอข้อมูลจากฐานข้อมูล
+                new ReportParameter("Alpassport", "เลขที่ Passport  " + model.Alpassport),
                 new ReportParameter("Albdate", "วัน/เดือน/ปี เกิด  " + formattedAlbdate),
-                new ReportParameter("Alcity", "เมือง   "),///รอข้อมูลจากฐานข้อมูล
-                new ReportParameter("Alcountry", "ประเทศ   "), ///รอข้อมูลจากฐานข้อมูล
+                new ReportParameter("Alcity", "เมืองเกิด  " + model.Alcity),
+                new ReportParameter("Alcountry", "ประเทศ  " + model.Alcountry),
                 new ReportParameter("Alnation", "สัญชาติ  " + model.Alnation),
                 new ReportParameter("Alpos", "อาชีพ  " + model.Alpos),
-                new ReportParameter("Aladdress", model.Aldadress),///รอข้อมูลจากฐานข้อมูล
+                new ReportParameter("Aladdress", model.Aladdress),
                 //// ส่วนที่ 2
                 new ReportParameter("Employee", model.EmpName),
                 new ReportParameter("EmpBtname", model.EmpBtname),
@@ -580,8 +681,11 @@ namespace HealthCheks.Controllers
                 //// ส่วนที่ 3
                 new ReportParameter("Chkname", model.Chkname),
                 new ReportParameter("Licenseno", model.Licenseno),
-                new ReportParameter("Hoppital", model.Hoppital),
-                new ReportParameter("HoppitalAddress", model.HoppitalAddress)
+                new ReportParameter("Hospital", model.Hospital),
+                new ReportParameter("HospitalAddress", model.HospitalAddress),
+                //// ผลตรวจสุขภาพ
+                new ReportParameter("HealthInfo", "ส่วนสูง " + model.Height + " ซม. "  + " น้ำหนัก " + model.Weight + " ก.ก " + " สีผิว " + model.SkinColor + " " + " ความดันโลหิต " + model.Bloodpressure + " มม.ปรอท " + " ชีพจร " + model.Pulse + " ครั้ง/นาที " ),
+                new ReportParameter("GeneralHealth", model.GeneralHealth),
             }.Concat(alcodeParameters).ToArray();
 
             report.SetParameters(parameters);

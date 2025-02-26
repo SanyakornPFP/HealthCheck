@@ -60,7 +60,23 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>สภาพร่างกาย จิตใจทั่วไป
+                    <Value>สภาพร่างกาย จิตใจทั่วไป  ผลตรวจสุขภาพและจิตใจทั่วไป </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!GeneralHealth.Value</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
     ผลการตรวจวัณโรค              </Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
@@ -525,10 +541,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>23.48476cm</Top>
-            <Left>13.08478cm</Left>
+            <Top>22.72276cm</Top>
+            <Left>10.9551cm</Left>
             <Height>0.84621cm</Height>
-            <Width>3.17573cm</Width>
+            <Width>6.76551cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -561,7 +577,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>24.51696cm</Top>
+            <Top>23.88196cm</Top>
             <Left>11.1456cm</Left>
             <Height>0.84621cm</Height>
             <Width>7.18884cm</Width>
@@ -622,7 +638,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>   สถานประกอบการ   </Value>
+                    <Value>      สถานประกอบการ   </Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -653,7 +669,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!EmpAddress.Value</Value>
+                    <Value>=Parameters!Empaddress.Value</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -752,7 +768,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>สถานพยาบาลชื่อ   </Value>
+                    <Value>สถานพยาบาลชื่อ    </Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -760,15 +776,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!Hoppital.Value</Value>
-                    <Style>
-                      <FontFamily>th SarabunPSK</FontFamily>
-                      <FontSize>16pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve">  </Value>
+                    <Value>=Parameters!Hospital.Value</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -783,7 +791,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>    ที่อยู่   </Value>
+                    <Value>    ที่อยู่ </Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -791,15 +799,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!HoppitalAddress.Value</Value>
-                    <Style>
-                      <FontFamily>th SarabunPSK</FontFamily>
-                      <FontSize>16pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
+                    <Value>=Parameters!HospitalAddress.Value</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -1268,6 +1268,7 @@
             <Source>External</Source>
             <Value>=Parameters!QRCode.Value</Value>
             <Sizing>FitProportional</Sizing>
+            <Top>0cm</Top>
             <Left>15.28575cm</Left>
             <Height>1.99968cm</Height>
             <Width>1.90271cm</Width>
@@ -1809,8 +1810,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>25.36316cm</Top>
-            <Left>11.1456cm</Left>
+            <Top>24.72816cm</Top>
+            <Left>10.9551cm</Left>
             <Height>0.84621cm</Height>
             <Width>7.18884cm</Width>
             <ZIndex>26</ZIndex>
@@ -2158,13 +2159,13 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="Hoppital">
+    <ReportParameter Name="Hospital">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="HoppitalAddress">
+    <ReportParameter Name="HospitalAddress">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -2177,6 +2178,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="HealthInfo">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="GeneralHealth">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -2331,12 +2338,12 @@
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>8</RowIndex>
-          <ParameterName>Hoppital</ParameterName>
+          <ParameterName>Hospital</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>8</RowIndex>
-          <ParameterName>HoppitalAddress</ParameterName>
+          <ParameterName>HospitalAddress</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
@@ -2347,6 +2354,11 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>9</RowIndex>
           <ParameterName>HealthInfo</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>GeneralHealth</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

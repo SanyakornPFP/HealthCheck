@@ -299,6 +299,7 @@ namespace HealthCheks.Controllers
                     e.Alcity,
                     e.Aladdress,
                     e.Alnation.AlnationName,
+                    e.Employee.Wkaddress
 
                 }).FirstOrDefault();
 
@@ -306,9 +307,9 @@ namespace HealthCheks.Controllers
             ViewBag.Alnation = modelAleint.AlnationName;
             ViewBag.AlName = modelAleint.Alnameen;
             ViewBag.AlPassport = modelAleint.Alpassport;
-            ViewBag.AlCountry = modelAleint.Alcountry;
+            ViewBag.AlCountry = modelAleint.Alcountry != null ? modelAleint.Alcountry : "พม่า";
             ViewBag.AlCity = modelAleint.Alcity;
-            ViewBag.AlAddress = modelAleint.Aladdress;
+            ViewBag.AlAddress = modelAleint.Aladdress != null ? modelAleint.Aladdress : modelAleint.Wkaddress;
 
             ViewBag.HealthchecksPerson = _db.Healthchecks.Where(e => e.Alcode == Alcode && e.IsActive)
                 .Select(s => new
@@ -784,7 +785,6 @@ namespace HealthCheks.Controllers
             .FirstOrDefault();
 
             string HospitalAddress = _db.Hospitals.Where(h => h.HospitalName == model.Hospital).Select(h => h.HospitalAddress).FirstOrDefault();
-            // Generate QR Code
             string hostname = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
             string qrCodeUrl = $"{hostname}/{model.Alchkdoc}";
             QRCodeGenerator qrGenerator = new QRCodeGenerator();

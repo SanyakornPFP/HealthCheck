@@ -29,6 +29,11 @@
                                             <input class="form-control" name="HospitalName" id="txtHospitalName" type="text" placeholder="กรุณากรอกข้อมูล">
                                         </div>
                                         <div class="col-xxl-12 col-sm-12">
+                                            <input name="HospitalID" id="txtHospitalID" type="hidden" style="display:none">
+                                            <label class="col-form-label" for="txtHospitalAddress">ที่อยู่โรงพยาบาล</label>
+                                            <input class="form-control" name="HospitalAdress" id="txtHospitalAddress" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
                                             <button class="btn btn-pill btn-primary active" id="createBtn" type="submit" title="btn btn-pill btn-primary active">บันทึก</button>
                                             <button class="btn btn-pill btn-primary active" id="updateBtn" type="submit" title="btn btn-pill btn-info active" style="display: none;">อัพเดท</button>
                                         </div>
@@ -69,6 +74,7 @@
                                 <thead>
                                     <tr>
                                         <th>ชื่อโรงพยาบาล</th>
+                                        <th>ที่อยู่</th>
                                         <th>ดำเนินการ</th>
                                     </tr>
                                 </thead>
@@ -77,6 +83,7 @@
                                     {
                                         <tr>
                                             <td>@item.HospitalName</td>
+                                            <td>@item.HospitalAddress</td>
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit"><a href="#" class="editBtn" data-HospitalID="@item.HospitalID"><i class="icon-pencil-alt"></i></a></li>
@@ -150,6 +157,7 @@
             function loadHospitalData(hospital) {
                 $('#txtHospitalID').val(hospital.hospitalID);
                 $('#txtHospitalName').val(hospital.hospitalName);
+                $('#txtHospitalAddress').val(hospital.hospitalAddress);
                 editingHospitalData = hospital;
             }
 
@@ -195,6 +203,7 @@
         $('#createBtn').click(function (e) {
             e.preventDefault();
             var hospitalData = $('#txtHospitalName').val();
+            var hospitalAdress = $('#txtHospitalAddress').val();
 
             Swal.fire({
                 title: 'คุณแน่ใจหรือไม่?',
@@ -210,7 +219,7 @@
                     $.ajax({
                         url: '@Url.Action("CreateHospital", "DefualtConfig")',
                         type: 'POST',
-                        data: { HospitalName: hospitalData },
+                        data: { HospitalName: hospitalData, HospitalAdress: hospitalAdress },
                         success: function (response) {
                             if (response.success) {
                                 Swal.fire(
@@ -237,6 +246,7 @@
             var hospitalData = {
                 HospitalID: $('#txtHospitalID').val(),
                 HospitalName: $('#txtHospitalName').val(),
+                HospitalAddress: $('#txtHospitalAddress').val()
             };
 
             Swal.fire({

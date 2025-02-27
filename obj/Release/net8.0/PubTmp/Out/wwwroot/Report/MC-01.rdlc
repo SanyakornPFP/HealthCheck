@@ -563,7 +563,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>........................................................ ให้ประตรา</Value>
+                    <Value>........................................................ ให้ประทับตรา</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -578,9 +578,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>23.88196cm</Top>
-            <Left>11.1456cm</Left>
+            <Left>10.11417cm</Left>
             <Height>0.84621cm</Height>
-            <Width>7.18884cm</Width>
+            <Width>8.29435cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>

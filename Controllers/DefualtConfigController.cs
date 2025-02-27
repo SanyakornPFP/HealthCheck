@@ -179,7 +179,7 @@ namespace HealthChecks.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateHospital(string HospitalName)
+        public async Task<IActionResult> CreateHospital(string HospitalName , string HospitalAddress)
         {
             if (!GetUserPermissions(int.Parse(User.GetLoggedInUserID())).Contains("CreateDefualtConfig"))
             {
@@ -193,6 +193,7 @@ namespace HealthChecks.Controllers
                 var newHospital = new Hospital
                 {
                     HospitalName = HospitalName,
+                    HospitalAddress = HospitalAddress,
                     IsActive = true
                 };
                 _db.Hospitals.Add(newHospital);
@@ -219,7 +220,7 @@ namespace HealthChecks.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateHospital(int HospitalID, string HospitalName)
+        public async Task<IActionResult> UpdateHospital(int HospitalID, string HospitalName, string HospitalAddress)
         {
             if (!GetUserPermissions(int.Parse(User.GetLoggedInUserID())).Contains("UpdateDefualtConfig"))
             {
@@ -235,6 +236,7 @@ namespace HealthChecks.Controllers
             else
             {
                 model.HospitalName = HospitalName;
+                model.HospitalAddress = HospitalAddress;
                 model.UpdateAt = DateTime.UtcNow;
                 await _db.SaveChangesAsync();
 

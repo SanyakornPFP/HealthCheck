@@ -23,9 +23,10 @@ namespace HealthCheks.Controllers
             _db = db;
         }
 
-        public IActionResult EmpList()
+        #region EmpList 
+        public IActionResult EmpList(string Search)
         {
-            ViewBag.EmpListData = _db.Employees.Where(e => e.IsActive)
+            var Model = _db.Employees.Where(e => e.IsActive)
                 .Select(e =>
                 new
                 {
@@ -37,12 +38,80 @@ namespace HealthCheks.Controllers
                 })
                 .OrderByDescending(s => s.EmpID)
                 .ToList();
+
+            if (!string.IsNullOrEmpty(Search))
+            {
+                Model = Model.Where(s => s.EmpName != null && s.EmpName.Contains(Search)).ToList();
+                ViewBag.Search = Search;
+            }
+
+            ViewBag.EmpListData = Model;
+
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CreateEmployee(string EmpName, string Wkaddress, string Btname)
+        {
+            var newEmp = new Employee
+            {
+                EmpName = EmpName,
+                Wkaddress = Wkaddress,
+                Btname = Btname,
+                CreatedAt = DateTime.Now,
+                IsActive = true
+            };
+            _db.Employees.Add(newEmp);
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Employee created successfully." });
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateEmployee(int EmpID, string EmpName, string Wkaddress, string Btname)
+        {
+            var existingEmp = _db.Employees.Where(e => e.EmpID == EmpID).FirstOrDefault();
+            if (existingEmp == null)
+            {
+                return Json(new { success = false, message = "Employee not found." });
+            }
+            existingEmp.EmpName = EmpName;
+            existingEmp.Wkaddress = Wkaddress;
+            existingEmp.Btname = Btname;
+            existingEmp.UpdatedAt = DateTime.Now;
+            _db.Employees.Update(existingEmp);
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Employee updated successfully." });
+        }
+
+        [HttpGet]
+        public JsonResult ModelGetEmployee(int EmpID)
+        {
+            var model = _db.Employees
+              .Where(e => e.EmpID == EmpID)
+              .Select(
+              p => new
+              {
+                  EmpID = p.EmpID,
+                  EmpName = p.EmpName,
+                  Wkaddress = p.Wkaddress,
+                  Btname = p.Btname
+              }
+              )
+            .ToList();
+            if (model == null)
+            {
+                return Json(new { success = false, message = "model not found." });
+            }
+            return Json(model);
+        }
+
+        #endregion EmpList 
 
         public IActionResult NameList(int EmpID)
         {
             ViewBag.EmpName = _db.Employees.Where(e => e.EmpID == EmpID).Select(e => e.EmpName).FirstOrDefault();
+            ViewBag.EmpID = EmpID;
             ViewBag.NameListData = _db.Alienlists
                 .Where(e => e.IsActive && e.EmpID == EmpID)
                 .Select(
@@ -60,7 +129,98 @@ namespace HealthCheks.Controllers
                 })
                 .OrderByDescending(p => p.Alcode)
               .ToList();
+
+            ViewBag.Alpo = _db.Alpos.Where(d => d.IsActive).ToList();
+            ViewBag.Alprefix = _db.Alprefixes.Where(d => d.IsActive).ToList();
+            ViewBag.Altype = _db.Altypes.Where(d => d.IsActive).ToList();
+            ViewBag.Alnation = _db.Alnations.Where(d => d.IsActive).ToList();
+            ViewBag.Algender = _db.Algenders.Where(d => d.IsActive).ToList();
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateAlien(int EmpID, string Alcode, string Alpassport, string Alnameen, string Alsnameen, string Albdate, string Alcity, string Alcountry, string Aladdress, string Alpo, string Alprefix, string Altype, string Alnation, string Algender)
+        {
+            var newAlien = new Alienlist
+            {
+                EmpID = EmpID,
+                Alcode = Alcode,
+                Alpassport = Alpassport,
+                Alnameen = Alnameen,
+                Alsnameen = Alsnameen,
+                Albdate = Albdate,
+                Alcity = Alcity,
+                Alcountry = Alcountry,
+                Aladdress = Aladdress,
+                AlposID = Alpo,
+                AlprefixID = Alprefix,
+                AltypeID = Altype,
+                AlnationID = Alnation,
+                AlgenderID = Algender,
+                CreatedAt = DateTime.Now,
+                IsActive = true
+            };
+            _db.Alienlists.Add(newAlien);
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Alien created successfully." });
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAlien(int EmpID, string Alcode, string Alpassport, string Alnameen, string Alsnameen, string Albdate, string Alcity, string Alcountry, string Aladdress, string Alpo, string Alprefix, string Altype, string Alnation, string Algender)
+        {
+            var existingAlien = _db.Alienlists.Where(a => a.EmpID == EmpID && a.Alcode == Alcode).FirstOrDefault();
+            if (existingAlien == null)
+            {
+                return Json(new { success = false, message = "Alien not found." });
+            }
+            existingAlien.Alpassport = Alpassport;
+            existingAlien.Alnameen = Alnameen;
+            existingAlien.Alsnameen = Alsnameen;
+            existingAlien.Albdate = Albdate;
+            existingAlien.Alcity = Alcity;
+            existingAlien.Alcountry = Alcountry;
+            existingAlien.Aladdress = Aladdress;
+            existingAlien.AlposID = Alpo;
+            existingAlien.AlprefixID = Alprefix;
+            existingAlien.AltypeID = Altype;
+            existingAlien.AlnationID = Alnation;
+            existingAlien.AlgenderID = Algender;
+            existingAlien.UpdatedAt = DateTime.Now;
+            _db.Alienlists.Update(existingAlien);
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Alien updated successfully." });
+        }
+
+        [HttpGet]
+        public JsonResult ModelGetAlien(string Alcode, int EmpID)
+        {
+            var model = _db.Alienlists
+                .Where(a => a.EmpID == EmpID && a.Alcode == Alcode)
+                .Select(
+                p => new
+                {
+                    Alcode = p.Alcode,
+                    Alpassport = p.Alpassport,
+                    Alnameen = p.Alnameen,
+                    Alsnameen = p.Alsnameen,
+                    Albdate = p.Albdate,
+                    Alcity = p.Alcity,
+                    Alcountry = p.Alcountry,
+                    Aladdress = p.Aladdress,
+                    Alpo = p.AlposID,
+                    Alprefix = p.AlprefixID,
+                    Altype = p.AltypeID,
+                    Alnation = p.AlnationID,
+                    Algender = p.AlgenderID
+                }
+                )
+                .ToList();
+            if (model == null || model.Count == 0)
+            {
+                return Json(new { success = false, message = "Alien not found." });
+            }
+            return Json(model);
         }
 
         public IActionResult HealthList(string searchString)

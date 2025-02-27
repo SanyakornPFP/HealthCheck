@@ -1,181 +1,375 @@
 ﻿@{
-	ViewData["Controller"] = "DataPerson";
-	ViewData["Action"] = "Employee";
-	ViewData["Icon"] = "building";
-	int countRow = 0;
-	string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+    ViewData["Controller"] = "DataPerson";
+    ViewData["Action"] = "Employee";
+    ViewData["Icon"] = "building";
+    int countRow = 0;
+    string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
 }
 @using ContainerEvaluationSystem.Helpers;
 @using HealthCheck.Models;
 
 <div class="page-body">
-	<!-- Container-fluid starts-->
-	<div class="container-fluid">
-		<div class="row" id="showInsert" style="display: none">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-header">
-						<a class="btn btn-light" id="createOff" href="#" style="float:right">ยกเลิก</a>
-						<h4><i class="fa fa-download"></i> โหลดข้อมูลจากกรมการจัดหางาน</h4>
-					</div>
-					<div class="card-body">
-						<div class="row g-3">
-							<div class="col-12">
-								<div class="card-wrapper border rounded-3 light-card checkbox-checked">
-									<form id="myForm" class="row g-3">
-										<div class="col-xxl-12 col-sm-12">
-											<label class="col-form-label" for="txtreqcode">เลขที่คำขอของกรมการจัดหางาน</label>
-											<input class="form-control" name="reqcode" id="txtreqcode" type="text" placeholder="กรุณากรอกข้อมูล">
-										</div>
-										<div class="col-xxl-12 col-sm-12">
-											<label class="col-form-label" for="txtAlcode">เลขที่อ้างอิงคนต่างด้าวของกรมการจัดหางาน</label>
-											<input class="form-control" name="alcode" id="txtalcode" type="text" placeholder="กรุณากรอกข้อมูล">
-										</div>
-										<div class="col-xxl-12 col-sm-12">
-											<button class="btn btn-pill btn-primary active" id="loadDataApiBtn" type="button">โหลดข้อมูล</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="card">
-					<div class="card-header pb-0 card-no-border">
-						<div class="d-flex justify-content-between align-items-center mb-3">
-							<div>
-								<h4><i class="fa fa-building"></i> ข้อมูลสถานประกอบการ</h4>
-								<a class="btn btn-primary mt-2" id="createOn" href="#"><i class="fa fa-download"></i> โหลดข้อมูลจากกรมการจัดหางาน</a>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="table-responsive theme-scrollbar">
-							<table class="display" id="data-source-1" style="width:100%">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>ชื่อนายจ้าง/ชื่อสถานประกอบการ</th>
-										<th>สถานที่ทำงาน</th>
-										<th>ประเภทกิจการ</th>
-										<th>จำนวนแรงงาน</th>
-										<th>รายชื่อ</th>
-									</tr>
-								</thead>
-								<tbody>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row" id="showInsert" style="display: none">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-light btn-pill" id="createOff" href="#" style="float:right">ยกเลิก</a>
+                        <h4><i class="fa fa-download"></i> โหลดข้อมูลจากกรมการจัดหางาน</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <form id="myForm" class="row g-3">
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <label class="col-form-label" for="txtreqcode">เลขที่คำขอของกรมการจัดหางาน</label>
+                                            <input class="form-control" name="reqcode" id="txtreqcode" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <label class="col-form-label" for="txtAlcode">เลขที่อ้างอิงคนต่างด้าวของกรมการจัดหางาน</label>
+                                            <input class="form-control" name="alcode" id="txtalcode" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="loadDataApiBtn" type="button">โหลดข้อมูล</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="createForm" style="display: none">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-light btn-pill" id="createOffForm" href="#" style="float:right">ยกเลิก</a>
+                        <h4><i class="fa fa-file-text"></i> แบบฟอร์มนายจ้าง / ชื่อสถานประกอบการ</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <form id="myFormNew" class="row g-3">
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <input type="hidden" id="txtEmpID" />
+                                            <label class="col-form-label" for="txtEmpName">ชื่อนายจ้าง / ชื่อสถานประกอบการ</label>
+                                            <input class="form-control" name="EmpName" id="txtEmpName" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <label class="col-form-label" for="txtBtname">ประเภทกิจการ</label>
+                                            <input class="form-control" name="Btname" id="txtBtname" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <label class="col-form-label" for="txtWkaddress">ที่อยู่ที่ทำงาน</label>
+                                            <input class="form-control" name="Wkaddress" id="txtWkaddress" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="saveBtn" type="button">บันทึก</button>
+                                            <button class="btn btn-pill btn-primary active" id="updateBtn" type="button" style="display:none">อัพเดท</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <h4 class="mb-0"><i class="fa fa-building"></i> ข้อมูลสถานประกอบการ</h4>
+                                <form asp-controller="HealthCheck" asp-action="EmpList" class="d-flex align-items-center">
+                                    <div class="input-group">
+                                        <input class="form-control" name="Search" id="txtSearch" type="text" style="width:350px" placeholder="กรุณากรอกข้อมูลชื่อนายจ้างสถานประกอบการ" value="@ViewBag.Search">
+                                        <button class="btn btn-primary active btn-pill" type="submit">ค้นหา</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="gap-2">
+                                <a class="btn btn-primary" id="createOn" href="#"><i class="fa fa-download"></i> โหลดข้อมูลจากกรมการจัดหางาน</a>
+                                <a class="btn btn-success" id="createOnForm" href="#"><i class="fa fa-plus"></i> เพิ่ม</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive theme-scrollbar">
+                            <table class="display table table-bordered" id="data-source-1" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>ชื่อนายจ้าง/ชื่อสถานประกอบการ</th>
+                                        <th>สถานที่ทำงาน</th>
+                                        <th>ประเภทกิจการ</th>
+                                        <th>จำนวนแรงงาน</th>
+                                        <th class="text-center">แก้ไข</th>
+                                        <th>รายชื่อ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-									@foreach (var item in ViewBag.EmpListData)
-									{
-										countRow++;
-										<tr>
-											<td>@countRow</td>
-											<td>@item.EmpName</td>
-											<td>@item.Wkaddress</td>
-											<td>@item.Btname</td>
-											<td>@item.CountAlien</td>
-											<td class="text-center">
-												<!-- ปุ่มที่เปิด Modal -->
-												<a asp-controller="HealthCheck" asp-action="NameList" asp-route-EmpID="@item.EmpID">
-													<i class="icofont icofont-list"></i>
-												</a>
-											</td>
-										</tr>
-									}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                    @foreach (var item in ViewBag.EmpListData)
+                                    {
+                                        countRow++;
+                                        <tr>
+                                            <td>@countRow</td>
+                                            <td>@item.EmpName</td>
+                                            <td>@item.Wkaddress</td>
+                                            <td>@item.Btname</td>
+                                            <td>@item.CountAlien</td>
+                                            <td class="text-center">
+                                                <a class="btn text-dark edit-employee" data-empid="@item.EmpID">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <!-- ปุ่มที่เปิด Modal -->
+                                                <a asp-controller="HealthCheck" asp-action="NameList" asp-route-EmpID="@item.EmpID">
+                                                    <i class="icofont icofont-list"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script>
-		$(document).ready(function () {
-			$('#loadDataApiBtn').click(function (e) {
-				e.preventDefault();
-				console.log("ปุ่มถูกคลิกแล้ว!");
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+             // Show the form when the "เพิ่ม" button is clicked
+            $('#createOnForm').on('click', function (e) {
+                e.preventDefault();
+                $('#createForm').show();
+            });
 
-				// ดึงข้อมูลจากฟอร์ม
-				var userData = {
-					reqcode: $('#txtreqcode').val(),
-					alcode: $('#txtalcode').val(),
-				};
+            // Hide the form when the "ยกเลิก" button is clicked
+            $('#createOffForm').on('click', function (e) {
+                e.preventDefault();
+                $('#myFormNew')[0].reset();
+                $('#createForm').hide();
+            });
 
-				Swal.fire({
-					title: 'คุณแน่ใจหรือไม่?',
-					text: "คุณจะไม่สามารถย้อนกลับได้!",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#28a745',
-					cancelButtonColor: '#d3d3d3',
-					confirmButtonText: 'ใช่, โหลดข้อมูล!',
-					cancelButtonText: 'ยกเลิก'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						// สร้าง query string จาก userData
-						// console.log(JSON.stringify(userData));
-						$.ajax({
-							url: '@(UrlDefault)/NameList/ForwardData',
-							type: 'POST',
-							contentType: 'application/json',
-							data: JSON.stringify(userData),
-							success: function (response) {
-								Swal.fire(
-									'สำเร็จ!',
-									'ข้อมูลของคุณถูกโหลดแล้ว.',
-									'success'
-								).then(() => {
-									console.log(response); // แสดงข้อมูลใน console
-									window.location.reload();
-								});
-							},
-							error: function (xhr) {
-								console.error('Error:', xhr.status, xhr.statusText, xhr.responseText);
-								Swal.fire({
-									title: 'ผิดพลาด',
-									text: `ไม่สามารถติดต่อเซิร์ฟเวอร์ได้: ${xhr.responseJSON.message}\nStatus Code: ${xhr.responseJSON.statusCode}\nReason: ${xhr.responseJSON.reasonPhrase}\nResponse: ${xhr.responseJSON.responseData}`,
-									icon: 'error'
-								});
-							}
-						});
-					}
-				});
-			});
-		});
+            // Handle form submission with confirmation
+            $('#saveBtn').on('click', function (e) {
+                e.preventDefault();
 
-		document.addEventListener('DOMContentLoaded', function () {
-			var showInsert = document.getElementById('showInsert');
-			var createOn = document.getElementById('createOn');
-			var createOff = document.getElementById('createOff');
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการบันทึกข้อมูลนี้หรือไม่?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ใช่, บันทึกเลย!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = {
+                            EmpName: $('#txtEmpName').val(),
+                            Btname: $('#txtBtname').val(),
+                            Wkaddress: $('#txtWkaddress').val()
+                        };
 
-			// Event listener for "เพิ่ม" button
-			createOn.addEventListener('click', function (e) {
-				e.preventDefault();
-				showInsert.style.display = 'block';  // Show the form
-			});
+                        $.ajax({
+                            url: '@Url.Action("CreateEmployee", "HealthCheck")', // เปลี่ยน "HealthCheck" ให้ตรงกับชื่อ Controller ของคุณ
+                            type: 'POST',
+                            data: formData,
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'บันทึกข้อมูลแล้ว!',
+                                        'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Error:', error);
+                                Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการบันทึกข้อมูล.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
 
-			// Event listener for "ยกเลิกเพิ่ม" button
-			createOff.addEventListener('click', function (e) {
-				e.preventDefault();
-				showInsert.style.display = 'none';  // Hide the form
-				// Reset the form fields
-				$('#myForm')[0].reset();
-				// Hide the DepartmentID field and update button
-				$('#updateBtn').hide();
-				// Show the create button and header
-				$('#createBtn').show();
-				// Hide the cancel button
-				$('#cancelBtn').hide();
-			});
-		});
-	</script>
+            // Handle form submission with confirmation for updating employee
+            $('#updateBtn').on('click', function (e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการอัปเดตข้อมูลนี้หรือไม่?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ใช่, อัปเดตเลย!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = {
+                            EmpID: $('#txtEmpID').val(),
+                            EmpName: $('#txtEmpName').val(),
+                            Btname: $('#txtBtname').val(),
+                            Wkaddress: $('#txtWkaddress').val()
+                        };
+
+                        $.ajax({
+                            url: '@Url.Action("UpdateEmployee", "HealthCheck")', // เปลี่ยน "HealthCheck" ให้ตรงกับชื่อ Controller ของคุณ
+                            type: 'POST',
+                            data: formData,
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'อัปเดตข้อมูลแล้ว!',
+                                        'ข้อมูลของคุณถูกอัปเดตแล้ว.',
+                                        'success'
+                                    ).then(() => {
+                                       window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Error:', error);
+                                Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการอัปเดตข้อมูล.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Function to load employee data into the form for editing
+                function loadEmployeeData(empID) {
+                    $.ajax({
+                        url: '@Url.Action("ModelGetEmployee", "HealthCheck")', // เปลี่ยน "HealthCheck" ให้ตรงกับชื่อ Controller ของคุณ
+                        type: 'GET',
+                        data: { EmpID: empID },
+                        success: function (response) {
+                            if (response && response.length > 0) {
+                                var emp = response[0];
+                                $('#txtEmpID').val(emp.empID);
+                                $('#txtEmpName').val(emp.empName);
+                                $('#txtBtname').val(emp.btname);
+                                $('#txtWkaddress').val(emp.wkaddress);
+                                $('#saveBtn').hide();
+                                $('#updateBtn').show();
+                                $('#createForm').show();
+                            } else {
+                                Swal.fire('ผิดพลาด', 'ไม่พบข้อมูลพนักงาน', 'error');
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Error:', error);
+                            Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการโหลดข้อมูลพนักงาน.', 'error');
+                        }
+                    });
+                }
+
+                // Bind click event to edit buttons
+                $(document).on('click', '.edit-employee', function (e) {
+                    e.preventDefault();
+                    var empID = $(this).data('empid');
+                    loadEmployeeData(empID);
+                });
+
+
+            $('#loadDataApiBtn').click(function (e) {
+                e.preventDefault();
+                console.log("ปุ่มถูกคลิกแล้ว!");
+
+                // ดึงข้อมูลจากฟอร์ม
+                var userData = {
+                    reqcode: $('#txtreqcode').val(),
+                    alcode: $('#txtalcode').val(),
+                };
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณจะไม่สามารถย้อนกลับได้!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d3d3d3',
+                    confirmButtonText: 'ใช่, โหลดข้อมูล!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // สร้าง query string จาก userData
+                        // console.log(JSON.stringify(userData));
+                        $.ajax({
+                            url: '@(UrlDefault)/NameList/ForwardData',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(userData),
+                            success: function (response) {
+                                Swal.fire(
+                                    'สำเร็จ!',
+                                    'ข้อมูลของคุณถูกโหลดแล้ว.',
+                                    'success'
+                                ).then(() => {
+                                   window.location.reload();
+                                });
+                            },
+                            error: function (xhr) {
+                                console.error('Error:', xhr.status, xhr.statusText, xhr.responseText);
+                                Swal.fire({
+                                    title: 'ผิดพลาด',
+                                    text: `ไม่สามารถติดต่อเซิร์ฟเวอร์ได้: ${xhr.responseJSON.message}\nStatus Code: ${xhr.responseJSON.statusCode}\nReason: ${xhr.responseJSON.reasonPhrase}\nResponse: ${xhr.responseJSON.responseData}`,
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var showInsert = document.getElementById('showInsert');
+            var createOn = document.getElementById('createOn');
+            var createOff = document.getElementById('createOff');
+
+            // Event listener for "เพิ่ม" button
+            createOn.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'block';  // Show the form
+            });
+
+            // Event listener for "ยกเลิกเพิ่ม" button
+            createOff.addEventListener('click', function (e) {
+                e.preventDefault();
+                showInsert.style.display = 'none';  // Hide the form
+                // Reset the form fields
+                $('#myForm')[0].reset();
+                // Hide the DepartmentID field and update button
+                $('#updateBtn').hide();
+                // Show the create button and header
+                $('#createBtn').show();
+                // Hide the cancel button
+                $('#cancelBtn').hide();
+            });
+
+
+        });
+    </script>
 }

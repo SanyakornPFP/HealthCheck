@@ -11,23 +11,129 @@
 <div class="page-body">
     <!-- Container-fluid starts-->
     <div class="container-fluid">
+        <div class="row" id="createForm" style="display: none">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="btn btn-light btn-pill" id="createOffForm" href="#" style="float:right">ยกเลิก</a>
+                        <h4><i class="fa fa-file-text"></i> แบบฟอร์มแรงงานต่างด้าว</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card-wrapper border rounded-3 light-card checkbox-checked">
+                                    <form id="myFormNew" class="row g-3">
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <input type="hidden" name="EmpID" id="txtEmpID" value="@ViewBag.EmpID" />
+                                            <label class="col-form-label" for="txtReqcode">เลขบัตรประจำตัว</label>
+                                            <input class="form-control" name="Alcode" id="txtAlcode" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtAlpassport">เลขที่พาสปอร์ต</label>
+                                            <input class="form-control" name="Alpassport" id="txtAlpassport" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-4 col-sm-4">
+                                            <label class="col-form-label" for="ddlAlprefix">คำนำหน้า</label>
+                                            <select class="form-control select2-In" name="Alprefix" id="ddlAlprefix">
+                                                @foreach (var item in ViewBag.Alprefix)
+                                                {
+                                                    <option value="@item.AlprefixID">@item.AlprefixName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-4 col-sm-4">
+                                            <label class="col-form-label" for="txtAlnameen">ชื่อ</label>
+                                            <input class="form-control" name="Alnameen" id="txtAlnameen" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-4 col-sm-4">
+                                            <label class="col-form-label" for="txtAlsnameen">นามสกุล</label>
+                                            <input class="form-control" name="Alsnameen" id="txtAlsnameen" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <label class="col-form-label" for="txtAlbdate">วันเกิด </label>
+                                            <input class="form-control" name="Albdate" id="txtAlbdate" type="text" placeholder="กรุณากรอกข้อมูลรูปแบบนี้ 10-03-1993">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddlAlpo">ตำแหน่ง</label>
+                                            <select class="form-control select2-In" name="Alpo" id="ddlAlpo">
+                                                @foreach (var item in ViewBag.Alpo)
+                                                {
+                                                    <option value="@item.AlposID">@item.AlposName</option>
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddlAltype">ประเภท</label>
+                                            <select class="form-control select2-In" name="Altype" id="ddlAltype">
+                                                @foreach (var item in ViewBag.Altype)
+                                                {
+                                                    <option value="@item.AltypeID">@item.AltypeName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddlAlnation">สัญชาติ</label>
+                                            <select class="form-control select2-In" name="Alnation" id="ddlAlnation">
+                                                @foreach (var item in ViewBag.Alnation)
+                                                {
+                                                    <option value="@item.AlnationID">@item.AlnationName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="ddlAlgender">เพศ</label>
+                                            <select class="form-control select2-In" name="Algender" id="ddlAlgender">
+                                                @foreach (var item in ViewBag.Algender)
+                                                {
+                                                    <option value="@item.AlgenderID">@item.AlgenderName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtAlcity">เมือง</label>
+                                            <input class="form-control" name="Alcity" id="txtAlcity" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-6 col-sm-6">
+                                            <label class="col-form-label" for="txtAlcountry">ประเทศ</label>
+                                            <input class="form-control" name="Alcountry" id="txtAlcountry" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <label class="col-form-label" for="txtAladdress">ที่อยู่</label>
+                                            <input class="form-control" name="Aladdress" id="txtAladdress" type="text" placeholder="กรุณากรอกข้อมูล">
+                                        </div>
+                                        <div class="col-xxl-12 col-sm-12">
+                                            <button class="btn btn-pill btn-primary active" id="saveBtn" type="button">บันทึก</button>
+                                            <button class="btn btn-pill btn-primary active" id="updateBtn" type="button" style="display:none">อัพเดท</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0 card-no-border">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div>
-                                <h4>
-                                    <i class="fa fa-address-card-o"></i> ข้อมูลแรงงาน
-                                    <a asp-controller="HealthCheck" asp-action="EmpList" class="btn btn-light btm-sm"><i class="fa fa-caret-left"></i> ย้อนกลับ</a>
+                                <h4 class="mb-0">
+                                    <i class="fa fa-address-card-o"></i> ข้อมูลแรงงานต่างด้าว
                                 </h4>
-                                <p class="mt-2">ชื่อนายจ้าง/สถานประกอบการ : @ViewBag.EmpName</p>
+                                <p class="mt-2"><span class="badge badge-primary" style="font-size:1rem">ชื่อนายจ้าง/สถานประกอบการ : @ViewBag.EmpName</span></p>
+                            </div>
+                            <div class="gap-2">
+                                <a asp-controller="HealthCheck" asp-action="EmpList" class="btn btn-light btm-sm"><i class="fa fa-caret-left"></i> ย้อนกลับ</a>
+                                <a class="btn btn-success" id="createOnForm" href="#"><i class="fa fa-plus"></i> เพิ่ม</a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive theme-scrollbar">
-                            <table class="display" id="data-source-1" style="width:100%">
+                            <table class="display table table-bordered" id="data-source-1" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -40,6 +146,7 @@
                                         <th>สัญชาติ</th>
                                         <th>ประเภทอาชีพ</th>
                                         <th>ประเภทคนต่างด้าว</th>
+                                        <th class="text-center">แก้ไข</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,6 +164,11 @@
                                             <td>@item.AlnationName</td>
                                             <td>@item.AlposName</td>
                                             <td>@item.AltypeName</td>
+                                            <td class="text-center">
+                                                <a class="btn text-dark edit-alien" data-alcode="@item.Alcode" data-empid="@ViewBag.EmpID">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -69,3 +181,184 @@
     </div>
 </div>
 
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            // Show the form when the "เพิ่ม" button is clicked
+            $('#createOnForm').on('click', function (e) {
+                e.preventDefault();
+                $('#createForm').show();
+                $('#saveBtn').show();
+                $('#updateBtn').hide();
+                $('#myFormNew')[0].reset();
+            });
+
+            // Hide the form when the "ยกเลิก" button is clicked
+            $('#createOffForm').on('click', function (e) {
+                e.preventDefault();
+                $('#myFormNew')[0].reset();
+                $('#createForm').hide();
+            });
+
+            // Handle form submission with confirmation for creating new alien
+            $('#saveBtn').on('click', function (e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการบันทึกข้อมูลนี้หรือไม่?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ใช่, บันทึกเลย!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = {
+                            EmpID: $('#txtEmpID').val(),
+                            Alcode: $('#txtAlcode').val(),
+                            Alpassport: $('#txtAlpassport').val(),
+                            Alnameen: $('#txtAlnameen').val(),
+                            Alsnameen: $('#txtAlsnameen').val(),
+                            Albdate: $('#txtAlbdate').val(),
+                            Alcity: $('#txtAlcity').val(),
+                            Alcountry: $('#txtAlcountry').val(),
+                            Aladdress: $('#txtAladdress').val(),
+                            Alpo: $('#ddlAlpo').val(),
+                            Alprefix: $('#ddlAlprefix').val(),
+                            Altype: $('#ddlAltype').val(),
+                            Alnation: $('#ddlAlnation').val(),
+                            Algender: $('#ddlAlgender').val()
+                        };
+
+                        $.ajax({
+                            url: '@Url.Action("CreateAlien", "HealthCheck")', // เปลี่ยน "HealthCheck" ให้ตรงกับชื่อ Controller ของคุณ
+                            type: 'POST',
+                            data: formData,
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'บันทึกข้อมูลแล้ว!',
+                                        'ข้อมูลของคุณถูกบันทึกแล้ว.',
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Error:', error);
+                                Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการบันทึกข้อมูล.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Handle form submission with confirmation for updating alien
+            $('#updateBtn').on('click', function (e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'คุณแน่ใจหรือไม่?',
+                    text: "คุณต้องการอัปเดตข้อมูลนี้หรือไม่?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ใช่, อัปเดตเลย!',
+                    cancelButtonText: 'ยกเลิก'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = {
+                            EmpID: $('#txtEmpID').val(),
+                            Alcode: $('#txtAlcode').val(),
+                            Alpassport: $('#txtAlpassport').val(),
+                            Alnameen: $('#txtAlnameen').val(),
+                            Alsnameen: $('#txtAlsnameen').val(),
+                            Albdate: $('#txtAlbdate').val(),
+                            Alcity: $('#txtAlcity').val(),
+                            Alcountry: $('#txtAlcountry').val(),
+                            Aladdress: $('#txtAladdress').val(),
+                            Alpo: $('#ddlAlpo').val(),
+                            Alprefix: $('#ddlAlprefix').val(),
+                            Altype: $('#ddlAltype').val(),
+                            Alnation: $('#ddlAlnation').val(),
+                            Algender: $('#ddlAlgender').val()
+                        };
+
+                        $.ajax({
+                            url: '@Url.Action("UpdateAlien", "HealthCheck")', // เปลี่ยน "HealthCheck" ให้ตรงกับชื่อ Controller ของคุณ
+                            type: 'POST',
+                            data: formData,
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'อัปเดตข้อมูลแล้ว!',
+                                        'ข้อมูลของคุณถูกอัปเดตแล้ว.',
+                                        'success'
+                                    ).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire('ผิดพลาด', response.message, 'error');
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Error:', error);
+                                Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการอัปเดตข้อมูล.', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Function to load alien data into the form for editing
+            function loadAlienData(alcode, empid) {
+                $.ajax({
+                    url: '@Url.Action("ModelGetAlien", "HealthCheck")', // เปลี่ยน "HealthCheck" ให้ตรงกับชื่อ Controller ของคุณ
+                    type: 'GET',
+                    data: { Alcode: alcode , EmpID: empid },
+                    success: function (response) {
+                        if (response && response.length > 0) {
+                            var alien = response[0];
+                            $('#txtAlcode').val(alien.alcode);
+                            $('#txtAlpassport').val(alien.alpassport);
+                            $('#txtAlnameen').val(alien.alnameen);
+                            $('#txtAlsnameen').val(alien.alsnameen);
+                            $('#txtAlbdate').val(alien.albdate);
+                            $('#txtAlcity').val(alien.alcity);
+                            $('#txtAlcountry').val(alien.alcountry);
+                            $('#txtAladdress').val(alien.aladdress);
+                            $('#ddlAlpo').val(alien.alpo).trigger('change');
+                            $('#ddlAlprefix').val(alien.alprefix).trigger('change');
+                            $('#ddlAltype').val(alien.altype).trigger('change');
+                            $('#ddlAlnation').val(alien.alnation).trigger('change');
+                            $('#ddlAlgender').val(alien.algender).trigger('change');
+                            $('#saveBtn').hide();
+                            $('#updateBtn').show();
+                            $('#createForm').show();
+                        } else {
+                            Swal.fire('ผิดพลาด', 'ไม่พบข้อมูลคนต่างด้าว', 'error');
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                        Swal.fire('ผิดพลาด', 'เกิดข้อผิดพลาดในการโหลดข้อมูลคนต่างด้าว.', 'error');
+                    }
+                });
+            }
+
+            // Bind click event to edit buttons
+            $(document).on('click', '.edit-alien', function (e) {
+                e.preventDefault();
+                var alcode = $(this).data('alcode');
+                var empid = $(this).data('empid');
+                loadAlienData(alcode, empid);
+            });
+        });
+    </script>
+}

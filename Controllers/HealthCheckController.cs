@@ -639,7 +639,7 @@ namespace HealthCheks.Controllers
                 alchkstatus = healthcheck.AlchkstatusID,
                 alchkdate = healthcheck.Alchkdate,
                 alchkprovid = healthcheck.Alchkprovid,
-                licenseno = healthcheck.Licenseno,
+                licenseno = "ว." + healthcheck.Licenseno,
                 chkname = healthcheck.Chkname,
                 chkposition = healthcheck.Chkposition,
                 alchkdesc = healthcheck.Alchkdesc,

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HealthChecks")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57454adcc14cb862de59518765062c2bdfb1ee20")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fb45019ff3cf7146aa3f8d40a7f2b5c81a197f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("HealthChecks")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HealthChecks")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

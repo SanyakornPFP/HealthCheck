@@ -1,11 +1,6 @@
-﻿using Azure.Core;
-using HealthCheck.Data;
-using HealthCheck.Models;
+﻿using HealthCheck.Data;
 using HealthChecks.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using System.ComponentModel;
-using System.Reflection.Emit;
 
 namespace HealthChecks.Controllers
 {
@@ -60,7 +55,7 @@ namespace HealthChecks.Controllers
                     alchkstatus = h.AlchkstatusID,
                     alchkdate = h.Alchkdate,
                     alchkprovid = h.Alchkprovid,
-                    licenseno = h.Licenseno,
+                    licenseno = "ว." + h.Licenseno,
                     chkname = h.Chkname,
                     chkposition = h.Chkposition,
                     alchkdesc = h.Alchkdesc,

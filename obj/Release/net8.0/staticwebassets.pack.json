@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "D:\\Project\\Project\\2024\\HealthCheck\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\HealthChecks.bundle.scp.css",
-      "PackagePath": "staticwebassets\\HealthChecks.bundle.scp.css"
+      "PackagePath": "staticwebassets\\HealthChecks.ndgz3ojff8.bundle.scp.css"
     },
     {
       "Id": "D:\\Project\\Project\\2024\\HealthCheck\\wwwroot\\Profile\\defaultUser.png",
@@ -9107,6 +9107,10 @@
     {
       "Id": "D:\\Project\\Project\\2024\\HealthCheck\\wwwroot\\qr-code.png",
       "PackagePath": "staticwebassets\\qr-code.png"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.HealthChecks.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.HealthChecks.Microsoft.AspNetCore.StaticWebAssets.props",

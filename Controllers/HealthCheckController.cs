@@ -276,6 +276,8 @@ namespace HealthCheks.Controllers
             .ToList();
             }
 
+            ViewBag.Search = searchString;
+
             return View();
         }
 
@@ -784,9 +786,11 @@ namespace HealthCheks.Controllers
                 })
             .FirstOrDefault();
 
+
+            string qrCodeDoc = "uploads/healthDoc/" + "HC" + DateTime.ParseExact(model.Alchkdate, "dd-MM-yyyy", null).ToString("yyyyMMdd") + model.Alcode + ".pdf";
             string HospitalAddress = _db.Hospitals.Where(h => h.HospitalName == model.Hospital).Select(h => h.HospitalAddress).FirstOrDefault();
             string hostname = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-            string qrCodeUrl = $"{hostname}/{model.Alchkdoc}";
+            string qrCodeUrl = $"{hostname}/{qrCodeDoc}";
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrCodeUrl, QRCodeGenerator.ECCLevel.Q);
 

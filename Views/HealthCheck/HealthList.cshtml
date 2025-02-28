@@ -27,7 +27,7 @@
 						<div class="table-responsive theme-scrollbar">
 							<form class="d-flex" asp-action="HealthList" asp-controller="HealthCheck" method="get">
 								<div class="input-group">
-									<input type="text" class="form-control m-2" name="searchString" placeholder="กรอกเลขประจำตัว">
+									<input type="text" class="form-control m-2" name="searchString" placeholder="กรอกเลขประจำตัว" value="@ViewBag.Search">
 									<div class="input-group-append">
 										<button class="btn btn-outline-secondary m-2" type="submit">
 											<i class="fa fa-search"></i>

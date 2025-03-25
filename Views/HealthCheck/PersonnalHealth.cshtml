@@ -461,7 +461,7 @@
             });
 
 
-               $('#myFormFile').on('submit', function (e) {
+            $('#myFormFile').on('submit', function (e) {
                    e.preventDefault();
 
                    Swal.fire({
@@ -474,6 +474,15 @@
                        cancelButtonText: 'ยกเลิก'
                    }).then((result) => {
                        if (result.isConfirmed) {
+
+                           var fileInput = $('#txtAlchkdoc')[0];
+                           var file = fileInput.files[0];
+
+                           if (file && file.type !== 'application/pdf') {
+                               Swal.fire('ผิดพลาด', 'กรุณาอัพโหลดไฟล์ PDF เท่านั้น.', 'error');
+                               return;
+                           }
+
                            var formData = new FormData(this);
                            formData.append('HealthID', $('#ddHealthID').val());
                            formData.append('AlchkstatusID', $('#ddlAlchkstatusID').val());

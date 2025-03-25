@@ -256,24 +256,25 @@ namespace HealthCheks.Controllers
             else
             {
                 ViewBag.NameListData = _db.Alienlists
-              .Where(e => e.IsActive && e.Alcode.Contains(searchString))
-              .Select(
-              p => new
-              {
-                  EmpID = p.EmpID,
-                  Alcode = p.Alcode,
-                  AlprefixName = p.Alprefix.AlprefixName,
-                  AltypeName = p.Altype.AltypeName,
-                  Alnameen = p.Alnameen,
-                  Alsnameen = p.Alsnameen,
-                  Albdate = p.Albdate,
-                  AlgenderName = p.Algender.AlgenderName,
-                  AlnationName = p.Alnation.AlnationName,
-                  AlposName = p.Alpo.AlposName,
-                  ResultHealth = _db.Healthchecks.Where(h => h.Alcode == p.Alcode).FirstOrDefault() == null ? 0 : 1
+                .Where(e => e.IsActive && e.Alcode.Contains(searchString))
+                .Select(
+                p => new
+                {
+                    EmpID = p.EmpID,
+                    Alcode = p.Alcode,
+                    AlprefixName = p.Alprefix.AlprefixName,
+                    AltypeName = p.Altype.AltypeName,
+                    Alnameen = p.Alnameen,
+                    Alsnameen = p.Alsnameen,
+                    Albdate = p.Albdate,
+                    AlgenderName = p.Algender.AlgenderName,
+                    AlnationName = p.Alnation.AlnationName,
+                    AlposName = p.Alpo.AlposName,
+                    ResultHealth = _db.Healthchecks.Where(h => h.Alcode == p.Alcode).FirstOrDefault() == null ? 0 : 1,
+                    CreatedAt = p.CreatedAt
 
-              })
-            .ToList();
+                })
+              .ToList();
             }
 
             ViewBag.Search = searchString;

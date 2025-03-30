@@ -14,20 +14,32 @@ namespace HealthChecks.Controllers
             _db = db;
         }
 
-        public IActionResult HistoryHealthPage()
+        public IActionResult HistoryHealthPage(DateTime? startDate, DateTime? endDate)
         {
-            var HistoryHealthCheck = _db.HistoryHealths
-         .AsEnumerable() // แปลงเป็น IEnumerable เพื่อใช้ LINQ to Objects
-         .Where(s => DateTime.TryParseExact(s.Alchkdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out _)) // กรองเฉพาะข้อมูลที่สามารถแปลงเป็น DateTime ได้
-         .GroupBy(p => p.Alchkdate) // Group by the date part of Alchkdate
-         .Select(g => new
-         {
-             Alchkdate = g.Key, // Grouped date in string format
-             TotalCount = g.Count() // Count of HistoryHealthID in the same date
-         }).ToList();
+            var query = _db.HistoryHealths.AsEnumerable();
+
+            // Filter by startDate and endDate if provided
+            if (startDate.HasValue)
+            {
+                query = query.Where(s => DateTime.TryParseExact(s.Alchkdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime date) && date >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(s => DateTime.TryParseExact(s.Alchkdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime date) && date <= endDate.Value);
+            }
+
+            var HistoryHealthCheck = query
+                .Where(s => DateTime.TryParseExact(s.Alchkdate, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out _)) // Ensure valid date format
+                .GroupBy(p => p.Alchkdate) // Group by the date part of Alchkdate
+                .Select(g => new
+                {
+                    Alchkdate = g.Key, // Grouped date in string format
+                    TotalCount = g.Count() // Count of HistoryHealthID in the same date
+                }).ToList();
 
             ViewBag.HistoryHealthCheck = HistoryHealthCheck
-                .OrderByDescending(s => DateTime.ParseExact(s.Alchkdate, "dd-MM-yyyy", null)) // แปลง Alchkdate เป็น DateTime และเรียงลำดับ
+                .OrderByDescending(s => DateTime.ParseExact(s.Alchkdate, "dd-MM-yyyy", null)) // Sort by date
                 .ToList();
 
             return View();

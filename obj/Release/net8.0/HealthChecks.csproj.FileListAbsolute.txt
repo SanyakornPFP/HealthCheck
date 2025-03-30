@@ -766,7 +766,3 @@ D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\zh-Hans\System.ServiceMod
 D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\zh-Hant\System.ServiceModel.Primitives.resources.dll
 D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
-D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\HealthChecks.staticwebassets.endpoints.json
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.build.endpoints.json
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets\msbuild.HealthChecks.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.upToDateCheck.txt

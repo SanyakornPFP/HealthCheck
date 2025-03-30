@@ -224,7 +224,7 @@
                                     <a class="sidebar-link sidebar-title link-nav  @(SureActive.StartsWith("/Home") ? "active bg-primary text-white custom-rounded" : "")" asp-controller="Home" asp-action="Dashboard">
                                         <i style="padding-left: 4px" class="stroke-icon fa fa-bar-chart-o text-white"></i>
                                         <i style="padding-left: 4px" class="fill-icon fa fa-bar-chart-o text-white"></i>
-                                        <span style="padding-left: 10px">ภาพรวมระบบ</span>
+                                        <span style="padding-left: 10px"> ภาพรวมระบบ</span>
                                     </a>
                                 </li>
                                 @if (User.GetLoggedPermissionViewAlienlist() == "True")
@@ -233,7 +233,7 @@
                                         <a class="sidebar-link sidebar-title link-nav  @(SureActive.StartsWith("/HealthCheck/EmpList") || SureActive.StartsWith("/HealthCheck/NameList") ? "active bg-primary text-white custom-rounded" : "")" asp-controller="HealthCheck" asp-action="EmpList">
                                             <i style="padding-left: 4px" class="stroke-icon fa fa-user text-white"></i>
                                             <i style="padding-left: 4px" class="fill-icon fa fa-user text-white"></i>
-                                            <span style="padding-left: 10px">รายชื่อแรงงานต่างด้าว</span>
+                                            <span style="padding-left: 10px"> รายชื่อแรงงานต่างด้าว</span>
                                         </a>
                                     </li>
                                 }
@@ -271,7 +271,7 @@
                                             {
                                                 <li>
                                                     <a asp-controller="LogSystem" asp-action="Logs">
-                                                        ประวัติการจัดการาข้อมูล
+                                                        ประวัติการจัดการข้อมูล
                                                     </a>
                                                 </li>
                                             }

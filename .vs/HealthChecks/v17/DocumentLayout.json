@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "D:\\Project\\Project\\2024\\HealthCheck\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\views\\healthcheck\\healthlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:views\\healthcheck\\healthlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\views\\healthcheck\\personnalhealth.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:views\\healthcheck\\personnalhealth.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\controllers\\healthcheckcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:controllers\\healthcheckcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\views\\historyhealth\\historyhealthpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:views\\historyhealth\\historyhealthpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\controllers\\historyhealthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,10 +30,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
@@ -54,71 +38,36 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PersonnalHealth.cshtml",
-              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HealthCheck\\PersonnalHealth.cshtml",
-              "RelativeDocumentMoniker": "Views\\HealthCheck\\PersonnalHealth.cshtml",
-              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HealthCheck\\PersonnalHealth.cshtml",
-              "RelativeToolTip": "Views\\HealthCheck\\PersonnalHealth.cshtml",
-              "ViewState": "AgIAANEBAAAAAAAAAAAAAOUBAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T06:34:59.673Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HealthList.cshtml",
-              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HealthCheck\\HealthList.cshtml",
-              "RelativeDocumentMoniker": "Views\\HealthCheck\\HealthList.cshtml",
-              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HealthCheck\\HealthList.cshtml",
-              "RelativeToolTip": "Views\\HealthCheck\\HealthList.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-25T06:34:56.299Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HealthCheckController.cs",
-              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\Controllers\\HealthCheckController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HealthCheckController.cs",
-              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\Controllers\\HealthCheckController.cs",
-              "RelativeToolTip": "Controllers\\HealthCheckController.cs",
-              "ViewState": "AgIAAGUBAAAAAAAAAAAAwBEBAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T06:26:18.995Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "HistoryHealthController.cs",
               "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\Controllers\\HistoryHealthController.cs",
               "RelativeDocumentMoniker": "Controllers\\HistoryHealthController.cs",
               "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\Controllers\\HistoryHealthController.cs",
               "RelativeToolTip": "Controllers\\HistoryHealthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABAAAAAAAAAAA==",
+              "ViewState": "AQIAACcAAAAAAAAAAAAUwC0AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T06:41:26.643Z",
+              "WhenOpened": "2025-03-30T01:47:05.098Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-01T03:08:34.148Z",
+              "DocumentIndex": 0,
+              "Title": "HistoryHealthPage.cshtml",
+              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HistoryHealth\\HistoryHealthPage.cshtml",
+              "RelativeDocumentMoniker": "Views\\HistoryHealth\\HistoryHealthPage.cshtml",
+              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HistoryHealth\\HistoryHealthPage.cshtml",
+              "RelativeToolTip": "Views\\HistoryHealth\\HistoryHealthPage.cshtml",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACMAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-29T16:38:08.296Z",
               "EditorCaption": ""
             }
           ]

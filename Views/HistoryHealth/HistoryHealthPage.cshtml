@@ -1,62 +1,85 @@
 ﻿@{
-	ViewData["Controller"] = "History";
-	ViewData["Action"] = "HealthCheck";
-	ViewData["Icon"] = "file-text";
-	string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
-	int countRow = 0;
+    ViewData["Controller"] = "History";
+    ViewData["Action"] = "HealthCheck";
+    ViewData["Icon"] = "file-text";
+    string UrlDefault = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+    int countRow = 0;
+    int total = 0;
 }
 @using ContainerEvaluationSystem.Helpers;
 @using HealthCheck.Models;
 
 <div class="page-body">
-	<!-- Container-fluid starts-->
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="card">
-					<div class="card-header pb-0 card-no-border">
-						<div class="d-flex justify-content-between align-items-center mb-3">
-							<div>
-								<h4>
-									<i class="fa fa-file-text"></i> ข้อมูลประวัติการส่งข้อมูลผลตรวจสุขภาพ
-								</h4>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="table-responsive theme-scrollbar">
-							<table class="display table table-bordered" id="data-source-1" style="width:100%">
-								<thead>
-									<tr>
-										<th class="text-center">#</th>
-										<th class="text-center">วันที่ตรวจสุขภาพ</th>
-										<th class="text-center">จำนวนการอัปโหลดข้อมูล</th>
-										<th class="text-center">รายละเอียด</th>
-									</tr>
-								</thead>
-								<tbody>
-									@foreach (var item in ViewBag.HistoryHealthCheck)
-									{
-										countRow++;
-										<tr>
-											<td class="text-center">@countRow</td>
-											<td class="text-center">@item.Alchkdate</td>
-											<td class="text-center">@item.TotalCount</td>
-											<td class="text-center">
-												<!-- ปุ่มที่เปิด Modal -->
-												<a asp-controller="HistoryHealth" asp-action="HistoryDetail" asp-route-Alchkdate="@item.Alchkdate">
-													<i class="icofont icofont-list"></i>
-												</a>
-											</td>
-										</tr>
-									}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0 card-no-border">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4>
+                                    <i class="fa fa-file-text"></i> ข้อมูลประวัติการส่งข้อมูลผลตรวจสุขภาพ
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Form with full width -->
+                        <form class="d-flex align-items-end w-100" asp-controller="HistoryHealth" asp-action="HistoryHealthPage" method="GET">
+                            <div class="form-group me-2 flex-grow-1">
+                                <label for="startDate">วันที่เริ่มต้น:</label>
+                                <input type="date" id="startDate" name="startDate" class="form-control"
+                                       value="@ViewContext.HttpContext.Request.Query["startDate"]">
+                            </div>
+                            <div class="form-group me-2 flex-grow-1">
+                                <label for="endDate">วันที่สิ้นสุด:</label>
+                                <input type="date" id="endDate" name="endDate" class="form-control"
+                                       value="@ViewContext.HttpContext.Request.Query["endDate"]">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+
+                        <div class="table-responsive theme-scrollbar mt-2">
+                            <table class="display table table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">วันที่ตรวจสุขภาพ</th>
+                                        <th class="text-center">จำนวนการอัปโหลดข้อมูล</th>
+                                        <th class="text-center">รายละเอียด</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.HistoryHealthCheck)
+                                    {
+                                        countRow++;
+                                        total = total + item.TotalCount;
+                                        <tr>
+                                            <td class="text-center">@countRow</td>
+                                            <td class="text-center">@item.Alchkdate</td>
+                                            <td class="text-center">@item.TotalCount</td>
+                                            <td class="text-center">
+                                                <!-- ปุ่มที่เปิด Modal -->
+                                                <a asp-controller="HistoryHealth" asp-action="HistoryDetail" asp-route-Alchkdate="@item.Alchkdate">
+                                                    <i class="icofont icofont-list"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td class="text-center" colspan="2">รวมทั้งหมด</td>
+                                        <td class="text-center">@total</td>
+                                        <td class="text-center">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

@@ -699,11 +699,6 @@ D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\scopedcss\bundle\HealthCh
 D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\scopedcss\projectbundle\HealthChecks.bundle.scp.css
 D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.build.json
 D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.development.json
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets\msbuild.HealthChecks.Microsoft.AspNetCore.StaticWebAssets.props
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets\msbuild.build.HealthChecks.props
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets\msbuild.buildMultiTargeting.HealthChecks.props
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets\msbuild.buildTransitive.HealthChecks.props
-D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.pack.json
 D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\HealthCh.F57B60A3.Up2Date
 D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\HealthChecks.dll
 D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\refint\HealthChecks.dll
@@ -766,3 +761,7 @@ D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\zh-Hans\System.ServiceMod
 D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\zh-Hant\System.ServiceModel.Primitives.resources.dll
 D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\Project\Project\2024\HealthCheck\bin\Release\net8.0\HealthChecks.staticwebassets.endpoints.json
+D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.build.json.cache
+D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.build.endpoints.json
+D:\Project\Project\2024\HealthCheck\obj\Release\net8.0\staticwebassets.upToDateCheck.txt

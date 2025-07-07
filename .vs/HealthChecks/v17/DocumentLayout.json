@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "D:\\Project\\Project\\2024\\HealthCheck\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\views\\historyhealth\\historyhealthpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:views\\historyhealth\\historyhealthpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\controllers\\historyhealthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:controllers\\historyhealthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|d:\\project\\project\\2024\\healthcheck\\wwwroot\\report\\mc-01.rdlc||{46F6D2A1-5E86-4080-A799-01F3D0E23796}",
+      "RelativeMoniker": "D:0:0:{149CF5F7-0D62-4B93-B004-F8585701C378}|HealthChecks.csproj|solutionrelative:wwwroot\\report\\mc-01.rdlc||{46F6D2A1-5E86-4080-A799-01F3D0E23796}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +14,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -29,46 +33,16 @@
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HistoryHealthController.cs",
-              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\Controllers\\HistoryHealthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HistoryHealthController.cs",
-              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\Controllers\\HistoryHealthController.cs",
-              "RelativeToolTip": "Controllers\\HistoryHealthController.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAUwC0AAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T01:47:05.098Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HistoryHealthPage.cshtml",
-              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HistoryHealth\\HistoryHealthPage.cshtml",
-              "RelativeDocumentMoniker": "Views\\HistoryHealth\\HistoryHealthPage.cshtml",
-              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\Views\\HistoryHealth\\HistoryHealthPage.cshtml",
-              "RelativeToolTip": "Views\\HistoryHealth\\HistoryHealthPage.cshtml",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACMAAABCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-29T16:38:08.296Z",
-              "EditorCaption": ""
+              "Title": "MC-01.rdlc [Design]",
+              "DocumentMoniker": "D:\\Project\\Project\\2024\\HealthCheck\\wwwroot\\Report\\MC-01.rdlc",
+              "RelativeDocumentMoniker": "wwwroot\\Report\\MC-01.rdlc",
+              "ToolTip": "D:\\Project\\Project\\2024\\HealthCheck\\wwwroot\\Report\\MC-01.rdlc [Design]",
+              "RelativeToolTip": "wwwroot\\Report\\MC-01.rdlc [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001755|",
+              "WhenOpened": "2025-07-07T00:45:32.258Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

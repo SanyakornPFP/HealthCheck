@@ -15,7 +15,7 @@
                     <Value>ผลตรวจสุขภาพ</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -199,7 +199,7 @@
             <Top>10.63666cm</Top>
             <Left>0.26312cm</Left>
             <Height>7.26477cm</Height>
-            <Width>19.8627cm</Width>
+            <Width>19.06895cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -234,7 +234,7 @@
             <Top>0.06934cm</Top>
             <Left>0.26312cm</Left>
             <Height>0.74936cm</Height>
-            <Width>19.87213cm</Width>
+            <Width>19.06895cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -270,7 +270,7 @@
             <Top>0.8187cm</Top>
             <Left>0.27255cm</Left>
             <Height>0.88574cm</Height>
-            <Width>19.8627cm</Width>
+            <Width>19.05952cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -286,27 +286,6 @@
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!Healthdate.Value</Value>
-                    <Style>
-                      <FontFamily>th SarabunPSK</FontFamily>
-                      <FontSize>16pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve">         </Value>
-                    <Style>
-                      <FontFamily>th SarabunPSK</FontFamily>
-                      <FontSize>16pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
@@ -505,10 +484,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.81028cm</Top>
+            <Top>2.28653cm</Top>
             <Left>0.27255cm</Left>
-            <Height>4.55963cm</Height>
-            <Width>19.8627cm</Width>
+            <Height>4.08338cm</Height>
+            <Width>19.05952cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -541,7 +520,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>22.72276cm</Top>
+            <Top>22.18301cm</Top>
             <Left>10.9551cm</Left>
             <Height>0.84621cm</Height>
             <Width>6.76551cm</Width>
@@ -577,7 +556,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>23.88196cm</Top>
+            <Top>23.11996cm</Top>
             <Left>10.11417cm</Left>
             <Height>0.84621cm</Height>
             <Width>8.29435cm</Width>
@@ -686,7 +665,7 @@
             <Top>6.36991cm</Top>
             <Left>0.27255cm</Left>
             <Height>2.0981cm</Height>
-            <Width>19.85327cm</Width>
+            <Width>19.05952cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -816,7 +795,7 @@
             <Top>8.468cm</Top>
             <Left>0.27255cm</Left>
             <Height>2.0981cm</Height>
-            <Width>19.8627cm</Width>
+            <Width>19.05952cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -1162,7 +1141,7 @@
                     <Value>สรุปผลการตรวจ</Value>
                     <Style>
                       <FontFamily>th SarabunPSK</FontFamily>
-                      <FontSize>18pt</FontSize>
+                      <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1249,10 +1228,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>17.93671cm</Top>
+            <Top>17.61921cm</Top>
             <Left>0.27255cm</Left>
             <Height>4.96707cm</Height>
-            <Width>19.8627cm</Width>
+            <Width>19.05952cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -1268,10 +1247,9 @@
             <Source>External</Source>
             <Value>=Parameters!QRCode.Value</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>0cm</Top>
             <Left>15.28575cm</Left>
             <Height>1.99968cm</Height>
-            <Width>1.90271cm</Width>
+            <Width>2.06146cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -1299,7 +1277,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81976cm</Top>
+            <Top>3.56576cm</Top>
             <Left>4.42043cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1337,7 +1315,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81976cm</Top>
+            <Top>3.56576cm</Top>
             <Left>5.08129cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1375,7 +1353,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81976cm</Top>
+            <Top>3.56576cm</Top>
             <Left>6.40301cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1413,7 +1391,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81976cm</Top>
+            <Top>3.56576cm</Top>
             <Left>5.74215cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1451,7 +1429,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81977cm</Top>
+            <Top>3.56577cm</Top>
             <Left>9.04645cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1489,7 +1467,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81977cm</Top>
+            <Top>3.56577cm</Top>
             <Left>8.38559cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1527,7 +1505,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81977cm</Top>
+            <Top>3.56577cm</Top>
             <Left>7.72473cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1565,7 +1543,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81977cm</Top>
+            <Top>3.56577cm</Top>
             <Left>7.06387cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1603,7 +1581,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81978cm</Top>
+            <Top>3.56578cm</Top>
             <Left>12.35075cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1641,7 +1619,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81978cm</Top>
+            <Top>3.56578cm</Top>
             <Left>11.68989cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1679,7 +1657,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81978cm</Top>
+            <Top>3.56578cm</Top>
             <Left>11.02903cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1717,7 +1695,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81978cm</Top>
+            <Top>3.56578cm</Top>
             <Left>10.36817cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1755,7 +1733,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox14</rd:DefaultName>
-            <Top>3.81977cm</Top>
+            <Top>3.56577cm</Top>
             <Left>9.70731cm</Left>
             <Height>0.54538cm</Height>
             <Width>0.66086cm</Width>
@@ -1810,7 +1788,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>24.72816cm</Top>
+            <Top>23.96616cm</Top>
             <Left>10.9551cm</Left>
             <Height>0.84621cm</Height>
             <Width>7.18884cm</Width>
@@ -1825,15 +1803,94 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox47">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>หมายเหตุ </Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>ใบรับรองแพทย์ฉบับนี้ มีอายุ 90 วัน นับตั้งแต่วันที่ตรวจร่างการ ยกเว้น กรณีใช้สำหรับประกันสุขภาพ มีอายุ 1 ปี</Value>
+                    <Style>
+                      <FontFamily>th SarabunPSK</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>24.76298cm</Top>
+            <Left>0.74838cm</Left>
+            <Height>0.84621cm</Height>
+            <Width>18.58369cm</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!Healthdate.Value</Value>
+                    <Style>
+                      <FontFamily>TH SarabunPSK</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox13</rd:DefaultName>
+            <Top>2.03496cm</Top>
+            <Left>13.32944cm</Left>
+            <Height>0.78521cm</Height>
+            <Width>6.00263cm</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>26.20938cm</Height>
+        <Height>25.60919cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>20.13525cm</Width>
+      <Width>19.33207cm</Width>
       <Page>
         <PageHeader>
           <Height>1.80549cm</Height>
@@ -1903,7 +1960,7 @@
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Left>3.22008cm</Left>
               <Height>1.80549cm</Height>
-              <Width>16.91517cm</Width>
+              <Width>16.11199cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1936,67 +1993,11 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageFooter>
-          <Height>1.0226cm</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Textbox Name="Textbox47">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>หมายเหตุ </Value>
-                      <Style>
-                        <FontFamily>th SarabunPSK</FontFamily>
-                        <FontSize>12pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>ใบรับรองแพทย์ฉบับนี้ มีอายุ 90 วัน นับตั้งแต่วันที่ตรวจร่างการ ยกเว้น กรณีใช้สำหรับประกันสุขภาพ มีอายุ 1 ปี</Value>
-                      <Style>
-                        <FontFamily>th SarabunPSK</FontFamily>
-                        <FontSize>12pt</FontSize>
-                        <FontWeight>Normal</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>0.17639cm</Top>
-              <Left>0.74838cm</Left>
-              <Height>0.84621cm</Height>
-              <Width>19.38687cm</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </PageFooter>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
         <LeftMargin>1cm</LeftMargin>
-        <RightMargin>1cm</RightMargin>
+        <RightMargin>0cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>
-        <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
